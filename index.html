@@ -1,322 +1,421 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>VexedStore</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VexServer</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #001933;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a1a2f;
       color: white;
     }
-    header {
-      background: #000;
-      color: white;
-      padding: 15px 30px;
+    nav {
+      background-color: #111;
+      padding: 10px;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .nav-left {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    .nav-right {
-      display: flex;
-      align-items: center;
       gap: 20px;
+      justify-content: center;
     }
-    .nav-links a {
+    nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
       cursor: pointer;
-      margin: 0 15px;
-    }
-    .login-button, .cart-button {
-      background: #007bff;
-      color: white;
-      padding: 6px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .login-button:hover, .cart-button:hover {
-      background: #0056b3;
     }
     section {
       display: none;
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    section.active {
-      display: block;
+      padding: 30px;
     }
     .card-container {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      justify-content: center;
     }
     .product-card {
-      background: #003366;
-      color: white;
+      background: #1e2f4f;
       padding: 20px;
       border-radius: 8px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+      width: 220px;
     }
     .product-card button {
-      margin-top: 10px;
-      padding: 10px 16px;
-      background: #28a745;
+      background: #0fa;
       border: none;
-      color: white;
-      font-size: 1em;
+      padding: 10px;
+      color: #000;
       font-weight: bold;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .product-card:hover {
-      transform: scale(1.03);
-    }
-    .rules-list {
-      font-size: 1.1em;
-      white-space: pre-line;
-      color: white;
-    }
-    #contact a {
-      color: #00bfff;
-      text-decoration: none;
-    }
-    .join-card {
-      background: orange;
-      color: white;
-      font-weight: bold;
-    }
-    #cart-items {
-      background: white;
-      color: black;
-      padding: 10px;
-      border-radius: 8px;
-    }
-    .cart-item {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
-    .hidden {
+    .cart-area {
+      background: #021422;
+      padding: 20px;
       display: none;
     }
-    .pay-button {
-      background: #28a745;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      font-weight: bold;
+    .login-box {
+      text-align: center;
+      margin-top: 100px;
+    }
+    .login-box input {
+      padding: 10px;
+      margin: 10px;
       border: none;
-      border-radius: 8px;
-      margin-top: 20px;
+      border-radius: 5px;
+      width: 200px;
+    }
+    .login-box button {
+      padding: 10px 20px;
+      background-color: #0fa;
+      color: black;
+      border: none;
+      font-weight: bold;
+      border-radius: 5px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-left">VexedStore</div>
-  <div class="nav-right">
-    <nav class="nav-links">
-      <a onclick="showSection('home')">Home</a>
-      <a onclick="showSection('store')">Store</a>
-      <a onclick="showSection('server')">Server</a>
-      <a onclick="showSection('rules')">Rules</a>
-      <a onclick="showSection('about')">About</a>
-      <a onclick="showSection('team')">Team</a>
-      <a onclick="showSection('contact')">Contact</a>
-      <a id="cartTab" class="hidden" onclick="showSection('cart')">Cart</a>
-    </nav>
-    <button id="loginBtn" class="login-button" onclick="login()">Login</button>
-  </div>
-</header>
+<div id="loginSection" class="login-box">
+  <h2>Login to VexStore</h2>
+  <input id="username" type="text" placeholder="Your Name" /><br/>
+  <input id="mcid" type="text" placeholder="Minecraft ID (min 5 chars)" /><br/>
+  <button onclick="login()">Login</button>
+</div>
 
-<section id="home" class="active">
-  <h1>Welcome to VexedStore</h1>
-  <p>Hello, I am CHETHAN. Buy ranks, coins, and crate keys to support our server!</p>
-  <div class="card-container">
-    <div class="product-card join-card" onclick="showSection('server')">Join Now</div>
-  </div>
-</section>
+<div id="mainContent" style="display:none;">
+  <nav>
+    <a onclick="showSection('home')">HOME</a>
+    <a onclick="showSection('mc-hosting')">MC Hosting</a>
+    <a onclick="showSection('pay-to-play')">PaytoPlay</a>
+    <a onclick="showSection('web-hosting')">Web Hosting</a>
+    <a onclick="showSection('modding')">Modding</a>
+    <a onclick="showSection('store')">Store</a>
+    <a onclick="showSection('rules')">Rules</a>
+    <a onclick="showSection('team')">Team</a>
+    <a onclick="showCart()">Cart</a>
+  </nav>
+  <section id="home">
+  <h1>Welcome to Chethan's Minecraft Store</h1>
+  <p>Get exclusive ranks, crate keys, and coins to power up your gameplay.</p>
+  <p>Use the navigation menu to browse the store, check rules, meet the team, and more!</p>
+ </section>
 
-<section id="store">
+  <section id="mc-hosting">
+    <h2>Minecraft Server Hosting (Unavailable until Oct 20 2025)</h2>
+    <div class="card-container">
+      <div class="product-card">
+        <h3>Basic MC Hosting</h3>
+        <p>₹150/month</p>
+        <button disabled>Unavailable</button>
+      </div>
+      <div class="product-card">
+        <h3>Standard MC Hosting</h3>
+        <p>₹300/month</p>
+        <button disabled>Unavailable</button>
+      </div>
+      <div class="product-card">
+        <h3>Pro MC Hosting</h3>
+        <p>₹500/month</p>
+        <button disabled>Unavailable</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="pay-to-play">
+    <h2>Pay to Play Server</h2>
+    <div class="card-container">
+      <div class="product-card">
+        <h3>Monthly</h3>
+        <p>₹200</p>
+        <button onclick="addToCart('Pay to Play - Monthly', 200)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <h3>Quarterly</h3>
+        <p>₹600</p>
+        <button onclick="addToCart('Pay to Play - Quarterly', 600)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <h3>Yearly</h3>
+        <p>₹1800</p>
+        <button onclick="addToCart('Pay to Play - Yearly', 1800)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="web-hosting">
+    <h2>Website Hosting</h2>
+    <div class="card-container">
+      <div class="product-card">
+        <h3>Basic</h3>
+        <p>₹250/month</p>
+        <button onclick="addToCart('Website Hosting - Basic', 250)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <h3>Standard</h3>
+        <p>₹450/month</p>
+        <button onclick="addToCart('Website Hosting - Standard', 450)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <h3>Premium</h3>
+        <p>₹650/month</p>
+        <button onclick="addToCart('Website Hosting - Premium', 650)">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+<
+
+
+
+
+<section id="store" style="display:none;">
   <h2>Store</h2>
-  <div id="store-products" class="card-container"></div>
-</section>
-
-<section id="cart">
-  <h2>Your Cart</h2>
-  <div id="cart-items"></div>
-  <button id="payBtn" class="pay-button hidden">PAY</button>
-</section>
-
-<section id="server">
-  <h2>Server</h2>
   <div class="card-container">
-    <div class="product-card">IP: In Future</div>
-    <div class="product-card">Port: In Future</div>
-    <div class="product-card" onclick="showSection('rules')">View Rules</div>
+    <!-- Ranks -->
+    <div class="product-card" data-name="ELITE" data-price="1080"> <h3>ELITE – ₹1080</h3> <button onclick="addToCart('ELITE', 1080)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('ELITE', -1)">-</button><span id="qty-ELITE">1</span><button onclick="updateQty('ELITE', 1)">+</button></div></div>
+    <div class="product-card" data-name="OVERLORD" data-price="730"> <h3>OVERLORD – ₹730</h3> <button onclick="addToCart('OVERLORD', 730)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('OVERLORD', -1)">-</button><span id="qty-OVERLORD">1</span><button onclick="updateQty('OVERLORD', 1)">+</button></div></div>
+    <div class="product-card" data-name="VIP+" data-price="650"> <h3>VIP+ – ₹650</h3> <button onclick="addToCart('VIP+', 650)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('VIP+', -1)">-</button><span id="qty-VIP+">1</span><button onclick="updateQty('VIP+', 1)">+</button></div></div>
+    <div class="product-card" data-name="VIP" data-price="360"> <h3>VIP – ₹360</h3> <button onclick="addToCart('VIP', 360)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('VIP', -1)">-</button><span id="qty-VIP">1</span><button onclick="updateQty('VIP', 1)">+</button></div></div>
+    <div class="product-card" data-name="MVP" data-price="519"> <h3>MVP – ₹519</h3> <button onclick="addToCart('MVP', 519)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('MVP', -1)">-</button><span id="qty-MVP">1</span><button onclick="updateQty('MVP', 1)">+</button></div></div>
+    <div class="product-card" data-name="Karen" data-price="240"> <h3>Karen – ₹240</h3> <button onclick="addToCart('Karen', 240)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Karen', -1)">-</button><span id="qty-Karen">1</span><button onclick="updateQty('Karen', 1)">+</button></div></div>
+    <div class="product-card" data-name="Rookie" data-price="150"> <h3>Rookie – ₹150</h3> <button onclick="addToCart('Rookie', 150)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Rookie', -1)">-</button><span id="qty-Rookie">1</span><button onclick="updateQty('Rookie', 1)">+</button></div></div>
+
+    <!-- Coins -->
+    <div class="product-card" data-name="1,000 Coins" data-price="100"> <h3>1,000 Coins – ₹100</h3> <button onclick="addToCart('1,000 Coins', 100)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('1,000 Coins', -1)">-</button><span id="qty-1,000 Coins">1</span><button onclick="updateQty('1,000 Coins', 1)">+</button></div></div>
+    <div class="product-card" data-name="2,000 Coins" data-price="180"> <h3>2,000 Coins – ₹180</h3> <button onclick="addToCart('2,000 Coins', 180)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('2,000 Coins', -1)">-</button><span id="qty-2,000 Coins">1</span><button onclick="updateQty('2,000 Coins', 1)">+</button></div></div>
+    <div class="product-card" data-name="4,000 + 1,000 Free Coins" data-price="320"> <h3>4,000 + 1,000 Free – ₹320</h3> <button onclick="addToCart('4,000 + 1,000 Free Coins', 320)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('4,000 + 1,000 Free Coins', -1)">-</button><span id="qty-4,000 + 1,000 Free Coins">1</span><button onclick="updateQty('4,000 + 1,000 Free Coins', 1)">+</button></div></div>
+
+    <!-- Crates -->
+    <div class="product-card" data-name="Seasonal Crate" data-price="599"> <h3>Seasonal Crate – ₹599</h3> <button onclick="addToCart('Seasonal Crate', 599)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Seasonal Crate', -1)">-</button><span id="qty-Seasonal Crate">1</span><button onclick="updateQty('Seasonal Crate', 1)">+</button></div></div>
+    <div class="product-card" data-name="Legendary Crate" data-price="499"> <h3>Legendary Crate – ₹499</h3> <button onclick="addToCart('Legendary Crate', 499)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Legendary Crate', -1)">-</button><span id="qty-Legendary Crate">1</span><button onclick="updateQty('Legendary Crate', 1)">+</button></div></div>
+    <div class="product-card" data-name="Ultimate Crate" data-price="349"> <h3>Ultimate Crate – ₹349</h3> <button onclick="addToCart('Ultimate Crate', 349)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Ultimate Crate', -1)">-</button><span id="qty-Ultimate Crate">1</span><button onclick="updateQty('Ultimate Crate', 1)">+</button></div></div>
+    <div class="product-card" data-name="Prime Crate" data-price="199"> <h3>Prime Crate – ₹199</h3> <button onclick="addToCart('Prime Crate', 199)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Prime Crate', -1)">-</button><span id="qty-Prime Crate">1</span><button onclick="updateQty('Prime Crate', 1)">+</button></div></div>
+  </div>
+</section>
+<section id="modding" style="padding: 20px; background: #111; color: white;">
+  <h2 style="text-align:center;">Minecraft Plugins & Mods</h2>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+    <!-- Minecraft cards -->
+    <a href="https://example.com/EssentialsX" target="_blank" class="card">EssentialsX</a>
+    <a href="https://example.com/LuckPerms" target="_blank" class="card">LuckPerms</a>
+    <a href="https://example.com/Vault" target="_blank" class="card">Vault</a>
+    <a href="https://example.com/WorldEdit" target="_blank" class="card">WorldEdit</a>
+    <a href="https://example.com/WorldGuard" target="_blank" class="card">WorldGuard</a>
+    <a href="https://example.com/Dynmap" target="_blank" class="card">Dynmap</a>
+    <a href="https://example.com/GriefPrevention" target="_blank" class="card">GriefPrevention</a>
+    <a href="https://example.com/ClearLag" target="_blank" class="card">ClearLag</a>
+    <a href="https://example.com/Citizens" target="_blank" class="card">Citizens</a>
+    <a href="https://example.com/CratesPlus" target="_blank" class="card">CratesPlus</a>
+    <a href="https://example.com/DeluxeMenus" target="_blank" class="card">DeluxeMenus</a>
+    <a href="https://example.com/MythicMobs" target="_blank" class="card">MythicMobs</a>
+    <a href="https://example.com/TAB" target="_blank" class="card">TAB</a>
+    <a href="https://example.com/PlaceholderAPI" target="_blank" class="card">PlaceholderAPI</a>
+    <a href="https://example.com/HolographicDisplays" target="_blank" class="card">HolographicDisplays</a>
+    <a href="https://example.com/AuctionHouse" target="_blank" class="card">AuctionHouse</a>
+    <a href="https://example.com/CoreProtect" target="_blank" class="card">CoreProtect</a>
+    <a href="https://example.com/FAWE" target="_blank" class="card">FastAsyncWorldEdit</a>
+    <a href="https://example.com/UltraPermissions" target="_blank" class="card">UltraPermissions</a>
+    <a href="https://example.com/ViaVersion" target="_blank" class="card">ViaVersion</a>
+    <a href="https://example.com/ProtocolLib" target="_blank" class="card">ProtocolLib</a>
+    <a href="https://example.com/JobsReborn" target="_blank" class="card">Jobs Reborn</a>
+    <a href="https://example.com/mcMMO" target="_blank" class="card">mcMMO</a>
+    <a href="https://example.com/Multiverse-Core" target="_blank" class="card">Multiverse-Core</a>
+    <a href="https://example.com/BetterRTP" target="_blank" class="card">BetterRTP</a>
+    <a href="https://example.com/ChatControl" target="_blank" class="card">ChatControl</a>
+    <a href="https://example.com/PlayerWarps" target="_blank" class="card">PlayerWarps</a>
+    <a href="https://example.com/LiteBans" target="_blank" class="card">LiteBans</a>
+    <a href="https://example.com/CombatLogX" target="_blank" class="card">CombatLogX</a>
+    <a href="https://example.com/ShopGUIPlus" target="_blank" class="card">ShopGUIPlus</a>
+    <a href="https://example.com/VotingPlugin" target="_blank" class="card">VotingPlugin</a>
+    <a href="https://example.com/GeyserMC" target="_blank" class="card">GeyserMC</a>
+    <a href="https://example.com/Floodgate" target="_blank" class="card">Floodgate</a>
+    <a href="https://example.com/EconomyShopGUI" target="_blank" class="card">EconomyShopGUI</a>
+    <a href="https://example.com/AdvancedBan" target="_blank" class="card">AdvancedBan</a>
+    <a href="https://example.com/CMI" target="_blank" class="card">CMI</a>
+    <a href="https://example.com/CrazyCrates" target="_blank" class="card">CrazyCrates</a>
+    <a href="https://example.com/UltraCosmetics" target="_blank" class="card">UltraCosmetics</a>
+    <a href="https://example.com/Quests" target="_blank" class="card">Quests</a>
+    <a href="https://example.com/HeadsPlus" target="_blank" class="card">HeadsPlus</a>
+    <a href="https://example.com/Factions" target="_blank" class="card">Factions</a>
+    <a href="https://example.com/TARDIS" target="_blank" class="card">TARDIS Plugin</a>
+    <a href="https://example.com/AntiCheatReloaded" target="_blank" class="card">AntiCheatReloaded</a>
+    <a href="https://example.com/SimpleClans" target="_blank" class="card">SimpleClans</a>
+    <a href="https://example.com/MobArena" target="_blank" class="card">MobArena</a>
+    <a href="https://example.com/Slimefun" target="_blank" class="card">Slimefun</a>
+    <a href="https://example.com/PetBlocks" target="_blank" class="card">PetBlocks</a>
+    <a href="https://example.com/Orebfuscator" target="_blank" class="card">Orebfuscator</a>
+    <a href="https://example.com/CommandNPC" target="_blank" class="card">CommandNPC</a>
+    <a href="https://example.com/AutoSell" target="_blank" class="card">AutoSell</a>
+  </div>
+
+  <h2 style="text-align:center; margin-top: 50px;">GTA V Mods</h2>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+    <!-- GTA cards -->
+    <a href="https://example.com/LSPDFR" target="_blank" class="card">LSPDFR</a>
+    <a href="https://example.com/Menyoo" target="_blank" class="card">Menyoo PC</a>
+    <a href="https://example.com/OpenIV" target="_blank" class="card">OpenIV</a>
+    <a href="https://example.com/NVE" target="_blank" class="card">NaturalVision Evolved</a>
+    <a href="https://example.com/SimpleTrainer" target="_blank" class="card">Simple Trainer</a>
+    <a href="https://example.com/ScriptHookV" target="_blank" class="card">Script Hook V</a>
+    <a href="https://example.com/GTAVRedux" target="_blank" class="card">GTA V Redux</a>
+    <a href="https://example.com/RealisticCars" target="_blank" class="card">Realistic Car Pack</a>
+    <a href="https://example.com/QuantV" target="_blank" class="card">QuantV</a>
+    <a href="https://example.com/IronManMod" target="_blank" class="card">Iron Man Mod</a>
+    <a href="https://example.com/NVRX" target="_blank" class="card">NVRX</a>
+    <a href="https://example.com/GangTurf" target="_blank" class="card">Gang and Turf Mod</a>
+    <a href="https://example.com/Zombies" target="_blank" class="card">Zombies Mod</a>
+    <a href="https://example.com/EUPMenu" target="_blank" class="card">EUP Menu</a>
+    <a href="https://example.com/VehicleSpawner" target="_blank" class="card">Vehicle Spawner</a>
+    <a href="https://example.com/Superman" target="_blank" class="card">Superman Mod</a>
+    <a href="https://example.com/WeaponSounds" target="_blank" class="card">Realistic Weapon Sounds</a>
+    <a href="https://example.com/PrisonMod" target="_blank" class="card">Prison Mod</a>
+    <a href="https://example.com/HomeInvasion" target="_blank" class="card">Home Invasion</a>
+    <a href="https://example.com/ViceCry" target="_blank" class="card">Vice Cry Remastered</a>
+    <a href="https://example.com/MafiaWork" target="_blank" class="card">Mafia Work Mod</a>
+    <a href="https://example.com/LibertyCity" target="_blank" class="card">Liberty City in GTA V</a>
+    <a href="https://example.com/FuelScript" target="_blank" class="card">Fuel Script V</a>
+    <a href="https://example.com/ATMRobbery" target="_blank" class="card">ATM Robbery Mod</a>
+    <a href="https://example.com/OpenInteriors" target="_blank" class="card">Open Interiors</a>
+    <a href="https://example.com/GTAVRemastered" target="_blank" class="card">GTA V Remastered</a>
+    <a href="https://example.com/Ambiance" target="_blank" class="card">Ambiance Mod</a>
+    <a href="https://example.com/Bennys" target="_blank" class="card">Benny’s Motorworks</a>
+    <a href="https://example.com/RagdollOD" target="_blank" class="card">Ragdoll On Demand</a>
+    <a href="https://example.com/HeistProject" target="_blank" class="card">Heist Project</a>
+    <a href="https://example.com/MilitaryBase" target="_blank" class="card">Military Base Expansion</a>
+    <a href="https://example.com/CharMenu" target="_blank" class="card">Character Menu</a>
+    <a href="https://example.com/MapEditor" target="_blank" class="card">Map Editor</a>
+    <a href="https://example.com/AddOnPeds" target="_blank" class="card">Add-On Peds</a>
+    <a href="https://example.com/AddOnVehicles" target="_blank" class="card">Add-On Vehicles</a>
+    <a href="https://example.com/Euphoria" target="_blank" class="card">Euphoria Ragdoll Overhaul</a>
+    <a href="https://example.com/PoliceSearch" target="_blank" class="card">Police Search</a>
+    <a href="https://example.com/LSLife" target="_blank" class="card">Los Santos Life</a>
+    <a href="https://example.com/JokerMod" target="_blank" class="card">Joker Mod</a>
+    <a href="https://example.com/Thanos" target="_blank" class="card">Thanos Mod</a>
+    <a href="https://example.com/Jetpack" target="_blank" class="card">Jetpack Mod</a>
+    <a href="https://example.com/TrainDriver" target="_blank" class="card">Enhanced Train Driver</a>
+    <a href="https://example.com/FirstPersonSA" target="_blank" class="card">First Person Mod (GTA SA)</a>
+    <a href="https://example.com/HDCJ" target="_blank" class="card">HD CJ Pack</a>
+    <a href="https://example.com/SA_Remastered" target="_blank" class="card">GTA SA Remastered Map</a>
+    <a href="https://example.com/Project2DFX" target="_blank" class="card">Project2DFX</a>
+    <a href="https://example.com/HotCoffee" target="_blank" class="card">Hot Coffee</a>
+    <a href="https://example.com/SkyGfx" target="_blank" class="card">SkyGfx</a>
+    <a href="https://example.com/VehFuncs" target="_blank" class="card">VehFuncs</a>
+    <a href="https://example.com/CLEOPack" target="_blank" class="card">CLEO Mod Pack</a>
   </div>
 </section>
 
-<section id="rules">
+<style>
+  .card {
+    display: inline-block;
+    background: #222;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+  }
+  .card:hover {
+    background: #444;
+  }
+</style>
+
+
+<section id="rules" style="display:none;">
   <h2>Server Rules</h2>
-  <div class="rules-list">
-    1. Do not impersonate others.<br>
-    2. No inappropriate content.<br>
-    3. Keep drama away.<br>
-    4. No sexual content.<br>
-    5. No spamming.<br>
-    6. Avoid religious/political debates.<br>
-    7. Do not share links.<br>
-    8. No selling.<br>
-    9. Do not share personal info.<br>
-    10. Don’t beg for roles.
-  </div>
+  <ol>
+    <li>Do not impersonate others.</li>
+    <li>No inappropriate content.</li>
+    <li>Keep drama away.</li>
+    <li>No sexual content.</li>
+    <li>No spamming.</li>
+    <li>Avoid religious/political debates.</li>
+    <li>Do not share links.</li>
+    <li>No selling.</li>
+    <li>Do not share personal info.</li>
+    <li>Don’t beg for roles.</li>
+  </ol>
 </section>
 
-<section id="about">
-  <h2>About</h2>
-  <p>Hi, I am Chethan. Please subscribe to my YouTube channel:</p>
-  <p><a href="https://www.youtube.com/@Chethanorg" target="_blank">youtube.com/@Chethanorg</a></p>
-  <p>Join my Discord server:</p>
-  <p><a href="https://discord.gg/PmXzbjN8Pq" target="_blank">discord.gg/PmXzbjN8Pq</a></p>
-</section>
-
-<section id="team">
-  <h2>Our Team</h2>
+<section id="team" style="display:none;">
+  <h2>Meet Our Team</h2>
   <div class="card-container">
-    <div class="product-card"><h4>Chethan</h4><p>OWNER</p></div>
-    <div class="product-card"><h4>Gamerboy</h4><p>ADMIN</p></div>
-    <div class="product-card"><h4>Sai</h4><p>STAFF</p></div>
-    <div class="product-card"><h4>Cisco</h4><p>Moderator</p></div>
+    <div class="product-card">
+      <h3>Chethan</h3>
+      <p><strong>Role:</strong> Founder</p>
+    </div>
+    <div class="product-card">
+      <h3>Gamerboy</h3>
+      <p><strong>Role:</strong> Adminstator</p>
+    </div>
+    <div class="product-card">
+      <h3>Sai</h3>
+      <p><strong>Role:</strong> Superintendent</p>
+    </div>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>Need help? Join our <a href="https://discord.gg/PmXzbjN8Pq" target="_blank">Discord server</a> and open a support ticket.</p>
-</section>
+<div class="cart-area" id="cartArea" style="display:none;">
+  <h2>Your Cart</h2>
+  <ul id="cartItems"></ul>
+  <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
+  <a href="upi://pay?pa=bargavi1204@ybl&pn=VexStore&cu=INR"
+     style="color:black; background:#0fa; padding:10px 20px; display:inline-block; border-radius:5px; text-decoration:none;">
+    BUY
+  </a>
+</div>
+
+
+  <div class="cart-area" id="cartArea">
+    <h2>Your Cart</h2>
+    <ul id="cartItems"></ul>
+    <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
+    <a href="upi://pay?pa=bargavi1204@ybl&pn=VexStore&cu=INR" style="color:black; background:#0fa; padding:10px 20px; display:inline-block; border-radius:5px; text-decoration:none;">PAY WITH GPAY/PHONEPE</a>
+  </div>
+</div>
 
 <script>
-  const products = [
-    { name: 'ELITE', price: 1080 },
-    { name: 'OVERLORD', price: 730 },
-    { name: 'VIP+', price: 650 },
-    { name: 'MVP', price: 519 },
-    { name: 'VIP', price: 360 },
-    { name: 'Karen', price: 240 },
-    { name: 'Rookie', price: 150 },
-    { name: '1,000 Coins', price: 100 },
-    { name: '2,000 Coins', price: 180 },
-    { name: '4,000 + 1,000 Free', price: 320 },
-    { name: 'Seasonal Crate', price: 599 },
-    { name: 'Legendary Crate', price: 499 },
-    { name: 'Ultimate Crate', price: 349 },
-    { name: 'Prime Crate', price: 199 }
-  ];
-
-  let loggedIn = false;
-  let cart = {};
-  let minecraftID = "";
+  let cart = [];
 
   function login() {
-    const id = prompt("Enter your Minecraft ID (min 5 characters):");
-    if (id && id.length >= 5) {
-      loggedIn = true;
-      minecraftID = id;
-      document.getElementById("loginBtn").textContent = id;
-      document.getElementById("cartTab").classList.remove("hidden");
-    } else {
-      alert("Invalid Minecraft ID. Must be at least 5 characters.");
+  const name = document.getElementById('username').value.trim();
+  const mcid = document.getElementById('mcid').value.trim();
+  if (name && mcid.length >= 5) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    showSection('home'); // ✅ This now shows the Home section instead of MC Hosting
+  } else {
+    alert('Enter valid name and Minecraft ID (min 5 characters)');
+  
     }
   }
 
   function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if (id === 'cart') renderCart();
+    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+    document.getElementById('cartArea').style.display = 'none';
   }
 
-  function renderProducts() {
-    const container = document.getElementById("store-products");
-    products.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "product-card";
-      card.innerHTML = `<strong>${p.name}</strong><br>₹${p.price}<div id="${p.name}-btn"></div>`;
-      container.appendChild(card);
-      updateProductUI(p.name);
-    });
+  function addToCart(item, price) {
+    cart.push({ item, price });
+    alert(item + ' added to cart.');
   }
 
-  function updateProductUI(name) {
-    const div = document.getElementById(`${name}-btn`);
-    if (!cart[name]) {
-      div.innerHTML = `<button onclick="addToCart('${name}')">Add to Cart</button>`;
-    } else {
-      div.innerHTML = `
-        <button onclick="changeQty('${name}', -1)">-</button>
-        ${cart[name].qty}
-        <button onclick="changeQty('${name}', 1)">+</button>
-      `;
-    }
-  }
-
-  function addToCart(name) {
-    const product = products.find(p => p.name === name);
-    if (!cart[name]) cart[name] = { ...product, qty: 1 };
-    updateProductUI(name);
-  }
-
-  function changeQty(name, change) {
-    cart[name].qty += change;
-    if (cart[name].qty <= 0) delete cart[name];
-    updateProductUI(name);
-    renderCart();
-  }
-
-  function renderCart() {
-    const cartItems = document.getElementById("cart-items");
-    const payBtn = document.getElementById("payBtn");
-    cartItems.innerHTML = "";
+  function showCart() {
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    cartItems.innerHTML = '';
     let total = 0;
-    for (let item in cart) {
-      const div = document.createElement("div");
-      const sub = cart[item].qty * cart[item].price;
-      total += sub;
-      div.className = "cart-item";
-      div.innerHTML = `<strong>${item}</strong><br>Qty: ${cart[item].qty} | ₹${sub}<br><button onclick="changeQty('${item}', -1)">-</button> <button onclick="changeQty('${item}', 1)">+</button>`;
-      cartItems.appendChild(div);
-    }
-    if (Object.keys(cart).length === 0) {
-      cartItems.innerHTML = "Cart is empty.";
-      payBtn.classList.add("hidden");
-    } else {
-      payBtn.classList.remove("hidden");
-      payBtn.onclick = () => {
-        const upiLink = `upi://pay?pa=bargavi1204@ybl&pn=VexedStore&cu=INR&am=${total}`;
-        window.location.href = upiLink;
-      };
-    }
+    cart.forEach(entry => {
+      const li = document.createElement('li');
+      li.textContent = `${entry.item} - ₹${entry.price}`;
+      cartItems.appendChild(li);
+      total += entry.price;
+    });
+    cartTotal.textContent = total;
+    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+    document.getElementById('cartArea').style.display = 'block';
   }
-
-  renderProducts();
 </script>
 
 </body>
