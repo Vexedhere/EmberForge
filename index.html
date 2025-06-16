@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -15,28 +15,44 @@
       background-color: #111;
       padding: 10px;
       display: flex;
-      gap: 20px;
       justify-content: center;
+      gap: 10px;
     }
     nav a {
       color: white;
       text-decoration: none;
       cursor: pointer;
+      padding: 8px 15px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background: #444;
     }
     section {
       display: none;
-      padding: 30px;
+      padding: 20px;
     }
     .card-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 10px;
+      justify-content: center;
     }
-    .product-card {
-      background: #1e2f4f;
-      padding: 20px;
+    .product-card, .event-card {
+      background: #1e2f4d;
+      padding: 15px;
       border-radius: 8px;
-      width: 220px;
+      width: 250px;
+      text-align: left;
+    }
+    .product-card h3, .event-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .product-card p, .event-card p {
+      margin: 5px 0;
+      font-size: 14px;
     }
     .product-card button {
       background: #0fa;
@@ -46,6 +62,13 @@
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
+      width: 100%;
+      font-size: 14px;
+    }
+    .product-card .unavailable-btn {
+      background: #ccc;
+      color: #666;
+      cursor: not-allowed;
     }
     .cart-area {
       background: #021422;
@@ -54,14 +77,19 @@
     }
     .login-box {
       text-align: center;
-      margin-top: 100px;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 400px;
     }
     .login-box input {
       padding: 10px;
-      margin: 10px;
+      margin: 8px 0;
       border: none;
       border-radius: 5px;
-      width: 200px;
+      width: 100%;
+      max-width: 300px;
+      background-color: lightblue;
+      font-size: 14px;
     }
     .login-box button {
       padding: 10px 20px;
@@ -71,338 +99,697 @@
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 14px;
     }
     .ip {
-      position: absolute;
+      position: fixed;
       top: 10px;
       right: 10px;
-      color: blue;
+      color: lightblue;
       font-family: 'Segoe UI', sans-serif;
-      font-size: 16px;
+      font-size: 12px;
+      z-index: 10;
     }
     .card {
       display: inline-block;
       background: #222;
       color: white;
-      padding: 10px 15px;
+      padding: 8px 12px;
       border-radius: 8px;
       text-decoration: none;
       transition: 0.3s;
       font-weight: bold;
+      font-size: 14px;
     }
     .card:hover {
       background: #444;
+    }
+    .device-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .device-toggle select {
+      background: #1e2f4d;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 200px;
+    }
+    #mobile-container {
+      display: none;
+    }
+    .rewards-toggle {
+      cursor: pointer;
+      color: #0fa;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .rewards-toggle::after {
+      content: '▼';
+      margin-left: 5px;
+      transition: transform 0.3s;
+    }
+    .rewards-toggle.open::after {
+      transform: rotate(180deg);
+    }
+    .rewards-list {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    .rewards-list ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin: 0;
     }
   </style>
 </head>
 <body>
   <div class="ip">vexedserver.game4free.net</div>
 
-<div id="loginSection" class="login-box">
-  <h2>Login to VexStore</h2>
-  <input id="username" type="text" placeholder="Your Name" /><br/>
-  <input id="mcid" type="text" placeholder="Minecraft ID (min 5 chars)" /><br/>
-  <button onclick="login()">Login</button>
-</div>
-
-<div id="mainContent" style="display:none;">
-  <nav>
-    <a onclick="showSection('home')">HOME</a>
-    <a onclick="showSection('mc-hosting')">MC Hosting</a>
-    <a onclick="showSection('pay-to-play')">PaytoPlay</a>
-    <a onclick="showSection('web-hosting')">Web Hosting</a>
-    <a onclick="showSection('modding')">Modding</a>
-    <a onclick="showSection('store')">Store</a>
-    <a onclick="showSection('rules')">Rules</a>
-    <a onclick="showSection('team')">Team</a>
-    <a onclick="showCart()">Cart</a>
-  </nav>
-  <section id="home">
-    <h1>Welcome to Chethan's Minecraft Store</h1>
-    <p>Get exclusive ranks, crate keys, and coins to power up your gameplay.</p>
-    <p>Use the navigation menu to browse the store, check rules, meet the team, and more!</p>
-  </section>
-
-  <section id="mc-hosting">
-    <h2>Minecraft Server Hosting (Unavailable until Oct 20 2025)</h2>
-    <div class="card-container">
-      <div class="product-card">
-        <h3>Basic MC Hosting</h3>
-        <p>₹150/month</p>
-        <button disabled>Unavailable</button>
-      </div>
-      <div class="product-card">
-        <h3>Standard MC Hosting</h3>
-        <p>₹300/month</p>
-        <button disabled>Unavailable</button>
-      </div>
-      <div class="product-card">
-        <h3>Pro MC Hosting</h3>
-        <p>₹500/month</p>
-        <button disabled>Unavailable</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="pay-to-play">
-    <h2>Pay to Play Server</h2>
-    <div class="card-container">
-      <div class="product-card">
-        <h3>Monthly</h3>
-        <p>₹200</p>
-        <button onclick="addToCart('Pay to Play - Monthly', 200)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Quarterly</h3>
-        <p>₹600</p>
-        <button onclick="addToCart('Pay to Play - Quarterly', 600)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Yearly</h3>
-        <p>₹1800</p>
-        <button onclick="addToCart('Pay to Play - Yearly', 1800)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="web-hosting">
-    <h2>Website Hosting</h2>
-    <div class="card-container">
-      <div class="product-card">
-        <h3>Basic</h3>
-        <p>₹250/month</p>
-        <button onclick="addToCart('Website Hosting - Basic', 250)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Standard</h3>
-        <p>₹450/month</p>
-        <button onclick="addToCart('Website Hosting - Standard', 450)">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <h3>Premium</h3>
-        <p>₹650/month</p>
-        <button onclick="addToCart('Website Hosting - Premium', 650)">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="store" style="display:none;">
-    <h2>Store</h2>
-    <div class="card-container">
-      <!-- Ranks -->
-      <div class="product-card" data-name="ELITE" data-price="1080"> <h3>ELITE – ₹1080</h3> <button onclick="addToCart('ELITE', 1080)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('ELITE', -1)">-</button><span id="qty-ELITE">1</span><button onclick="updateQty('ELITE', 1)">+</button></div></div>
-      <div class="product-card" data-name="OVERLORD" data-price="730"> <h3>OVERLORD – ₹730</h3> <button onclick="addToCart('OVERLORD', 730)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('OVERLORD', -1)">-</button><span id="qty-OVERLORD">1</span><button onclick="updateQty('OVERLORD', 1)">+</button></div></div>
-      <div class="product-card" data-name="VIP+" data-price="650"> <h3>VIP+ – ₹650</h3> <button onclick="addToCart('VIP+', 650)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('VIP+', -1)">-</button><span id="qty-VIP+">1</span><button onclick="updateQty('VIP+', 1)">+</button></div></div>
-      <div class="product-card" data-name="VIP" data-price="360"> <h3>VIP – ₹360</h3> <button onclick="addToCart('VIP', 360)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('VIP', -1)">-</button><span id="qty-VIP">1</span><button onclick="updateQty('VIP', 1)">+</button></div></div>
-      <div class="product-card" data-name="MVP" data-price="519"> <h3>MVP – ₹519</h3> <button onclick="addToCart('MVP', 519)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('MVP', -1)">-</button><span id="qty-MVP">1</span><button onclick="updateQty('MVP', 1)">+</button></div></div>
-      <div class="product-card" data-name="Karen" data-price="240"> <h3>Karen – ₹240</h3> <button onclick="addToCart('Karen', 240)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Karen', -1)">-</button><span id="qty-Karen">1</span><button onclick="updateQty('Karen', 1)">+</button></div></div>
-      <div class="product-card" data-name="Rookie" data-price="150"> <h3>Rookie – ₹150</h3> <button onclick="addToCart('Rookie', 150)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Rookie', -1)">-</button><span id="qty-Rookie">1</span><button onclick="updateQty('Rookie', 1)">+</button></div></div>
-      <!-- Coins -->
-      <div class="product-card" data-name="1,000 Coins" data-price="100"> <h3>1,000 Coins – ₹100</h3> <button onclick="addToCart('1,000 Coins', 100)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('1,000 Coins', -1)">-</button><span id="qty-1,000 Coins">1</span><button onclick="updateQty('1,000 Coins', 1)">+</button></div></div>
-      <div class="product-card" data-name="2,000 Coins" data-price="180"> <h3>2,000 Coins – ₹180</h3> <button onclick="addToCart('2,000 Coins', 180)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('2,000 Coins', -1)">-</button><span id="qty-2,000 Coins">1</span><button onclick="updateQty('2,000 Coins', 1)">+</button></div></div>
-      <div class="product-card" data-name="4,000 + 1,000 Free Coins" data-price="320"> <h3>4,000 + 1,000 Free – ₹320</h3> <button onclick="addToCart('4,000 + 1,000 Free Coins', 320)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('4,000 + 1,000 Free Coins', -1)">-</button><span id="qty-4,000 + 1,000 Free Coins">1</span><button onclick="updateQty('4,000 + 1,000 Free Coins', 1)">+</button></div></div>
-      <!-- Crates -->
-      <div class="product-card" data-name="Seasonal Crate" data-price="599"> <h3>Seasonal Crate – ₹599</h3> <button onclick="addToCart('Seasonal Crate', 599)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Seasonal Crate', -1)">-</button><span id="qty-Seasonal Crate">1</span><button onclick="updateQty('Seasonal Crate', 1)">+</button></div></div>
-      <div class="product-card" data-name="Legendary Crate" data-price="499"> <h3>Legendary Crate – ₹499</h3> <button onclick="addToCart('Legendary Crate', 499)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Legendary Crate', -1)">-</button><span id="qty-Legendary Crate">1</span><button onclick="updateQty('Legendary Crate', 1)">+</button></div></div>
-      <div class="product-card" data-name="Ultimate Crate" data-price="349"> <h3>Ultimate Crate – ₹349</h3> <button onclick="addToCart('Ultimate Crate', 349)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Ultimate Crate', -1)">-</button><span id="qty-Ultimate Crate">1</span><button onclick="updateQty('Ultimate Crate', 1)">+</button></div></div>
-      <div class="product-card" data-name="Prime Crate" data-price="199"> <h3>Prime Crate – ₹199</h3> <button onclick="addToCart('Prime Crate', 199)">Add to Cart</button> <div class="qty-box" style="display:none;"><button onclick="updateQty('Prime Crate', -1)">-</button><span id="qty-Prime Crate">1</span><button onclick="updateQty('Prime Crate', 1)">+</button></div></div>
-    </div>
-  </section>
-
-  <section id="modding" style="padding: 20px; background: #111; color: white;">
-    <h2 style="text-align:center;">Minecraft Plugins & Mods</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-      <a href="https://www.spigotmc.org/resources/essentialsx.9089/" target="_blank" class="card">EssentialsX</a>
-      <a href="https://www.spigotmc.org/resources/luckperms.28140/" target="_blank" class="card">LuckPerms</a>
-      <a href="https://www.spigotmc.org/resources/vault.34315/" target="_blank" class="card">Vault</a>
-      <a href="https://www.spigotmc.org/resources/worldedit.1391/" target="_blank" class="card">WorldEdit</a>
-      <a href="https://www.spigotmc.org/resources/worldguard.1635/" target="_blank" class="card">WorldGuard</a>
-      <a href="https://www.spigotmc.org/resources/dynmap.274/" target="_blank" class="card">Dynmap</a>
-      <a href="https://www.spigotmc.org/resources/griefprevention.1884/" target="_blank" class="card">GriefPrevention</a>
-      <a href="https://www.spigotmc.org/resources/clearlagg.68271/" target="_blank" class="card">ClearLag</a>
-      <a href="https://www.spigotmc.org/resources/citizens.13811/" target="_blank" class="card">Citizens</a>
-      <a href="https://www.spigotmc.org/resources/cratesplus-free-crates-plugin-1-8-1-20-6.10900/" target="_blank" class="card">CratesPlus</a>
-      <a href="https://www.spigotmc.org/resources/deluxemenus.28779/" target="_blank" class="card">DeluxeMenus</a>
-      <a href="https://www.spigotmc.org/resources/mythicmobs.10495/" target="_blank" class="card">MythicMobs</a>
-      <a href="https://www.spigotmc.org/resources/tab.57806/" target="_blank" class="card">TAB</a>
-      <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" class="card">PlaceholderAPI</a>
-      <a href="https://www.spigotmc.org/resources/holographic-displays.28728/" target="_blank" class="card">HolographicDisplays</a>
-      <a href="https://www.spigotmc.org/resources/auctionhouse.61836/" target="_blank" class="card">AuctionHouse</a>
-      <a href="https://www.spigotmc.org/resources/coreprotect.8631/" target="_blank" class="card">CoreProtect</a>
-      <a href="https://www.spigotmc.org/resources/fastasyncworldedit.13932/" target="_blank" class="card">FastAsyncWorldEdit</a>
-      <a href="https://www.spigotmc.org/resources/ultrapermissions.32201/" target="_blank" class="card">UltraPermissions</a>
-      <a href="https://www.spigotmc.org/resources/viaversion.19254/" target="_blank" class="card">ViaVersion</a>
-      <a href="https://www.spigotmc.org/resources/protocollib.1997/" target="_blank" class="card">ProtocolLib</a>
-      <a href="https://www.spigotmc.org/resources/jobs-reborn.4216/" target="_blank" class="card">Jobs Reborn</a>
-      <a href="https://www.spigotmc.org/resources/mcmmo.2445/" target="_blank" class="card">mcMMO</a>
-      <a href="https://www.spigotmc.org/resources/multiverse-core.390/" target="_blank" class="card">Multiverse-Core</a>
-      <a href="https://www.spigotmc.org/resources/betterrtp.36051/" target="_blank" class="card">BetterRTP</a>
-      <a href="https://www.spigotmc.org/resources/chatcontrol-red-the-ultimate-chat-solution-1-2-5-1-21-1.90481/" target="_blank" class="card">ChatControl</a>
-      <a href="https://www.spigotmc.org/resources/playerwarps-warp-gui-1-8-1-21-1.81159/" target="_blank" class="card">PlayerWarps</a>
-      <a href="https://www.spigotmc.org/resources/litebans.3715/" target="_blank" class="card">LiteBans</a>
-      <a href="https://www.spigotmc.org/resources/combatlogx.31689/" target="_blank" class="card">CombatLogX</a>
-      <a href="https://www.spigotmc.org/resources/shopgui.6515/" target="_blank" class="card">ShopGUIPlus</a>
-      <a href="https://www.spigotmc.org/resources/votingplugin.15358/" target="_blank" class="card">VotingPlugin</a>
-      <a href="https://www.spigotmc.org/resources/geysermc.76021/" target="_blank" class="card">GeyserMC</a>
-      <a href="https://www.spigotmc.org/resources/floodgate.77007/" target="_blank" class="card">Floodgate</a>
-      <a href="https://www.spigotmc.org/resources/economyshopgui.69927/" target="_blank" class="card">EconomyShopGUI</a>
-      <a href="https://www.spigotmc.org/resources/advancedban.8695/" target="_blank" class="card">AdvancedBan</a>
-      <a href="https://www.spigotmc.org/resources/cmi.3742/" target="_blank" class="card">CMI</a>
-      <a href="https://www.spigotmc.org/resources/crazycrates.17599/" target="_blank" class="card">CrazyCrates</a>
-      <a href="https://www.spigotmc.org/resources/ultracosmetics.30676/" target="_blank" class="card">UltraCosmetics</a>
-      <a href="https://www.spigotmc.org/resources/quests.3711/" target="_blank" class="card">Quests</a>
-      <a href="https://www.spigotmc.org/resources/headsplus.40265/" target="_blank" class="card">HeadsPlus</a>
-      <a href="https://www.spigotmc.org/resources/factionsuuid.1035/" target="_blank" class="card">Factions</a>
-      <a href="https://www.spigotmc.org/resources/tardis.2796/" target="_blank" class="card">TARDIS Plugin</a>
-      <a href="https://www.spigotmc.org/resources/anticheatreloaded.62201/" target="_blank" class="card">AntiCheatReloaded</a>
-      <a href="https://www.spigotmc.org/resources/simpleclans.74497/" target="_blank" class="card">SimpleClans</a>
-      <a href="https://www.spigotmc.org/resources/mobarena.34110/" target="_blank" class="card">MobArena</a>
-      <a href="https://www.curseforge.com/minecraft/mc-mods/slimefun" target="_blank" class="card">Slimefun</a>
-      <a href="https://www.spigotmc.org/resources/petblocks-1-8-1-20-6-mysql-sqlite.10937/" target="_blank" class="card">PetBlocks</a>
-      <a href="https://www.spigotmc.org/resources/orebfuscator.9514/" target="_blank" class="card">Orebfuscator</a>
-      <a href="https://www.spigotmc.org/resources/commandnpc-1-7-1-21-x.19276/" target="_blank" class="card">CommandNPC</a>
-      <a href="https://www.spigotmc.org/resources/autosell.3722/" target="_blank" class="card">AutoSell</a>
-    </div>
-
-    <h2 style="text-align:center; margin-top: 50px;">GTA V Mods</h2>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-      <a href="https://www.lcpdfr.com/downloads/gta5mods/scripts/7712-lspd-first-response/" target="_blank" class="card">LSPDFR</a>
-      <a href="https://www.gta5-mods.com/scripts/menyoo-pc-sp" target="_blank" class="card">Menyoo PC</a>
-      <a href="https://www.openiv.com/" target="_blank" class="card">OpenIV</a>
-      <a href="https://www.gta5-mods.com/misc/naturalvision-evolved" target="_blank" class="card">NaturalVision Evolved</a>
-      <a href="https://www.gta5-mods.com/scripts/simple-trainer-for-gtav" target="_blank" class="card">Simple Trainer</a>
-      <a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank" class="card">Script Hook V</a>
-      <a href="https://www.gta5-mods.com/misc/gta-v-redux" target="_blank" class="card">GTA V Redux</a>
-      <a href="https://www.gta5-mods.com/vehicles/realistic-car-pack" target="_blank" class="card">Realistic Car Pack</a>
-      <a href="https://www.gta5-mods.com/misc/quantv-3-0" target="_blank" class="card">QuantV</a>
-      <a href="https://www.gta5-mods.com/scripts/iron-man-script-2-0" target="_blank" class="card">Iron Man Mod</a>
-      <a href="https://www.gta5-mods.com/misc/nvrx-naturalvision-remastered-x" target="_blank" class="card">NVRX</a>
-      <a href="https://www.gta5-mods.com/scripts/gang-and-turf-mod" target="_blank" class="card">Gang and Turf Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/zombies" target="_blank" class="card">Zombies Mod</a>
-      <a href="https://www.gta5-mods.com/misc/emergency-uniforms-pack" target="_blank" class="card">EUP Menu</a>
-      <a href="https://www.gta5-mods.com/scripts/vehicle-spawner" target="_blank" class="card">Vehicle Spawner</a>
-      <a href="https://www.gta5-mods.com/scripts/superman-script-mod" target="_blank" class="card">Superman Mod</a>
-      <a href="https://www.gta5-mods.com/misc/realistic-weapon-sounds" target="_blank" class="card">Realistic Weapon Sounds</a>
-      <a href="https://www.gta5-mods.com/scripts/prison-mod" target="_blank" class="card">Prison Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/home-invasion" target="_blank" class="card">Home Invasion</a>
-      <a href="https://www.gta5-mods.com/maps/vice-cry-remastered" target="_blank" class="card">Vice Cry Remastered</a>
-      <a href="https://www.gta5-mods.com/scripts/mafia-work-mod" target="_blank" class="card">Mafia Work Mod</a>
-      <a href="https://www.gta5-mods.com/maps/liberty-city-in-gtav" target="_blank" class="card">Liberty City in GTA V</a>
-      <a href="https://www.gta5-mods.com/scripts/fuel-script-v" target="_blank" class="card">Fuel Script V</a>
-      <a href="https://www.gta5-mods.com/scripts/atm-robberies-bank-heists" target="_blank" class="card">ATM Robbery Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/open-interiors" target="_blank" class="card">Open Interiors</a>
-      <a href="https://www.gta5-mods.com/misc/gta-v-remastered" target="_blank" class="card">GTA V Remastered</a>
-      <a href="https://www.gta5-mods.com/scripts/ambiance" target="_blank" class="card">Ambiance Mod</a>
-      <a href="https://www.gta5-mods.com/maps/bennys-motorworks-sp" target="_blank" class="card">Benny’s Motorworks</a>
-      <a href="https://www.gta5-mods.com/scripts/ragdoll-on-demand" target="_blank" class="card">Ragdoll On Demand</a>
-      <a href="https://www.gta5-mods.com/scripts/the-heist-project" target="_blank" class="card">Heist Project</a>
-      <a href="https://www.gta5-mods.com/maps/military-base-expansion" target="_blank" class="card">Military Base Expansion</a>
-      <a href="https://www.gta5-mods.com/scripts/character-menu" target="_blank" class="card">Character Menu</a>
-      <a href="https://www.gta5-mods.com/tools/map-editor" target="_blank" class="card">Map Editor</a>
-      <a href="https://www.gta5-mods.com/scripts/add-on-peds" target="_blank" class="card">Add-On Peds</a>
-      <a href="https://www.gta5-mods.com/vehicles/add-on-vehicle-spawner" target="_blank" class="card">Add-On Vehicles</a>
-      <a href="https://www.gta5-mods.com/scripts/euphoria-ragdoll-overhaul" target="_blank" class="card">Euphoria Ragdoll Overhaul</a>
-      <a href="https://www.gta5-mods.com/scripts/police-search" target="_blank" class="card">Police Search</a>
-      <a href="https://www.gta5-mods.com/scripts/los-santos-life" target="_blank" class="card">Los Santos Life</a>
-      <a href="https://www.gta5-mods.com/scripts/joker-script" target="_blank" class="card">Joker Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/thanos-script" target="_blank" class="card">Thanos Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/jetpack" target="_blank" class="card">Jetpack Mod</a>
-      <a href="https://www.gta5-mods.com/scripts/enhanced-train-driver" target="_blank" class="card">Enhanced Train Driver</a>
-      <a href="https://www.gta5-mods.com/scripts/first-person-mod-sa" target="_blank" class="card">First Person Mod (GTA SA)</a>
-      <a href="https://www.gta5-mods.com/player/hd-cj-pack" target="_blank" class="card">HD CJ Pack</a>
-      <a href="https://www.gta5-mods.com/maps/gta-sa-remastered-map" target="_blank" class="card">GTA SA Remastered Map</a>
-      <a href="https://www.gta5-mods.com/misc/project2dfx" target="_blank" class="card">Project2DFX</a>
-      <a href="https://www.gta5-mods.com/scripts/hot-coffee" target="_blank" class="card">Hot Coffee</a>
-      <a href="https://www.gta5-mods.com/misc/skygfx" target="_blank" class="card">SkyGfx</a>
-      <a href="https://www.gta5-mods.com/scripts/vehfuncs" target="_blank" class="card">VehFuncs</a>
-      <a href="https://www.gta5-mods.com/scripts/cleo-mod-pack" target="_blank" class="card">CLEO Mod Pack</a>
-    </div>
-  </section>
-
-  <section id="rules" style="display:none;">
-    <h2>Server Rules</h2>
-    <ol>
-      <li>Do not impersonate others.</li>
-      <li>No inappropriate content.</li>
-      <li>Keep drama away.</li>
-      <li>No sexual content.</li>
-      <li>No spamming.</li>
-      <li>Avoid religious/political debates.</li>
-      <li>Do not share links.</li>
-      <li>No selling.</li>
-      <li>Do not share personal info.</li>
-      <li>Don’t beg for roles.</li>
-    </ol>
-  </section>
-
-  <section id="team" style="display:none;">
-    <h2>Meet Our Team</h2>
-    <div class="card-container">
-      <div class="product-card">
-        <h3>Chethan</h3>
-        <p><strong>Role:</strong> Founder</p>
-      </div>
-      <div class="product-card">
-        <h3>Gamerboy</h3>
-        <p><strong>Role:</strong> Adminstator</p>
-      </div>
-      <div class="product-card">
-        <h3>Sai</h3>
-        <p><strong>Role:</strong> Superintendent</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="cart-area" id="cartArea" style="display:none;">
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-    <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
-    <a href="upi://pay?pa=bargavi1204@ybl&pn=VexStore&cu=INR" style="color:black; background:#0fa; padding:10px 20px; display:inline-block; border-radius:5px; text-decoration:none;">PAY WITH GPAY/PHONEPE</a>
+  <div id="loginSection" class="login-box">
+    <h2>Login to VexStore</h2>
+    <input id="username" type="text" placeholder="Your Name" /><br/>
+    <input id="mcid" type="text" placeholder="Minecraft ID (min 5 chars)" /><br/>
+    <button onclick="login()">Login</button>
   </div>
-</div>
 
-<script>
-  let cart = [];
+  <div id="mainContent" style="display:none;">
+    <nav>
+      <a onclick="showSection('home')">HOME</a>
+      <a onclick="showSection('mc-hosting')">MC Hosting</a>
+      <a onclick="showSection('pay-to-play')">PaytoPlay</a>
+      <a onclick="showSection('web-hosting')">Web Hosting</a>
+      <a onclick="showSection('pcs')">PCs</a>
+      <a onclick="showSection('modding')">Modding</a>
+      <a onclick="showSection('store')">Store</a>
+      <a onclick="showSection('rules')">Rules</a>
+      <a onclick="showSection('team')">Team</a>
+      <a onclick="showSection('events')">Events</a>
+      <a onclick="showCart()">Cart</a>
+    </nav>
 
-  function login() {
-    const name = document.getElementById('username').value.trim();
-    const mcid = document.getElementById('mcid').value.trim();
-    if (name && mcid.length >= 5) {
-      document.getElementById('loginSection').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-      showSection('home');
-    } else {
-      alert('Enter valid name and Minecraft ID (min 5 characters)');
+    <section id="home">
+      <h1>Welcome to Chethan's Minecraft Store</h1>
+      <p>Get exclusive ranks, crate keys, coins, and now gaming PCs and mobile devices to enhance your gameplay experience.</p>
+      <p>Use the navigation menu to browse the store, check rules, meet the team, and more!</p>
+    </section>
+
+    <section id="mc-hosting">
+      <h2>Minecraft Server Hosting (Unavailable until Oct 20 2025)</h2>
+      <div class="card-container">
+        <div class="product-card">
+          <h3>Basic MC Hosting</h3>
+          <p>₹150/month</p>
+          <button disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Standard MC Hosting</h3>
+          <p>₹300/month</p>
+          <button disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Pro MC Hosting</h3>
+          <p>₹500/month</p>
+          <button disabled>Unavailable</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pay-to-play">
+      <h2>Pay to Play Server</h2>
+      <div class="card-container">
+        <div class="product-card">
+          <h3>Monthly</h3>
+          <p>₹200</p>
+          <button onclick="addToCart('Pay to Play - Monthly', 200)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h3>Quarterly</h3>
+          <p>₹600</p>
+          <button onclick="addToCart('Pay to Play - Quarterly', 600)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h3>Yearly</h3>
+          <p>₹1800</p>
+          <button onclick="addToCart('Pay to Play - Yearly', 1800)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="web-hosting">
+      <h2>Website Hosting</h2>
+      <div class="card-container">
+        <div class="product-card">
+          <h3>Basic</h3>
+          <p>₹250/month</p>
+          <button onclick="addToCart('Website Hosting - Basic', 250)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h3>Standard</h3>
+          <p>₹450/month</p>
+          <button onclick="addToCart('Website Hosting - Standard', 450)">Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <h3>Premium</h3>
+          <p>₹650/month</p>
+          <button onclick="addToCart('Website Hosting - Premium', 650)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pcs">
+      <h2>PCs</h2>
+      <div class="device-toggle">
+        <select id="device-select" onchange="toggleDevices()">
+          <option value="pc">PCs</option>
+          <option value="mobile">Mobiles</option>
+        </select>
+      </div>
+      <div id="pcs-container" class="card-container">
+        <div class="product-card">
+          <h3>Gaming Beast X1</h3>
+          <p>CPU: Intel Core i9-13900K</p>
+          <p>GPU: NVIDIA RTX 4090</p>
+          <p>RAM: 32GB DDR5</p>
+          <p>Storage: 1TB NVMe SSD</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Creator Pro Z2</h3>
+          <p>CPU: AMD Ryzen 9 7950X</p>
+          <p>GPU: NVIDIA RTX 4080</p>
+          <p>RAM: 64GB DDR5</p>
+          <p>Storage: 2TB NVMe SSD</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Workstation Elite</h3>
+          <p>CPU: Intel Xeon W-3375</p>
+          <p>GPU: NVIDIA Quadro RTX A6000</p>
+          <p>RAM: 128GB DDR4</p>
+          <p>Storage: 4TB NVMe SSD</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Ultra Gamer V4</h3>
+          <p>CPU: AMD Ryzen 7 7800X3D</p>
+          <p>GPU: AMD Radeon RX 7900 XTX</p>
+          <p>RAM: 32GB DDR5</p>
+          <p>Storage: 1TB NVMe SSD + 2TB HDD</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Compact Powerhouse</h3>
+          <p>CPU: Intel Core i7-13700</p>
+          <p>GPU: NVIDIA RTX 4070 Ti</p>
+          <p>RAM: 16GB DDR5</p>
+          <p>Storage: 1TB NVMe SSD</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+      </div>
+      <div id="mobile-container" class="card-container">
+        <div class="product-card">
+          <h3>Galaxy Z Fold 7</h3>
+          <p>CPU: Snapdragon 8 Gen 4</p>
+          <p>RAM: 16GB</p>
+          <p>Storage: 512GB</p>
+          <p>Display: 7.6" AMOLED 120Hz</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>iPhone 17 Pro Max</h3>
+          <p>CPU: Apple A19 Pro</p>
+          <p>RAM: 12GB</p>
+          <p>Storage: 1TB</p>
+          <p>Display: 6.9" OLED 120Hz</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Pixel 10 Pro</h3>
+          <p>CPU: Google Tensor G5</p>
+          <p>RAM: 16GB</p>
+          <p>Storage: 256GB</p>
+          <p>Display: 6.8" AMOLED 120Hz</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>OnePlus 13</h3>
+          <p>CPU: Snapdragon 8 Gen 4</p>
+          <p>RAM: 12GB</p>
+          <p>Storage: 512GB</p>
+          <p>Display: 6.7" AMOLED 144Hz</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+        <div class="product-card">
+          <h3>Xiaomi 15 Pro</h3>
+          <p>CPU: Snapdragon 8 Gen 4</p>
+          <p>RAM: 16GB</p>
+          <p>Storage: 1TB</p>
+          <p>Display: 6.8" AMOLED 120Hz</p>
+          <button class="unavailable-btn" disabled>Unavailable</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="store" style="display:none;">
+      <h2>Store</h2>
+      <div class="card-container">
+        <div class="product-card" data-name="ELITE" data-price="1080">
+          <h3>ELITE – ₹1080</h3>
+          <button onclick="addToCart('ELITE', 1080)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('ELITE', -1)">-</button>
+            <span id="qty-ELITE">1</span>
+            <button onclick="updateQty('ELITE', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="OVERLORD" data-price="730">
+          <h3>OVERLORD – ₹730</h3>
+          <button onclick="addToCart('OVERLORD', 730)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('OVERLORD', -1)">-</button>
+            <span id="qty-OVERLORD">1</span>
+            <button onclick="updateQty('OVERLORD', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="VIP+" data-price="650">
+          <h3>VIP+ – ₹650</h3>
+          <button onclick="addToCart('VIP+', 650)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('VIP+', -1)">-</button>
+            <span id="qty-VIP+">1</span>
+            <button onclick="updateQty('VIP+', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="VIP" data-price="360">
+          <h3>VIP – ₹360</h3>
+          <button onclick="addToCart('VIP', 360)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('VIP', -1)">-</button>
+            <span id="qty-VIP">1</span>
+            <button onclick="updateQty('VIP', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="MVP" data-price="519">
+          <h3>MVP – ₹519</h3>
+          <button onclick="addToCart('MVP', 519)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('MVP', -1)">-</button>
+            <span id="qty-MVP">1</span>
+            <button onclick="updateQty('MVP', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Karen" data-price="240">
+          <h3>Karen – ₹240</h3>
+          <button onclick="addToCart('Karen', 240)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Karen', -1)">-</button>
+            <span id="qty-Karen">1</span>
+            <button onclick="updateQty('Karen', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Rookie" data-price="150">
+          <h3>Rookie – ₹150</h3>
+          <button onclick="addToCart('Rookie', 150)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Rookie', -1)">-</button>
+            <span id="qty-Rookie">1</span>
+            <button onclick="updateQty('Rookie', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="1,000 Coins" data-price="100">
+          <h3>1,000 Coins – ₹100</h3>
+          <button onclick="addToCart('1,000 Coins', 100)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('1,000 Coins', -1)">-</button>
+            <span id="qty-1,000 Coins">1</span>
+            <button onclick="updateQty('1,000 Coins', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="2,000 Coins" data-price="180">
+          <h3>2,000 Coins – ₹180</h3>
+          <button onclick="addToCart('2,000 Coins', 180)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('2,000 Coins', -1)">-</button>
+            <span id="qty-2,000 Coins">1</span>
+            <button onclick="updateQty('2,000 Coins', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="4,000 + 1,000 Free Coins" data-price="320">
+          <h3>4,000 + 1,000 Free – ₹320</h3>
+          <button onclick="addToCart('4,000 + 1,000 Free Coins', 320)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('4,000 + 1,000 Free Coins', -1)">-</button>
+            <span id="qty-4,000 + 1,000 Free Coins">1</span>
+            <button onclick="updateQty('4,000 + 1,000 Free Coins', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Seasonal Crate" data-price="599">
+          <h3>Seasonal Crate – ₹599</h3>
+          <button onclick="addToCart('Seasonal Crate', 599)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Seasonal Crate', -1)">-</button>
+            <span id="qty-Seasonal Crate">1</span>
+            <button onclick="updateQty('Seasonal Crate', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Legendary Crate" data-price="499">
+          <h3>Legendary Crate – ₹499</h3>
+          <button onclick="addToCart('Legendary Crate', 499)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Legendary Crate', -1)">-</button>
+            <span id="qty-Legendary Crate">1</span>
+            <button onclick="updateQty('Legendary Crate', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Ultimate Crate" data-price="349">
+          <h3>Ultimate Crate – ₹349</h3>
+          <button onclick="addToCart('Ultimate Crate', 349)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Ultimate Crate', -1)">-</button>
+            <span id="qty-Ultimate Crate">1</span>
+            <button onclick="updateQty('Ultimate Crate', 1)">+</button>
+          </div>
+        </div>
+        <div class="product-card" data-name="Prime Crate" data-price="199">
+          <h3>Prime Crate – ₹199</h3>
+          <button onclick="addToCart('Prime Crate', 199)">Add to Cart</button>
+          <div class="qty-box" style="display:none;">
+            <button onclick="updateQty('Prime Crate', -1)">-</button>
+            <span id="qty-Prime Crate">1</span>
+            <button onclick="updateQty('Prime Crate', 1)">+</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modding" style="padding: 20px; background: #111; color: white;">
+      <h2 style="text-align:center;">Minecraft Plugins & Mods</h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+        <a href="https://www.spigotmc.org/resources/essentialsx.9089/" target="_blank" class="card">EssentialsX</a>
+        <a href="https://www.spigotmc.org/resources/luckperms.28140/" target="_blank" class="card">LuckPerms</a>
+        <a href="https://www.spigotmc.org/resources/vault.34315/" target="_blank" class="card">Vault</a>
+        <a href="https://www.spigotmc.org/resources/worldedit.1391/" target="_blank" class="card">WorldEdit</a>
+        <a href="https://www.spigotmc.org/resources/worldguard.1635/" target="_blank" class="card">WorldGuard</a>
+        <a href="https://www.spigotmc.org/resources/dynmap.274/" target="_blank" class="card">Dynmap</a>
+        <a href="https://www.spigotmc.org/resources/griefprevention.1884/" target="_blank" class="card">GriefPrevention</a>
+        <a href="https://www.spigotmc.org/resources/clearlagg.68271/" target="_blank" class="card">ClearLag</a>
+        <a href="https://www.spigotmc.org/resources/citizens.13811/" target="_blank" class="card">Citizens</a>
+        <a href="https://www.spigotmc.org/resources/cratesplus-free-crates-plugin-1-8-1-20-6.10900/" target="_blank" class="card">CratesPlus</a>
+        <a href="https://www.spigotmc.org/resources/deluxemenus.28779/" target="_blank" class="card">DeluxeMenus</a>
+        <a href="https://www.spigotmc.org/resources/mythicmobs.10495/" target="_blank" class="card">MythicMobs</a>
+        <a href="https://www.spigotmc.org/resources/tab.57806/" target="_blank" class="card">TAB</a>
+        <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" class="card">PlaceholderAPI</a>
+        <a href="https://www.spigotmc.org/resources/holographic-displays.28728/" target="_blank" class="card">HolographicDisplays</a>
+        <a href="https://www.spigotmc.org/resources/auctionhouse.61836/" target="_blank" class="card">AuctionHouse</a>
+        <a href="https://www.spigotmc.org/resources/coreprotect.8631/" target="_blank" class="card">CoreProtect</a>
+        <a href="https://www.spigotmc.org/resources/fastasyncworldedit.13932/" target="_blank" class="card">FastAsyncWorldEdit</a>
+        <a href="https://www.spigotmc.org/resources/ultrapermissions.32201/" target="_blank" class="card">UltraPermissions</a>
+        <a href="https://www.spigotmc.org/resources/viaversion.19254/" target="_blank" class="card">ViaVersion</a>
+        <a href="https://www.spigotmc.org/resources/protocollib.1997/" target="_blank" class="card">ProtocolLib</a>
+        <a href="https://www.spigotmc.org/resources/jobs-reborn.4216/" target="_blank" class="card">Jobs Reborn</a>
+        <a href="https://www.spigotmc.org/resources/mcmmo.2445/" target="_blank" class="card">mcMMO</a>
+        <a href="https://www.spigotmc.org/resources/multiverse-core.390/" target="_blank" class="card">Multiverse-Core</a>
+        <a href="https://www.spigotmc.org/resources/betterrtp.36051/" target="_blank" class="card">BetterRTP</a>
+        <a href="https://www.spigotmc.org/resources/chatcontrol-red-the-ultimate-chat-solution-1-2-5-1-21-1.90481/" target="_blank" class="card">ChatControl</a>
+        <a href="https://www.spigotmc.org/resources/playerwarps-warp-gui-1-8-1-21-1.81159/" target="_blank" class="card">PlayerWarps</a>
+        <a href="https://www.spigotmc.org/resources/litebans.3715/" target="_blank" class="card">LiteBans</a>
+        <a href="https://www.spigotmc.org/resources/combatlogx.31689/" target="_blank" class="card">CombatLogX</a>
+        <a href="https://www.spigotmc.org/resources/shopgui.6515/" target="_blank" class="card">ShopGUIPlus</a>
+        <a href="https://www.spigotmc.org/resources/votingplugin.15358/" target="_blank" class="card">VotingPlugin</a>
+        <a href="https://www.spigotmc.org/resources/geysermc.76021/" target="_blank" class="card">GeyserMC</a>
+        <a href="https://www.spigotmc.org/resources/floodgate.77007/" target="_blank" class="card">Floodgate</a>
+        <a href="https://www.spigotmc.org/resources/economyshopgui.69927/" target="_blank" class="card">EconomyShopGUI</a>
+        <a href="https://www.spigotmc.org/resources/advancedban.8695/" target="_blank" class="card">AdvancedBan</a>
+        <a href="https://www.spigotmc.org/resources/cmi.3742/" target="_blank" class="card">CMI</a>
+        <a href="https://www.spigotmc.org/resources/crazycrates.17599/" target="_blank" class="card">CrazyCrates</a>
+        <a href="https://www.spigotmc.org/resources/ultracosmetics.30676/" target="_blank" class="card">UltraCosmetics</a>
+        <a href="https://www.spigotmc.org/resources/quests.3711/" target="_blank" class="card">Quests</a>
+        <a href="https://www.spigotmc.org/resources/headsplus.40265/" target="_blank" class="card">HeadsPlus</a>
+        <a href="https://www.spigotmc.org/resources/factionsuuid.1035/" target="_blank" class="card">Factions</a>
+        <a href="https://www.spigotmc.org/resources/tardis.2796/" target="_blank" class="card">TARDIS Plugin</a>
+        <a href="https://www.spigotmc.org/resources/anticheatreloaded.62201/" target="_blank" class="card">AntiCheatReloaded</a>
+        <a href="https://www.spigotmc.org/resources/simpleclans.74497/" target="_blank" class="card">SimpleClans</a>
+        <a href="https://www.spigotmc.org/resources/mobarena.34110/" target="_blank" class="card">MobArena</a>
+        <a href="https://www.curseforge.com/minecraft/mc-mods/slimefun" target="_blank" class="card">Slimefun</a>
+        <a href="https://www.spigotmc.org/resources/petblocks-1-8-1-20-6-mysql-sqlite.10937/" target="_blank" class="card">PetBlocks</a>
+        <a href="https://www.spigotmc.org/resources/orebfuscator.9514/" target="_blank" class="card">Orebfuscator</a>
+        <a href="https://www.spigotmc.org/resources/commandnpc-1-7-1-21-x.19276/" target="_blank" class="card">CommandNPC</a>
+        <a href="https://www.spigotmc.org/resources/autosell.3722/" target="_blank" class="card">AutoSell</a>
+      </div>
+
+      <h2 style="text-align:center; margin-top: 30px;">GTA V Mods</h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+        <a href="https://www.lcpdfr.com/downloads/gta5mods/scripts/7712-lspd-first-response/" target="_blank" class="card">LSPDFR</a>
+        <a href="https://www.gta5-mods.com/scripts/menyoo-pc-sp" target="_blank" class="card">Menyoo PC</a>
+        <a href="https://www.openiv.com/" target="_blank" class="card">OpenIV</a>
+        <a href="https://www.gta5-mods.com/misc/naturalvision-evolved" target="_blank" class="card">NaturalVision Evolved</a>
+        <a href="https://www.gta5-mods.com/scripts/simple-trainer-for-gtav" target="_blank" class="card">Simple Trainer</a>
+        <a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank" class="card">Script Hook V</a>
+        <a href="https://www.gta5-mods.com/misc/gta-v-redux" target="_blank" class="card">GTA V Redux</a>
+        <a href="https://www.gta5-mods.com/vehicles/realistic-car-pack" target="_blank" class="card">Realistic Car Pack</a>
+        <a href="https://www.gta5-mods.com/misc/quantv-3-0" target="_blank" class="card">QuantV</a>
+        <a href="https://www.gta5-mods.com/scripts/iron-man-script-2-0" target="_blank" class="card">Iron Man Mod</a>
+        <a href="https://www.gta5-mods.com/misc/nvrx-naturalvision-remastered-x" target="_blank" class="card">NVRX</a>
+        <a href="https://www.gta5-mods.com/scripts/gang-and-turf-mod" target="_blank" class="card">Gang and Turf Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/zombies" target="_blank" class="card">Zombies Mod</a>
+        <a href="https://www.gta5-mods.com/misc/emergency-uniforms-pack" target="_blank" class="card">EUP Menu</a>
+        <a href="https://www.gta5-mods.com/scripts/vehicle-spawner" target="_blank" class="card">Vehicle Spawner</a>
+        <a href="https://www.gta5-mods.com/scripts/superman-script-mod" target="_blank" class="card">Superman Mod</a>
+        <a href="https://www.gta5-mods.com/misc/realistic-weapon-sounds" target="_blank" class="card">Realistic Weapon Sounds</a>
+        <a href="https://www.gta5-mods.com/scripts/prison-mod" target="_blank" class="card">Prison Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/home-invasion" target="_blank" class="card">Home Invasion</a>
+        <a href="https://www.gta5-mods.com/maps/vice-cry-remastered" target="_blank" class="card">Vice Cry Remastered</a>
+        <a href="https://www.gta5-mods.com/scripts/mafia-work-mod" target="_blank" class="card">Mafia Work Mod</a>
+        <a href="https://www.gta5-mods.com/maps/liberty-city-in-gtav" target="_blank" class="card">Liberty City in GTA V</a>
+        <a href="https://www.gta5-mods.com/scripts/fuel-script-v" target="_blank" class="card">Fuel Script V</a>
+        <a href="https://www.gta5-mods.com/scripts/atm-robberies-bank-heists" target="_blank" class="card">ATM Robbery Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/open-interiors" target="_blank" class="card">Open Interiors</a>
+        <a href="https://www.gta5-mods.com/misc/gta-v-remastered" target="_blank" class="card">GTA V Remastered</a>
+        <a href="https://www.gta5-mods.com/scripts/ambiance" target="_blank" class="card">Ambiance Mod</a>
+        <a href="https://www.gta5-mods.com/maps/bennys-motorworks-sp" target="_blank" class="card">Benny’s Motorworks</a>
+        <a href="https://www.gta5-mods.com/scripts/ragdoll-on-demand" target="_blank" class="card">Ragdoll On Demand</a>
+        <a href="https://www.gta5-mods.com/scripts/the-heist-project" target="_blank" class="card">Heist Project</a>
+        <a href="https://www.gta5-mods.com/maps/military-base-expansion" target="_blank" class="card">Military Base Expansion</a>
+        <a href="https://www.gta5-mods.com/scripts/character-menu" target="_blank" class="card">Character Menu</a>
+        <a href="https://www.gta5-mods.com/tools/map-editor" target="_blank" class="card">Map Editor</a>
+        <a href="https://www.gta5-mods.com/scripts/add-on-peds" target="_blank" class="card">Add-On Peds</a>
+        <a href="https://www.gta5-mods.com/vehicles/add-on-vehicle-spawner" target="_blank" class="card">Add-On Vehicles</a>
+        <a href="https://www.gta5-mods.com/scripts/euphoria-ragdoll-overhaul" target="_blank" class="card">Euphoria Ragdoll Overhaul</a>
+        <a href="https://www.gta5-mods.com/scripts/police-search" target="_blank" class="card">Police Search</a>
+        <a href="https://www.gta5-mods.com/scripts/los-santos-life" target="_blank" class="card">Los Santos Life</a>
+        <a href="https://www.gta5-mods.com/scripts/joker-script" target="_blank" class="card">Joker Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/thanos-script" target="_blank" class="card">Thanos Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/jetpack" target="_blank" class="card">Jetpack Mod</a>
+        <a href="https://www.gta5-mods.com/scripts/enhanced-train-driver" target="_blank" class="card">Enhanced Train Driver</a>
+        <a href="https://www.gta5-mods.com/scripts/first-person-mod-sa" target="_blank" class="card">First Person Mod (GTA SA)</a>
+        <a href="https://www.gta5-mods.com/player/hd-cj-pack" target="_blank" class="card">HD CJ Pack</a>
+        <a href="https://www.gta5-mods.com/maps/gta-sa-remastered-map" target="_blank" class="card">GTA SA Remastered Map</a>
+        <a href="https://www.gta5-mods.com/misc/project2dfx" target="_blank" class="card">Project2DFX</a>
+        <a href="https://www.gta5-mods.com/scripts/hot-coffee" target="_blank" class="card">Hot Coffee</a>
+        <a href="https://www.gta5-mods.com/misc/skygfx" target="_blank" class="card">SkyGfx</a>
+        <a href="https://www.gta5-mods.com/scripts/vehfuncs" target="_blank" class="card">VehFuncs</a>
+        <a href="https://www.gta5-mods.com/scripts/cleo-mod-pack" target="_blank" class="card">CLEO Mod Pack</a>
+      </div>
+    </section>
+
+    <section id="rules" style="display:none;">
+      <h2>Server Rules</h2>
+      <ol>
+        <li>Do not impersonate others.</li>
+        <li>No inappropriate content.</li>
+        <li>Keep drama away.</li>
+        <li>No sexual content.</li>
+        <li>No spamming.</li>
+        <li>Avoid religious/political debates.</li>
+        <li>Do not share links.</li>
+        <li>No selling.</li>
+        <li>Do not share personal info.</li>
+        <li>Don’t beg for roles.</li>
+      </ol>
+    </section>
+
+    <section id="team" style="display:none;">
+      <h2>Meet Our Team</h2>
+      <div class="card-container">
+        <div class="product-card">
+          <h3>Chethan</h3>
+          <p><strong>Role:</strong> Founder</p>
+        </div>
+        <div class="product-card">
+          <h3>Gamerboy</h3>
+          <p><strong>Role:</strong> Adminstator</p>
+        </div>
+        <div class="product-card">
+          <h3>Sai</h3>
+          <p><strong>Role:</strong> Superintendent</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" style="display:none;">
+      <h2>Events</h2>
+      <div class="card-container">
+        <div class="event-card">
+          <h3>Base Contest 1</h3>
+          <p>Show off your building skills in our first base-building competition!</p>
+          <p><strong>Date:</strong> August 15, 2025</p>
+          <span class="rewards-toggle" onclick="toggleRewards('rewards-1')">Rewards</span>
+          <div class="rewards-list" id="rewards-1">
+            <ul>
+              <li>1st: Free Moderator Rank (30 days)</li>
+              <li>2nd: 1,000,000 Coins + 5 Crate Keys</li>
+              <li>3rd: 500,000 Coins + 3 Prime Crates</li>
+              <li>4th: VIP Rank (15 days) + 2 Ultimate Crates</li>
+              <li>5th: 250,000 Coins + 1 Legendary Crate</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-card">
+          <h3>Base Contest 2</h3>
+          <p>Push your creativity further with an advanced base-building challenge!</p>
+          <p><strong>Date:</strong> August 30, 2025</p>
+          <span class="rewards-toggle" onclick="toggleRewards('rewards-2')">Rewards</span>
+          <div class="rewards-list" id="rewards-2">
+            <ul>
+              <li>1st: Free Moderator Rank (30 days) + 1 Seasonal Crate</li>
+              <li>2nd: 1,500,000 Coins + 7 Crate Keys</li>
+              <li>3rd: 750,000 Coins + 5 Prime Crates</li>
+              <li>4th: VIP+ Rank (30 days) + 3 Ultimate Crates</li>
+              <li>5th: 400,000 Coins + 2 Legendary Crates</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-card">
+          <h3>Monumental</h3>
+          <p>Construct epic monuments that will stand the test of time!</p>
+          <p><strong>Date:</strong> September 1, 2025</p>
+          <span class="rewards-toggle" onclick="toggleRewards('rewards-3')">Rewards</span>
+          <div class="rewards-list" id="rewards-3">
+            <ul>
+              <li>1st: Mod (45 days) + 2 Seasonal Crates</li>
+              <li>2nd: 2,000,000 Coins + 10 Crate Keys</li>
+              <li>3rd: 1,000,000 Coins + 7 Prime Crates</li>
+              <li>4th: VIP+ Rank (45 days) + 4 Ultimate Crates</li>
+              <li>5th: 600,000 Coins + 3 Legendary Crates</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-card">
+          <h3>PVP Battle</h3>
+          <p>Test your combat skills in an all-out PVP showdown!</p>
+          <p><strong>Date:</strong> October 1, 2025</p>
+          <span class="rewards-toggle" onclick="toggleRewards('rewards-4')">Rewards</span>
+          <div class="rewards-list" id="rewards-4">
+            <ul>
+              <li>1st: Mod (60 days) + 3 Seasonal Crates</li>
+              <li>2nd: 2,500,000 Coins + 12 Crate Keys</li>
+              <li>3rd: 1,250,000 Coins + 10 Prime Crates</li>
+              <li>4th: MVP Rank (45 days) + 5 Ultimate Crates</li>
+              <li>5th: 800,000 Coins + 4 Legendary Crates</li>
+            </ul>
+          </div>
+        </div>
+        <div class="event-card">
+          <h3>Best Mega Base</h3>
+          <p>Build the ultimate mega base to claim legendary status!</p>
+          <p><strong>Date:</strong> November 1, 2025</p>
+          <span class="rewards-toggle" onclick="toggleRewards('rewards-5')">Rewards</span>
+          <div class="rewards-list" id="rewards-5">
+            <ul>
+              <li>1st: STAFF + 5 Seasonal Crates</li>
+              <li>2nd: 3,000,000 Coins + 15 Crate Keys</li>
+              <li>3rd: 1,500,000 Coins + 12 Prime Crates</li>
+              <li>4th:  Elite + 6 Ultimate Crates</li>
+              <li>5th: 1,000,000 Cash + 5 Legendary Crates</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cart-area" id="cartArea" style="display:none;">
+      <h2>Your Cart</h2>
+      <ul id="cartItems"></ul>
+      <p><strong>Total:</strong> ₹<span id="cartTotal">0</span></p>
+      <a href="upi://pay?pa=bargavi@gmail.com&pn=VexStore&cu=INR" style="color:black; background:#0fa; padding:8px 15px; display:inline-block; border-radius:5px; text-decoration:none; font-size: 14px;">PAY WITH GPAY/PHONEPE</a>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function login() {
+      const name = document.getElementById('username').value.trim();
+      const mcid = document.getElementById('mcid').value.trim();
+      if (name && mcid.length >= 5) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        showSection('home');
+      } else {
+        alert('Enter valid name and Minecraft ID (min 5 characters)');
+      }
     }
-  }
 
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    document.getElementById('cartArea').style.display = 'none';
-  }
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      document.getElementById('cartArea').style.display = 'none';
+    }
 
-  function addToCart(item, price) {
-    cart.push({ item, price });
-    alert(item + ' added to cart.');
-  }
+    function addToCart(item, price) {
+      cart.push({ item, price });
+      alert(item + ' added to cart.');
+    }
 
-  function showCart() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    cartItems.innerHTML = '';
-    let total = 0;
-    cart.forEach(entry => {
-      const li = document.createElement('li');
-      li.textContent = `${entry.item} - ₹${entry.price}`;
-      cartItems.appendChild(li);
-      total += entry.price;
-    });
-    cartTotal.textContent = total;
-    document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-    document.getElementById('cartArea').style.display = 'block';
-  }
-</script>
+    function showCart() {
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.item} - ₹${entry.price}`;
+        cartItems.appendChild(li);
+        total += entry.price;
+      });
+      cartTotal.textContent = total;
+      document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+      document.getElementById('cartArea').style.display = 'block';
+    }
 
+    function toggleDevices() {
+      const select = document.getElementById('device-select');
+      const pcsContainer = document.getElementById('pcs-container');
+      const mobileContainer = document.getElementById('mobile-container');
+      if (select.value === 'pc') {
+        pcsContainer.style.display = 'flex';
+        mobileContainer.style.display = 'none';
+      } else {
+        pcsContainer.style.display = 'none';
+        mobileContainer.style.display = 'flex';
+      }
+    }
+
+    function toggleRewards(id) {
+      const rewardsList = document.getElementById(id);
+      const toggle = rewardsList.previousElementSibling;
+      if (rewardsList.style.display === 'block') {
+        rewardsList.style.display = 'none';
+        toggle.classList.remove('open');
+      } else {
+        rewardsList.style.display = 'block';
+        toggle.classList.add('open');
+      }
+    }
+  </script>
 </body>
 </html>
