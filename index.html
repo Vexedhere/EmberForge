@@ -39,18 +39,18 @@
       gap: 10px;
       justify-content: center;
     }
-    .product-card, .event-card {
+    .product-card, .event-card, .command-card {
       background: #1e2f4d;
       padding: 15px;
       border-radius: 8px;
       width: 250px;
       text-align: left;
     }
-    .product-card h3, .event-card h3 {
+    .product-card h3, .event-card h3, .command-card h3 {
       margin: 0 0 10px;
       font-size: 18px;
     }
-    .product-card p, .event-card p {
+    .product-card p, .event-card p, .command-card p {
       margin: 5px 0;
       font-size: 14px;
     }
@@ -185,11 +185,12 @@
     <nav>
       <a onclick="showSection('home')">HOME</a>
       <a onclick="showSection('store')">Store</a>
+      <a onclick="showSection('commands')">Command Help</a
       <a onclick="showSection('mc-hosting')">MC Hosting</a>
       <a onclick="showSection('pay-to-play')">PaytoPlay</a>
       <a onclick="showSection('web-hosting')">Web Hosting</a>
       <a onclick="showSection('pcs')">Devices</a>
-      <a onclick="showSection('modding')">Modding
+      <a onclick="showSection('modding')">Modding</a>
       <a onclick="showSection('rules')">Rules</a>
       <a onclick="showSection('team')">Team</a>
       <a onclick="showSection('events')">Events</a>
@@ -266,7 +267,7 @@
     </section>
 
     <section id="pcs">
-      <h2>PCs</h2>
+      <h2>Devices</h2>
       <div class="device-toggle">
         <select id="device-select" onchange="toggleDevices()">
           <option value="pc">PCs</option>
@@ -708,10 +709,116 @@
               <li>1st: STAFF + 5 Seasonal Crates</li>
               <li>2nd: 3,000,000 Coins + 15 Crate Keys</li>
               <li>3rd: 1,500,000 Coins + 12 Prime Crates</li>
-              <li>4th:  Elite + 6 Ultimate Crates</li>
+              <li>4th: Elite + 6 Ultimate Crates</li>
               <li>5th: 1,000,000 Cash + 5 Legendary Crates</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="commands" style="display:none;">
+      <h2>Command Help</h2>
+      <div class="card-container">
+        <div class="command-card">
+          <h3>/fly</h3>
+          <p>Toggles flight mode for the player (requires permission).</p>
+        </div>
+        <div class="command-card">
+          <h3>/feed</h3>
+          <p>Fills the player's hunger bar (requires permission).</p>
+        </div>
+        <div class="command-card">
+          <h3>/pay</h3>
+          <p>Transfers in-game currency to another player. Usage: /pay [player] [amount]</p>
+        </div>
+        <div class="command-card">
+          <h3>/craft</h3>
+          <p>Opens a virtual crafting table for the player.</p>
+        </div>
+        <div class="command-card">
+          <h3>/discord</h3>
+          <p>Displays the server's Discord invite link in chat.</p>
+        </div>
+        <div class="command-card">
+          <h3>/tpa</h3>
+          <p>Sends a teleport request to another player. Usage: /tpa [player]</p>
+        </div>
+        <div class="command-card">
+          <h3>/tpaccept</h3>
+          <p>Accepts a pending teleport request from another player.</p>
+        </div>
+        <div class="command-card">
+          <h3>/tpadecline</h3>
+          <p>Declines a pending teleport request from another player.</p>
+        </div>
+        <div class="command-card">
+          <h3>/tpacancel</h3>
+          <p>Cancels a teleport request you sent to another player.</p>
+        </div>
+        <div class="command-card">
+          <h3>/rtp</h3>
+          <p>Teleports the player to a random location in the world.</p>
+        </div>
+        <div class="command-card">
+          <h3>/shop</h3>
+          <p>Opens the server shop GUI for buying and selling items.</p>
+        </div>
+        <div class="command-card">
+          <h3>/ah</h3>
+          <p>Opens the auction house to browse player listings.</p>
+        </div>
+        <div class="command-card">
+          <h3>/ah sell</h3>
+          <p>Lists an item for sale in the auction house. Usage: /ah sell [price]</p>
+        </div>
+        <div class="command-card">
+          <h3>/coinshop</h3>
+          <p>Opens a shop where items can be purchased with in-game coins.</p>
+        </div>
+        <div class="command-card">
+          <h3>/pw set</h3>
+          <p>Sets a personal warp point for the player. Usage: /pw set [name]</p>
+        </div>
+        <div class="command-card">
+          <h3>/warp Crates</h3>
+          <p>Teleports the player to the crates area.</p>
+        </div>
+        <div class="command-card">
+          <h3>/warp Leaderboards</h3>
+          <p>Teleports the player to the leaderboards area.</p>
+        </div>
+        <div class="command-card">
+          <h3>/warp PVP</h3>
+          <p>Teleports the player to the PVP arena.</p>
+        </div>
+        <div class="command-card">
+          <h3>/msg</h3>
+          <p>Sends a private message to another player. Usage: /msg [player] [message]</p>
+        </div>
+        <div class="command-card">
+          <h3>/back</h3>
+          <p>Teleports the player to their last location (requires permission).</p>
+        </div>
+        <div class="command-card">
+          <h3>/home</h3>
+          <p>Teleports the player to their set home. Usage: /home [name]</p>
+        </div>
+        <div class="command-card">
+          <h3>/sethome</h3>
+          <p>Sets a home at the player's current location. Usage: /sethome [name]</p>
+        </div>
+        <div class="command-card">
+          <h3>/bal</h3>
+          <p>Displays the player's current in-game currency balance.</p>
+        </div>
+        <div class="command-card">
+          <h3>/kit</h3>
+          <p>Lists or claims available kits. Usage: /kit [name]</p>
+        </div>
+        <div class="command-card">
+          <h3>/spawn</h3>
+          <p>Teleports the player to the server's spawn point.</p>
         </div>
       </div>
     </section>
