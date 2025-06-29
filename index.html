@@ -13,10 +13,36 @@
       color: white;
       display: flex;
     }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: #202225;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      z-index: 1001;
+    }
+    .top-bar a {
+      color: #0fa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .top-bar .copy-ip {
+      background: #2f3136;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
     .sidebar {
       width: 220px;
       background: #2f3136;
-      padding-top: 40px;
+      padding-top: 60px;
       height: 100vh;
       position: fixed;
       top: 0;
@@ -47,6 +73,7 @@
       font-size: 24px;
       font-weight: 600;
       position: relative;
+      margin-top: 40px;
     }
     .login-btn {
       position: absolute;
@@ -69,18 +96,13 @@
     .section.active {
       display: block;
     }
-    h2 {
-      color: #fff;
-      border-bottom: 1px solid #333;
-      padding-bottom: 5px;
-    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
       margin-top: 20px;
     }
-       .card {
+    .card {
       background: #2f3136;
       border-radius: 8px;
       padding: 16px;
@@ -124,23 +146,6 @@
       z-index: 9999;
       text-align: center;
     }
-    .login-box input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #444;
-      background: #1e1f22;
-      color: white;
-    }
-    .login-box button {
-      background: #0fa;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
     .basket {
       position: fixed;
       bottom: 20px;
@@ -175,25 +180,20 @@
       background: #0fa;
       color: black;
     }
-    .footer-links {
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
-      color: #aaa;
-    }
-    .footer-links a {
-      color: #0fa;
-      margin: 0 10px;
-      text-decoration: none;
-    }
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    <div class="copy-ip" onclick="copyIP()">Server IP: play.emberforge.net</div>
+    <a href="https://discord.gg/JKXc8Eh66v" target="_blank">Join Discord</a>
+  </div>
+
   <div class="sidebar">
     <a onclick="showSection('home')">Home</a>
     <a onclick="showSection('ranks')">Ranks</a>
     <a onclick="showSection('coins')">Coins</a>
     <a onclick="showSection('crates')">Crate Keys</a>
+    <a onclick="showSection('memberships')">Memberships</a>
   </div>
 
   <div class="main">
@@ -211,22 +211,13 @@
 
     <div id="home" class="section active">
       <h2>Welcome to EmberForge</h2>
-      <p style="font-size: 18px;">Log in with your Minecraft ID to purchase ranks, coins, or crates with direct UPI payments. All products are delivered instantly to your in-game account.</p>
-      <img src="spawn.jpg" style="width: 100%; max-width: 800px; display: block; margin: 20px auto; border-radius: 10px;" />
-      <img src="spawn2.jpg" style="width: 100%; max-width: 800px; display: block; margin: 20px auto; border-radius: 10px;" />
-      <img src="spawn3.jpg" style="width: 100%; max-width: 800px; display: block; margin: 20px auto; border-radius: 10px;" />
-      <img src="spawn4.jpg" style="width: 100%; max-width: 800px; display: block; margin: 20px auto; border-radius: 10px;" />
-      
+      <p style="font-size: 18px;">Log in with your Minecraft ID to purchase ranks, coins, crates, or memberships with direct UPI payments. All products are delivered instantly to your in-game account.</p>
     </div>
 
     <div id="ranks" class="section"><h2>Ranks</h2><div class="grid" id="rank-grid"></div></div>
     <div id="coins" class="section"><h2>Coins</h2><div class="grid" id="coin-grid"></div></div>
     <div id="crates" class="section"><h2>Crates</h2><div class="grid" id="crate-grid"></div></div>
-
-    <div class="footer-links">
-      <a href="https://https://discord.gg/JKXc8Eh66v" target="_blank">Join Discord</a>
-      <a href="https://vexedhere.github.io/server/"  target="_blank">Join Server</a>
-    </div>
+    <div id="memberships" class="section"><h2>Memberships</h2><div class="grid" id="membership-grid"></div></div>
   </div>
 
   <div class="basket" id="basket">
@@ -261,9 +252,20 @@
       { id: "legendary", name: "Legendary Crate", price: 499 },
       { id: "seasonal", name: "Seasonal Crate", price: 599 },
     ];
+    const memberships = [
+      { id: "newember", name: "New Ember", price: 250 },
+      { id: "miniforge", name: "MINIFORGE", price: 649 },
+      { id: "magmaforge", name: "MagmaForge", price: 2999 },
+      { id: "emberforge", name: "EmberForge", price: 6999 },
+    ];
+
+    function copyIP() {
+      navigator.clipboard.writeText("play.emberforge.net").then(() => {
+        alert("Server IP copied to clipboard!");
+      });
+    }
 
     function login() {
-      const name = document.getElementById("username").value.trim();
       const mcid = document.getElementById("mcidInput").value.trim();
       if (mcid.length < 5) return alert("Minecraft ID must be at least 5 characters");
       localStorage.setItem("mcid", mcid);
@@ -321,14 +323,10 @@
       document.getElementById("upi-link").href = upiString;
     }
 
-    function toggleBasket() {
-      const b = document.getElementById("basket");
-      b.style.display = b.style.display === "none" ? "block" : "none";
-    }
-
     ranks.forEach((item) => renderProduct(item, "rank-grid"));
     coins.forEach((item) => renderProduct(item, "coin-grid"));
     crates.forEach((item) => renderProduct(item, "crate-grid"));
+    memberships.forEach((item) => renderProduct(item, "membership-grid"));
   </script>
 </body>
 </html>
