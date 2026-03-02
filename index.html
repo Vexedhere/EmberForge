@@ -1,332 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EmberForge Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #18191c;
-      color: white;
-      display: flex;
-    }
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background: #202225;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 20px;
-      font-size: 14px;
-      z-index: 1001;
-    }
-    .top-bar a {
-      color: #0fa;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .top-bar .copy-ip {
-      background: #2f3136;
-      padding: 6px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .sidebar {
-      width: 220px;
-      background: #2f3136;
-      padding-top: 60px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .sidebar a {
-      padding: 12px 20px;
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    .sidebar a:hover {
-      background-color: #202225;
-      color: #0fa;
-    }
-    .main {
-      margin-left: 220px;
-      width: 100%;
-    }
-    header {
-      background: #202225;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 600;
-      position: relative;
-      margin-top: 40px;
-    }
-    .login-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 16px;
-      background: #0fa;
-      border: none;
-      border-radius: 6px;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .section {
-      display: none;
-      padding: 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    .section.active {
-      display: block;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .card {
-      background: #2f3136;
-      border-radius: 8px;
-      padding: 16px;
-      text-align: center;
-    }
-    .card h3 {
-      margin: 10px 0 5px;
-    }
-    .card p {
-      color: #0fa;
-      font-weight: bold;
-    }
-    .card input, .card button {
-      width: 90%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-    .card input {
-      border: 1px solid #444;
-      background: #1e1f22;
-      color: white;
-    }
-    .card button {
-      background: #0fa;
-      border: none;
-      color: black;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .login-box {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #2f3136;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-      z-index: 9999;
-      text-align: center;
-    }
-    .basket {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #2f3136;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      display: none;
-      width: 300px;
-      z-index: 10000;
-    }
-    .basket h3 {
-      margin-top: 0;
-      border-bottom: 1px solid #444;
-      padding-bottom: 10px;
-    }
-    .basket-item {
-      display: flex;
-      justify-content: space-between;
-      margin: 10px 0;
-    }
-    .basket-total {
-      border-top: 1px solid #444;
-      padding-top: 10px;
-      font-weight: bold;
-      text-align: right;
-    }
-    .basket button {
-      margin-top: 10px;
-      width: 100%;
-      background: #0fa;
-      color: black;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MythicalStudios | Official Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #020617; color: #f8fafc; scroll-behavior: smooth; }
+        .mythic-font { font-family: 'Cinzel', serif; }
+        .gold-glow { text-shadow: 0 0 15px rgba(234, 179, 8, 0.5); }
+        .rank-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.8)); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .rank-card:hover { border-color: #eab308; transform: scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .price-tag { background: linear-gradient(90deg, #eab308, #ca8a04); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+        @keyframes flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .moving-border { background: linear-gradient(270deg, #eab308, #3b82f6, #eab308); background-size: 200% 200%; animation: flow 3s ease infinite; }
+        .copy-badge { animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
-<body>
-  <div class="top-bar">
-    <div class="copy-ip" onclick="copyIP()">Server IP: play.emberforge.net</div>
-    <a href="https://discord.gg/JKXc8Eh66v" target="_blank">Join Discord</a>
-  </div>
+<body class="antialiased">
 
-  <div class="sidebar">
-    <a onclick="showSection('home')">Home</a>
-    <a onclick="showSection('ranks')">Ranks</a>
-    <a onclick="showSection('coins')">Coins</a>
-    <a onclick="showSection('crates')">Crate Keys</a>
-    <a onclick="showSection('memberships')">Memberships</a>
-  </div>
-
-  <div class="main">
-    <header>
-      EmberForge Store
-      <button class="login-btn" onclick="document.getElementById('loginSection').style.display = 'block'">Login</button>
-    </header>
-
-    <div id="loginSection" class="login-box" style="display: none">
-      <h2>Welcome to EmberForge Universe</h2>
-      <input id="username" type="text" placeholder="Your Name" />
-      <input id="mcidInput" type="text" placeholder="Minecraft ID (min 5 chars)" />
-      <button onclick="login()">Login</button>
+    <div class="bg-black text-[10px] font-black tracking-[0.3em] py-2 text-center uppercase border-b border-white/5">
+        <span class="text-emerald-500">● Global Status:</span> Online <span class="mx-4 text-slate-700">|</span> <span class="text-yellow-500">IP: mc.mythicalstudios.online</span>
     </div>
 
-    <div id="home" class="section active">
-      <h2>Welcome to EmberForge</h2>
-      <p style="font-size: 18px;">Log in with your Minecraft ID to purchase ranks, coins, crates, or memberships with direct UPI payments. All products are delivered instantly to your in-game account.</p>
+    <nav class="sticky top-0 z-50 bg-[#020617]/90 backdrop-blur-xl border-b border-white/5 px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-crown text-yellow-500 text-2xl gold-glow"></i>
+            <span class="mythic-font text-2xl font-black">Mythical<span class="text-yellow-500">Studios</span></span>
+        </div>
+        
+        <div class="hidden lg:flex gap-10 text-[10px] font-black uppercase tracking-widest text-slate-400">
+            <a href="#ranks" class="hover:text-white transition">Ranks</a>
+            <a href="#coins" class="hover:text-white transition">Coins</a>
+            <a href="https://www.youtube.com/@MSOfficial69" target="_blank" class="text-red-500"><i class="fab fa-youtube mr-1"></i> YouTube</a>
+            <a href="https://discord.com/channels/1363044619377578166/1363044619377578169" target="_blank" class="text-indigo-400"><i class="fab fa-discord mr-1"></i> Discord</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button onclick="copyIP()" class="hidden md:flex flex-col items-end group">
+                <span class="text-[9px] font-bold text-slate-500 group-hover:text-yellow-500 transition">CLICK TO JOIN</span>
+                <span class="text-xs font-black text-white tracking-widest uppercase">mc.mythicalstudios.online</span>
+            </button>
+            <a href="https://discord.com/channels/1363044619377578166/1363044619377578169" target="_blank" class="bg-indigo-600 px-6 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg shadow-indigo-600/20">Join Discord</a>
+        </div>
+    </nav>
+
+    <section class="py-24 px-6 text-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent">
+        <div class="inline-block mb-6 relative">
+            <button onclick="copyIP()" class="bg-white/5 border border-white/10 px-6 py-3 rounded-2xl text-xs font-black tracking-widest hover:border-yellow-500 transition cursor-pointer">
+                SERVER IP: <span class="text-yellow-500">mc.mythicalstudios.online</span>
+            </button>
+            <div id="copy-toast" class="hidden absolute -top-10 left-1/2 -translate-x-1/2 bg-emerald-500 text-black text-[10px] font-black px-3 py-1 rounded-md copy-badge italic">COPIED TO CLIPBOARD!</div>
+        </div>
+        
+        <h1 class="mythic-font text-6xl md:text-8xl font-black mb-6">CLAIM YOUR <br><span class="text-yellow-500">LEGACY.</span></h1>
+        <p class="text-slate-400 max-w-xl mx-auto mb-10">Premium ranks and mythical prestige. Use IP <span class="text-white font-bold">mc.mythicalstudios.online</span> to play now on Java & Bedrock.</p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#ranks" class="bg-white text-black px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest hover:bg-yellow-500 transition">View Ranks</a>
+            <a href="https://www.youtube.com/@MSOfficial69" target="_blank" class="bg-red-600/10 border border-red-600/20 text-red-500 px-8 py-4 rounded-full text-xs font-black uppercase tracking-widest hover:bg-red-600 hover:text-white transition"><i class="fab fa-youtube mr-2"></i> Subscribe</a>
+        </div>
+    </section>
+
+    <section id="ranks" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="rank-card p-8 rounded-[2rem]">
+                <h3 class="mythic-font text-xl mb-1">SQUIRE</h3>
+                <div class="price-tag text-3xl mb-6">₹99</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /feed command</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /condense</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> 2 Sethomes</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> Bronze [Squire] Tag</li>
+                </ul>
+                <button onclick="openModal('Squire Rank', 99)" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem]">
+                <h3 class="mythic-font text-xl mb-1">KNIGHT</h3>
+                <div class="price-tag text-3xl mb-6">₹199</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /heal (3min CD)</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /workbench</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> 5 Sethomes</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> Iron [Knight] Kit</li>
+                </ul>
+                <button onclick="openModal('Knight Rank', 199)" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem] border-blue-500/30 relative">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-[9px] font-black px-4 py-1 rounded-full uppercase">Most Popular</span>
+                <h3 class="mythic-font text-xl mb-1 text-blue-400">HERO</h3>
+                <div class="price-tag text-3xl mb-6 text-blue-400">₹399</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-star text-blue-500 mr-2"></i> <b>/fly command</b></li>
+                    <li><i class="fas fa-check text-blue-500 mr-2"></i> /invsee</li>
+                    <li><i class="fas fa-check text-blue-500 mr-2"></i> 10 Sethomes</li>
+                    <li><i class="fas fa-check text-blue-500 mr-2"></i> Silk-Touch Spawners</li>
+                </ul>
+                <button onclick="openModal('Hero Rank', 399)" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-500 transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem]">
+                <h3 class="mythic-font text-xl mb-1">TITAN</h3>
+                <div class="price-tag text-3xl mb-6">₹699</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /back command</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /feed (No CD)</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> 20 Sethomes</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> 2x Job EXP Booster</li>
+                </ul>
+                <button onclick="openModal('Titan Rank', 699)" class="w-full py-4 bg-white/5 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem]">
+                <h3 class="mythic-font text-xl mb-1 text-yellow-500">MYTHIC</h3>
+                <div class="price-tag text-3xl mb-6">₹999</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-magic text-yellow-500 mr-2"></i> /nick (Colored)</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> /top command</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> 50 Sethomes</li>
+                    <li><i class="fas fa-check text-yellow-500 mr-2"></i> Exclusive Trails</li>
+                </ul>
+                <button onclick="openModal('Mythic Rank', 999)" class="w-full py-4 bg-yellow-600/20 border border-yellow-500/50 text-yellow-500 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-yellow-500 transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem] border-red-500/20">
+                <h3 class="mythic-font text-xl mb-1 text-red-500">GOD</h3>
+                <div class="price-tag text-3xl mb-6">₹1,999</div>
+                <ul class="text-[11px] text-slate-400 space-y-3 mb-8">
+                    <li><i class="fas fa-bolt text-red-500 mr-2"></i> <b>/god mode</b></li>
+                    <li><i class="fas fa-check text-red-500 mr-2"></i> /near radar</li>
+                    <li><i class="fas fa-check text-red-500 mr-2"></i> Infinite Sethomes</li>
+                    <li><i class="fas fa-check text-red-500 mr-2"></i> WorldEdit Lite</li>
+                </ul>
+                <button onclick="openModal('God Rank', 1999)" class="w-full py-4 bg-red-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-red-500 transition">Select Rank</button>
+            </div>
+
+            <div class="rank-card p-8 rounded-[2rem] lg:col-span-2 border-yellow-500 relative overflow-hidden">
+                <div class="absolute inset-0 moving-border opacity-5"></div>
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div>
+                        <h3 class="mythic-font text-4xl mb-2 italic">CELESTIAL</h3>
+                        <p class="text-xs text-yellow-500 font-black uppercase mb-4">Ultimate Tier</p>
+                        <p class="text-[11px] text-slate-400 max-w-sm">Full Staff-lite perms, weekly 10k coins, custom tags, and priority discord support.</p>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <div class="text-5xl font-black text-white mb-4">₹3,999</div>
+                        <button onclick="openModal('Celestial Rank', 3999)" class="px-12 py-5 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-widest hover:scale-105 transition">Ascend Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coins" class="py-24 bg-black/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="mythic-font text-3xl text-center mb-16 uppercase tracking-widest">Mythic <span class="text-yellow-500">Coins</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                <div onclick="openModal('1000 Coins', 50)" class="rank-card p-8 rounded-2xl cursor-pointer hover:scale-105 transition">
+                    <h4 class="font-bold mb-2">1,000 Coins</h4>
+                    <div class="text-yellow-500 font-black">₹50</div>
+                </div>
+                <div onclick="openModal('5000 Coins', 200)" class="rank-card p-8 rounded-2xl cursor-pointer hover:scale-105 transition border-yellow-500/40">
+                    <h4 class="font-bold mb-2">5,000 Coins</h4>
+                    <div class="text-yellow-500 font-black">₹200</div>
+                </div>
+                <div onclick="openModal('15000 Coins', 500)" class="rank-card p-8 rounded-2xl cursor-pointer hover:scale-105 transition">
+                    <h4 class="font-bold mb-2">15,000 Coins</h4>
+                    <div class="text-yellow-500 font-black">₹500</div>
+                </div>
+                <div onclick="openModal('40000 Coins', 1200)" class="rank-card p-8 rounded-2xl cursor-pointer hover:scale-105 transition border-indigo-500/40">
+                    <h4 class="font-bold mb-2">40,000 Coins</h4>
+                    <div class="text-indigo-400 font-black">₹1,200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="checkoutModal" class="fixed inset-0 bg-black/95 hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-[#0f172a] border border-white/10 rounded-[3rem] max-w-md w-full p-10 relative">
+            <button onclick="closeModal()" class="absolute top-8 right-8 text-slate-500 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            <h2 class="mythic-font text-2xl mb-8 uppercase italic">Checkout</h2>
+            <div class="bg-black/50 p-6 rounded-3xl mb-8 flex justify-between items-center border border-white/5">
+                <span class="text-[10px] font-black uppercase text-slate-500" id="itemName">Item</span>
+                <span class="text-4xl font-black text-white" id="itemPrice">₹0</span>
+            </div>
+            <form id="paymentForm" class="space-y-6">
+                <div>
+                    <label class="block text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2 ml-1">In-Game Name (IGN)</label>
+                    <input type="text" id="ign" placeholder="Minecraft Username" class="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-5 text-white outline-none focus:border-yellow-500 font-bold" required>
+                </div>
+                <p class="text-[10px] text-center text-slate-500 font-black uppercase tracking-tighter">Merchant: bargavi1204@ybl</p>
+                <a id="payBtn" href="#" class="flex items-center justify-center gap-3 w-full py-5 bg-yellow-500 text-black rounded-2xl font-black uppercase tracking-widest text-[10px]">Pay via UPI App</a>
+                <input type="text" id="utr" maxlength="12" placeholder="12-Digit UTR Number" class="w-full bg-black/50 border border-white/5 rounded-2xl px-4 py-5 text-center text-yellow-500 font-mono text-xl outline-none" required>
+                <button type="submit" class="w-full py-5 bg-white/10 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest">Verify Payment</button>
+            </form>
+        </div>
     </div>
 
-    <div id="ranks" class="section"><h2>Ranks</h2><div class="grid" id="rank-grid"></div></div>
-    <div id="coins" class="section"><h2>Coins</h2><div class="grid" id="coin-grid"></div></div>
-    <div id="crates" class="section"><h2>Crates</h2><div class="grid" id="crate-grid"></div></div>
-    <div id="memberships" class="section"><h2>Memberships</h2><div class="grid" id="membership-grid"></div></div>
-  </div>
+    <footer class="py-20 border-t border-white/5 text-center">
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="https://www.youtube.com/@MSOfficial69" target="_blank" class="text-slate-500 hover:text-red-500 text-xl transition"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.com/channels/1363044619377578166/1363044619377578169" target="_blank" class="text-slate-500 hover:text-indigo-500 text-xl transition"><i class="fab fa-discord"></i></a>
+            <a href="https://wa.me/919515756622" class="text-slate-500 hover:text-emerald-500 text-xl transition"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="text-slate-500 font-bold text-[10px] uppercase tracking-[0.5em]">&copy; 2026 MYTHICALSTUDIOS | IP: mc.mythicalstudios.online</p>
+    </footer>
 
-  <div class="basket" id="basket">
-    <h3>Basket</h3>
-    <div id="basket-items"></div>
-    <div class="basket-total" id="basket-total">Total: ₹0</div>
-    <a id="upi-link" href="#" target="_blank"><button>Pay via UPI</button></a>
-  </div>
+    <script>
+        const UPI_ID = "bargavi1204@ybl";
+        const SERVER_IP = "mc.mythicalstudios.online";
 
-  <script>
-    const UPI_ID = "bargavi1204@ybl";
-    let basket = [];
-    let loggedInMCID = localStorage.getItem("mcid") || "";
+        function copyIP() {
+            navigator.clipboard.writeText(SERVER_IP);
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 2000);
+        }
 
-    const ranks = [
-      { id: "rookie", name: "Rookie", price: 150 },
-      { id: "karen", name: "Karen", price: 240 },
-      { id: "vip", name: "VIP", price: 360 },
-      { id: "mvp", name: "MVP", price: 519 },
-      { id: "vipplus", name: "VIP+", price: 650 },
-      { id: "overlord", name: "OVERLORD", price: 730 },
-      { id: "elite", name: "ELITE", price: 1080 },
-    ];
-    const coins = [
-      { id: "coins1000", name: "1,000 Coins", price: 100 },
-      { id: "coins2000", name: "2,000 Coins", price: 180 },
-      { id: "coins5000", name: "5,000 Coins", price: 320 },
-    ];
-    const crates = [
-      { id: "prime", name: "Prime Crate", price: 199 },
-      { id: "ultimate", name: "Ultimate Crate", price: 349 },
-      { id: "legendary", name: "Legendary Crate", price: 499 },
-      { id: "seasonal", name: "Seasonal Crate", price: 599 },
-    ];
-    const memberships = [
-      { id: "newember", name: "New Ember", price: 250 },
-      { id: "miniforge", name: "MINIFORGE", price: 649 },
-      { id: "magmaforge", name: "MagmaForge", price: 2999 },
-      { id: "emberforge", name: "EmberForge", price: 6999 },
-    ];
-
-    function copyIP() {
-      navigator.clipboard.writeText("play.emberforge.net").then(() => {
-        alert("Server IP copied to clipboard!");
-      });
-    }
-
-    function login() {
-      const mcid = document.getElementById("mcidInput").value.trim();
-      if (mcid.length < 5) return alert("Minecraft ID must be at least 5 characters");
-      localStorage.setItem("mcid", mcid);
-      loggedInMCID = mcid;
-      document.getElementById("loginSection").style.display = "none";
-    }
-
-    function renderProduct(item, section) {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <h3>${item.name}</h3>
-        <p>₹${item.price}</p>
-        <input type="text" id="mc-${item.id}" placeholder="Minecraft ID" value="${loggedInMCID}" />
-        <button onclick="addToBasket('${item.id}', '${item.name}', ${item.price})">Add to Basket</button>
-      `;
-      document.getElementById(section).appendChild(card);
-    }
-
-    function showSection(id) {
-      document.querySelectorAll(".section").forEach((sec) => sec.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-    }
-
-    function addToBasket(id, name, price) {
-      const mcid = document.getElementById(`mc-${id}`)?.value.trim() || loggedInMCID;
-      if (!mcid || mcid.length < 5) return alert("Enter a valid Minecraft ID");
-      const existing = basket.find((item) => item.id === id);
-      if (existing) {
-        existing.qty++;
-      } else {
-        basket.push({ id, name, price, qty: 1 });
-      }
-      updateBasket();
-      document.getElementById("basket").style.display = "block";
-    }
-
-    function updateBasket() {
-      const container = document.getElementById("basket-items");
-      container.innerHTML = "";
-      let total = 0;
-
-      basket.forEach((item) => {
-        total += item.price * item.qty;
-        container.innerHTML += `
-          <div class="basket-item">
-            <span>${item.name} × ${item.qty}</span>
-            <span>₹${item.price * item.qty}</span>
-          </div>
-        `;
-      });
-
-      document.getElementById("basket-total").innerText = `Total: ₹${total}`;
-      const upiString = `upi://pay?pa=${UPI_ID}&pn=EmberForge&am=${total}&cu=INR&tn=${encodeURIComponent("Purchase by " + loggedInMCID)}`;
-      document.getElementById("upi-link").href = upiString;
-    }
-
-    ranks.forEach((item) => renderProduct(item, "rank-grid"));
-    coins.forEach((item) => renderProduct(item, "coin-grid"));
-    crates.forEach((item) => renderProduct(item, "crate-grid"));
-    memberships.forEach((item) => renderProduct(item, "membership-grid"));
-  </script>
+        function openModal(name, price) {
+            document.getElementById('itemName').innerText = name;
+            document.getElementById('itemPrice').innerText = '₹' + price;
+            const upiLink = `upi://pay?pa=${UPI_ID}&pn=MythicalStudios&am=${price}&cu=INR&tn=Order_${name.replace(/ /g,'_')}`;
+            document.getElementById('payBtn').href = upiLink;
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() { document.getElementById('checkoutModal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        document.getElementById('paymentForm').addEventListener('submit', (e) => { e.preventDefault(); alert("Payment details submitted. Your rank will be active on mc.mythicalstudios.online shortly."); closeModal(); });
+    </script>
 </body>
 </html>
