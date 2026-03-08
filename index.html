@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,19 @@
         .rank-card:hover { border-color: #eab308; transform: translateY(-5px); box-shadow: 0 10px 40px -10px rgba(234, 179, 8, 0.2); }
         .discord-btn { background: #5865F2; transition: 0.3s ease; }
         .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
+        .perk-list li { display: flex; align-items: center; gap: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
+        
+        /* New Big Feature Styles */
+        .feature-text { 
+            font-size: 1.5rem; 
+            font-weight: 900; 
+            letter-spacing: -0.01em; 
+            line-height: 1.4;
+            color: #ffffff;
+        }
+        @media (min-width: 768px) {
+            .feature-text { font-size: 2.25rem; }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -43,87 +56,147 @@
         </div>
     </nav>
 
-    <header class="relative hero-bg min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
+    <header class="relative hero-bg min-h-[70vh] flex flex-col items-center justify-center text-center px-6">
         <div class="bg-yellow-500/10 px-6 py-1 rounded-full border border-yellow-500/20 mb-6">
-            <p class="text-[10px] font-black uppercase tracking-[0.3em] text-yellow-500">Owned by CHETHAN</p>
+            <p class="text-[11px] font-black uppercase tracking-[0.3em] text-yellow-500">Owned by CHETHAN</p>
         </div>
-        <h1 class="mythic-font text-5xl md:text-8xl mb-6 tracking-tighter uppercase leading-none">
+        <h1 class="mythic-font text-6xl md:text-9xl mb-8 tracking-tighter uppercase leading-none">
             MYTHICAL <br> <span class="text-yellow-500">DOMINION</span>
         </h1>
         <div class="flex flex-wrap justify-center gap-4">
-            <a href="https://discord.gg/yourlink" target="_blank" class="discord-btn text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-2">
-                <i class="fab fa-discord text-lg"></i> Discord
+            <a href="https://discord.gg/yourlink" target="_blank" class="discord-btn text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-500/20">
+                <i class="fab fa-discord text-lg"></i> Join Discord
             </a>
-            <a href="#ranks" class="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white/10 transition">Store</a>
+            <a href="#ranks" class="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-black transition">Visit Store</a>
         </div>
     </header>
 
-    <section id="about" class="max-w-5xl mx-auto px-6 py-20 border-t border-white/5">
+    <section id="about" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
         <div class="text-center">
-            <h2 class="mythic-font text-2xl md:text-4xl mb-8 leading-tight">Welcome to Mythical Network — the ultimate Minecraft server experience! 🔥</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-slate-400 text-sm mb-10 text-left md:text-center">
-                <p>🌍 Explore custom-built worlds and unique biomes. <br>⚔️ Battle in epic PvP arenas for glory.</p>
-                <p>🛠️ Build, craft, and trade with a thriving community. <br>🎁 Enjoy exclusive ranks, perks, and events.</p>
+            <h2 class="mythic-font text-3xl md:text-5xl mb-16 leading-tight">The Ultimate Minecraft <span class="text-yellow-500">Multiverse</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mb-16">
+                <div class="p-8 glass rounded-[2rem]">
+                    <p class="feature-text mb-4">🌍 Explore <span class="text-yellow-500">Custom Worlds</span> & unique biomes.</p>
+                    <p class="text-slate-400 font-medium">Adventure across terrains never seen before in vanilla Minecraft.</p>
+                </div>
+                <div class="p-8 glass rounded-[2rem]">
+                    <p class="feature-text mb-4">⚔️ Battle in <span class="text-red-500">Epic Arenas</span> for glory.</p>
+                    <p class="text-slate-400 font-medium">Prove your skill in high-stakes PvP combat and earn your rank.</p>
+                </div>
+                <div class="p-8 glass rounded-[2rem]">
+                    <p class="feature-text mb-4">🛠️ Build & <span class="text-green-500">Trade</span> with a community.</p>
+                    <p class="text-slate-400 font-medium">Establish your empire and dominate the server economy.</p>
+                </div>
+                <div class="p-8 glass rounded-[2rem]">
+                    <p class="feature-text mb-4">🎁 Exclusive <span class="text-blue-500">Ranks & Perks</span>.</p>
+                    <p class="text-slate-400 font-medium">Unlock powerful abilities and custom cosmetics to stand out.</p>
+                </div>
             </div>
-            <div class="inline-block p-4 bg-yellow-500/10 rounded-2xl border border-yellow-500/20">
-                <p class="text-xs font-bold uppercase tracking-widest text-yellow-500">💰 Seamless payments via UPI, Cards, or Tebex</p>
-            </div>
-            <p class="mt-8 mythic-font text-xl">Join Mythical Network, and forge your legacy!</p>
-        </div>
-    </section>
 
-    <section class="max-w-7xl mx-auto px-6 py-20 bg-white/[0.01] border-y border-white/5">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div class="p-4">
-                <i class="fas fa-bolt text-yellow-500 text-4xl mb-6"></i>
-                <h3 class="mythic-font text-lg mb-4">Insane Performance</h3>
-                <p class="text-xs text-slate-500 leading-relaxed">Dedicated hardware ensures a 20 TPS experience even during peak hours.</p>
+            <div class="inline-block p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20 mb-10">
+                <p class="text-sm font-black uppercase tracking-[0.2em] text-yellow-500">💰 Fast Payments via UPI, Cards, or Tebex</p>
             </div>
-            <div class="p-4">
-                <i class="fas fa-gem text-yellow-500 text-4xl mb-6"></i>
-                <h3 class="mythic-font text-lg mb-4">Premium Perks</h3>
-                <p class="text-xs text-slate-500 leading-relaxed">Ranks carefully balanced to provide power without breaking the game.</p>
-            </div>
-            <div class="p-4">
-                <i class="fas fa-user-shield text-yellow-500 text-4xl mb-6"></i>
-                <h3 class="mythic-font text-lg mb-4">Owned by CHETHAN</h3>
-                <p class="text-xs text-slate-500 leading-relaxed">A community-first project built on trust, transparency, and legacy.</p>
-            </div>
+            <p class="mythic-font text-3xl md:text-5xl mt-8">Join the Dominion. <br>Forge your <span class="text-yellow-500">Legacy</span>.</p>
         </div>
     </section>
 
     <section id="ranks" class="max-w-7xl mx-auto px-6 py-24">
         <h2 class="mythic-font text-3xl text-center mb-16 text-yellow-500 uppercase tracking-widest">Premium Ranks</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+            
             <div class="rank-card p-8 flex flex-col justify-between">
-                <div><h3 class="mythic-font text-xl mb-2">SQUIRE</h3><div class="text-3xl font-black text-yellow-500 mb-6">₹149</div>
-                <ul class="text-[11px] text-slate-400 space-y-3 mb-8"><li>• /feed & /condense</li><li>• 2 Sethomes</li></ul></div>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2">SQUIRE</h3>
+                    <div class="text-3xl font-black text-yellow-500 mb-6">₹149</div>
+                    <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
+                        <li><i class="fas fa-check-circle text-yellow-500"></i> /feed & /condense</li>
+                        <li><i class="fas fa-check-circle text-yellow-500"></i> 2 Sethomes</li>
+                        <li><i class="fas fa-check-circle text-yellow-500"></i> [Squire] Chat Tag</li>
+                        <li><i class="fas fa-check-circle text-yellow-500"></i> Access to /recipe</li>
+                    </ul>
+                </div>
                 <button onclick="processPurchase('squire')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
             </div>
+
             <div class="rank-card p-8 flex flex-col justify-between">
-                <div><h3 class="mythic-font text-xl mb-2">KNIGHT</h3><div class="text-3xl font-black text-yellow-500 mb-6">₹299</div>
-                <ul class="text-[11px] text-slate-400 space-y-3 mb-8"><li>• /heal & /workbench</li><li>• 5 Sethomes</li></ul></div>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2">KNIGHT</h3>
+                    <div class="text-3xl font-black text-yellow-500 mb-6">₹299</div>
+                    <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
+                        <li><i class="fas fa-shield-alt text-yellow-500"></i> /heal & /workbench</li>
+                        <li><i class="fas fa-shield-alt text-yellow-500"></i> 5 Sethomes</li>
+                        <li><i class="fas fa-shield-alt text-yellow-500"></i> /near (100 blocks)</li>
+                        <li><i class="fas fa-shield-alt text-yellow-500"></i> Priority Queue</li>
+                        <li><i class="fas fa-shield-alt text-yellow-500"></i> Keep XP on Death</li>
+                    </ul>
+                </div>
                 <button onclick="processPurchase('knight')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
             </div>
+
             <div class="rank-card p-8 flex flex-col justify-between border-blue-500/30 bg-blue-500/5">
-                <div><h3 class="mythic-font text-xl mb-2 text-blue-400">HERO</h3><div class="text-3xl font-black text-blue-400 mb-6">₹499</div>
-                <ul class="text-[11px] text-slate-300 space-y-3 mb-8"><li>• /fly & /invsee</li><li>• 10 Sethomes</li></ul></div>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2 text-blue-400">HERO</h3>
+                    <div class="text-3xl font-black text-blue-400 mb-6">₹499</div>
+                    <ul class="perk-list text-[10px] text-slate-300 space-y-3 mb-8">
+                        <li><i class="fas fa-star text-blue-400"></i> /fly (Flight Mode)</li>
+                        <li><i class="fas fa-star text-blue-400"></i> /invsee (View Inv)</li>
+                        <li><i class="fas fa-star text-blue-400"></i> 10 Sethomes</li>
+                        <li><i class="fas fa-star text-blue-400"></i> /pweather & /ptime</li>
+                        <li><i class="fas fa-star text-blue-400"></i> Virtual Enderchest</li>
+                        <li><i class="fas fa-star text-blue-400"></i> Exclusive Blue Glow</li>
+                    </ul>
+                </div>
                 <button onclick="processPurchase('hero')" class="w-full py-4 bg-blue-600 rounded-xl font-black text-[10px] uppercase transition">Buy Now</button>
             </div>
+
             <div class="rank-card p-8 flex flex-col justify-between">
-                <div><h3 class="mythic-font text-xl mb-2">TITAN</h3><div class="text-3xl font-black text-yellow-500 mb-6">₹899</div>
-                <ul class="text-[11px] text-slate-400 space-y-3 mb-8"><li>• /back death</li><li>• 20 Sethomes</li></ul></div>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2">TITAN</h3>
+                    <div class="text-3xl font-black text-yellow-500 mb-6">₹899</div>
+                    <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
+                        <li><i class="fas fa-mountain text-yellow-500"></i> /back (on death)</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> 20 Sethomes</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> /extinguish (auto)</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> /top & /thru</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> /trash (portable)</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> Infinite Auction Slots</li>
+                    </ul>
+                </div>
                 <button onclick="processPurchase('titan')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
             </div>
+
             <div class="rank-card p-8 flex flex-col justify-between border-yellow-500/20">
-                <div><h3 class="mythic-font text-xl mb-2 text-yellow-500">MYTHIC</h3><div class="text-3xl font-black text-yellow-500 mb-6">₹1,499</div>
-                <ul class="text-[11px] text-slate-400 space-y-3 mb-8"><li>• /nick colors</li><li>• /glow effect</li></ul></div>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2 text-yellow-500">MYTHIC</h3>
+                    <div class="text-3xl font-black text-yellow-500 mb-6">₹1,499</div>
+                    <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
+                        <li><i class="fas fa-bolt text-yellow-500"></i> /nick (Hex Colors)</li>
+                        <li><i class="fas fa-bolt text-yellow-500"></i> /glow (Any Color)</li>
+                        <li><i class="fas fa-bolt text-yellow-500"></i> /hat (Block Helmet)</li>
+                        <li><i class="fas fa-bolt text-yellow-500"></i> /stack items</li>
+                        <li><i class="fas fa-bolt text-yellow-500"></i> 50 Sethomes</li>
+                        <li><i class="fas fa-bolt text-yellow-500"></i> /repair (No CD)</li>
+                    </ul>
+                </div>
                 <button onclick="processPurchase('mythic')" class="w-full py-4 bg-yellow-500 text-black rounded-xl font-black text-[10px] uppercase transition">Buy Now</button>
             </div>
+
             <div class="rank-card p-8 flex flex-col justify-between border-red-500/30 bg-red-500/5">
-                <div><h3 class="mythic-font text-xl mb-2 text-red-500">GOD</h3><div class="text-3xl font-black text-red-500 mb-6">₹2,499</div>
-                <ul class="text-[11px] text-slate-300 space-y-3 mb-8"><li>• /god & /near</li><li>• /repair all</li></ul></div>
-                <button onclick="processPurchase('god')" class="w-full py-4 bg-red-600 rounded-xl font-black text-[10px] uppercase transition">Ascend Now</button>
+                <div>
+                    <h3 class="mythic-font text-xl mb-2 text-red-500">GOD</h3>
+                    <div class="text-3xl font-black text-red-500 mb-6">₹2,499</div>
+                    <ul class="perk-list text-[10px] text-slate-300 space-y-3 mb-8">
+                        <li><i class="fas fa-crown text-red-500"></i> /god & /near (Global)</li>
+                        <li><i class="fas fa-crown text-red-500"></i> /repair all</li>
+                        <li><i class="fas fa-crown text-red-500"></i> Unlimited Sethomes</li>
+                        <li><i class="fas fa-crown text-red-500"></i> /speed 10 (Fast)</li>
+                        <li><i class="fas fa-crown text-red-500"></i> /vanish mode</li>
+                        <li><i class="fas fa-crown text-red-500"></i> Custom Join Message</li>
+                        <li><i class="fas fa-crown text-red-500"></i> Access to God-Kit</li>
+                    </ul>
+                </div>
+                <button onclick="processPurchase('god')" class="w-full py-4 bg-red-600 rounded-xl font-black text-[10px] uppercase transition shadow-lg shadow-red-500/20">Ascend Now</button>
             </div>
         </div>
 
