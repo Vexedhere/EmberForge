@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astral SMP| Official Hub</title>
+    <title>Mythical Dominion | Official Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -12,98 +12,57 @@
         .mythic-font { font-family: 'Cinzel', serif; }
         .nav-glass { background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
         .hero-bg { background: radial-gradient(circle at 50% 50%, rgba(234, 179, 8, 0.12) 0%, transparent 70%); }
-        .rank-card { 
+        .rank-card, .info-card { 
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.8)); 
             border: 1px solid rgba(255,255,255,0.05); border-radius: 1.5rem; transition: 0.3s ease;
         }
-        .rank-card:hover { border-color: #eab308; transform: translateY(-5px); box-shadow: 0 10px 40px -10px rgba(234, 179, 8, 0.2); }
-        .discord-btn { background: #5865F2; transition: 0.3s ease; }
-        .discord-btn:hover { background: #4752c4; transform: scale(1.05); }
+        .rank-card:hover, .info-card:hover { border-color: #eab308; transform: translateY(-5px); box-shadow: 0 10px 40px -10px rgba(234, 179, 8, 0.2); }
         .perk-list li { display: flex; align-items: center; gap: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; }
-        
-        /* New Big Feature Styles */
-        .feature-text { 
-            font-size: 1.5rem; 
-            font-weight: 900; 
-            letter-spacing: -0.01em; 
-            line-height: 1.4;
-            color: #ffffff;
-        }
-        @media (min-width: 768px) {
-            .feature-text { font-size: 2.25rem; }
-        }
+        .modal-glass { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="sticky top-0 z-[100] nav-glass px-6 py-4">
+    <nav class="sticky top-0 z-[50] nav-glass px-6 py-4">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <i class="fas fa-dragon text-yellow-500 text-xl"></i>
                 <a href="#" class="mythic-font text-lg font-black tracking-widest uppercase">Mythical<span class="text-yellow-500">Network</span></a>
             </div>
             
-            <div id="auth-container" class="flex items-center gap-4">
-                <div id="login-form" class="flex items-center bg-white/5 border border-white/10 rounded-xl overflow-hidden focus-within:border-yellow-500/50">
-                    <input id="mc-user" type="text" placeholder="MC Username" class="bg-transparent px-4 py-2 text-[10px] w-24 md:w-48 focus:outline-none text-white uppercase font-bold">
-                    <button onclick="siteLogin()" class="bg-yellow-500 text-black px-4 py-2 text-[10px] font-black uppercase hover:bg-white transition">Link</button>
-                </div>
-                <div id="user-profile" class="hidden items-center gap-4">
-                    <p id="active-user" class="text-xs font-black uppercase text-white"></p>
-                    <button onclick="siteLogout()" class="text-white/20 hover:text-red-500 transition"><i class="fas fa-power-off"></i></button>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleBasketSidebar()" class="relative bg-white/5 border border-white/10 p-2.5 rounded-xl text-white hover:border-yellow-500/50 transition">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span id="basket-count" class="absolute -top-1.5 -right-1.5 bg-yellow-500 text-black font-black text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <div id="auth-container">
+                    <div id="login-form" class="flex items-center bg-white/5 border border-white/10 rounded-xl overflow-hidden focus-within:border-yellow-500/50">
+                        <input id="mc-user" type="text" placeholder="MC Username" class="bg-transparent px-4 py-2 text-[10px] w-24 md:w-48 focus:outline-none text-white uppercase font-bold">
+                        <button onclick="siteLogin()" class="bg-yellow-500 text-black px-4 py-2 text-[10px] font-black uppercase hover:bg-white transition">Link</button>
+                    </div>
+                    <div id="user-profile" class="hidden items-center gap-4">
+                        <p id="active-user" class="text-xs font-black uppercase text-white tracking-wider"></p>
+                        <button onclick="siteLogout()" class="text-white/20 hover:text-red-500 transition"><i class="fas fa-power-off"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="relative hero-bg min-h-[70vh] flex flex-col items-center justify-center text-center px-6">
+    <header class="relative hero-bg min-h-[50vh] flex flex-col items-center justify-center text-center px-6">
         <div class="bg-yellow-500/10 px-6 py-1 rounded-full border border-yellow-500/20 mb-6">
             <p class="text-[11px] font-black uppercase tracking-[0.3em] text-yellow-500">Owned by CHETHAN</p>
         </div>
-        <h1 class="mythic-font text-6xl md:text-9xl mb-8 tracking-tighter uppercase leading-none">
+        <h1 class="mythic-font text-5xl md:text-8xl mb-6 tracking-tighter uppercase leading-none">
             MYTHICAL <br> <span class="text-yellow-500">DOMINION</span>
         </h1>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="https://discord.gg/yourlink" target="_blank" class="discord-btn text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-indigo-500/20">
-                <i class="fab fa-discord text-lg"></i> Join Discord
-            </a>
-            <a href="#ranks" class="bg-white/5 border border-white/10 text-white px-10 py-5 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white hover:text-black transition">Visit Store</a>
-        </div>
+        <p class="text-xs font-bold uppercase tracking-widest text-slate-400 max-w-md mx-auto">Build your empire, conquer arenas, and secure your legendary legacy status.</p>
     </header>
 
-    <section id="about" class="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-        <div class="text-center">
-            <h2 class="mythic-font text-3xl md:text-5xl mb-16 leading-tight">The Ultimate Minecraft <span class="text-yellow-500">Multiverse</span></h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mb-16">
-                <div class="p-8 glass rounded-[2rem]">
-                    <p class="feature-text mb-4">🌍 Explore <span class="text-yellow-500">Custom Worlds</span> & unique biomes.</p>
-                    <p class="text-slate-400 font-medium">Adventure across terrains never seen before in vanilla Minecraft.</p>
-                </div>
-                <div class="p-8 glass rounded-[2rem]">
-                    <p class="feature-text mb-4">⚔️ Battle in <span class="text-red-500">Epic Arenas</span> for glory.</p>
-                    <p class="text-slate-400 font-medium">Prove your skill in high-stakes PvP combat and earn your rank.</p>
-                </div>
-                <div class="p-8 glass rounded-[2rem]">
-                    <p class="feature-text mb-4">🛠️ Build & <span class="text-green-500">Trade</span> with a community.</p>
-                    <p class="text-slate-400 font-medium">Establish your empire and dominate the server economy.</p>
-                </div>
-                <div class="p-8 glass rounded-[2rem]">
-                    <p class="feature-text mb-4">🎁 Exclusive <span class="text-blue-500">Ranks & Perks</span>.</p>
-                    <p class="text-slate-400 font-medium">Unlock powerful abilities and custom cosmetics to stand out.</p>
-                </div>
-            </div>
-
-            <div class="inline-block p-6 bg-yellow-500/10 rounded-3xl border border-yellow-500/20 mb-10">
-                <p class="text-sm font-black uppercase tracking-[0.2em] text-yellow-500">💰 Fast Payments via UPI, Cards, or Tebex</p>
-            </div>
-            <p class="mythic-font text-3xl md:text-5xl mt-8">Join the Dominion. <br>Forge your <span class="text-yellow-500">Legacy</span>.</p>
-        </div>
-    </section>
-
-    <section id="ranks" class="max-w-7xl mx-auto px-6 py-24">
+    <section id="ranks" class="max-w-7xl mx-auto px-6 py-12">
         <h2 class="mythic-font text-3xl text-center mb-16 text-yellow-500 uppercase tracking-widest">Premium Ranks</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             
             <div class="rank-card p-8 flex flex-col justify-between">
                 <div>
@@ -113,10 +72,9 @@
                         <li><i class="fas fa-check-circle text-yellow-500"></i> /feed & /condense</li>
                         <li><i class="fas fa-check-circle text-yellow-500"></i> 2 Sethomes</li>
                         <li><i class="fas fa-check-circle text-yellow-500"></i> [Squire] Chat Tag</li>
-                        <li><i class="fas fa-check-circle text-yellow-500"></i> Access to /recipe</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('squire')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
+                <button onclick="addToBasket('Squire Rank', 29)" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Add to Basket</button>
             </div>
 
             <div class="rank-card p-8 flex flex-col justify-between">
@@ -126,12 +84,10 @@
                     <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
                         <li><i class="fas fa-shield-alt text-yellow-500"></i> /heal & /workbench</li>
                         <li><i class="fas fa-shield-alt text-yellow-500"></i> 5 Sethomes</li>
-                        <li><i class="fas fa-shield-alt text-yellow-500"></i> /near (100 blocks)</li>
-                        <li><i class="fas fa-shield-alt text-yellow-500"></i> Priority Queue</li>
                         <li><i class="fas fa-shield-alt text-yellow-500"></i> Keep XP on Death</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('knight')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
+                <button onclick="addToBasket('Knight Rank', 69)" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Add to Basket</button>
             </div>
 
             <div class="rank-card p-8 flex flex-col justify-between border-blue-500/30 bg-blue-500/5">
@@ -142,12 +98,9 @@
                         <li><i class="fas fa-star text-blue-400"></i> /fly (Flight Mode)</li>
                         <li><i class="fas fa-star text-blue-400"></i> /invsee (View Inv)</li>
                         <li><i class="fas fa-star text-blue-400"></i> 10 Sethomes</li>
-                        <li><i class="fas fa-star text-blue-400"></i> /pweather & /ptime</li>
-                        <li><i class="fas fa-star text-blue-400"></i> Virtual Enderchest</li>
-                        <li><i class="fas fa-star text-blue-400"></i> Exclusive Blue Glow</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('hero')" class="w-full py-4 bg-blue-600 rounded-xl font-black text-[10px] uppercase transition">Buy Now</button>
+                <button onclick="addToBasket('Hero Rank', 99)" class="w-full py-4 bg-blue-600 rounded-xl font-black text-[10px] uppercase transition">Add to Basket</button>
             </div>
 
             <div class="rank-card p-8 flex flex-col justify-between">
@@ -157,13 +110,10 @@
                     <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
                         <li><i class="fas fa-mountain text-yellow-500"></i> /back (on death)</li>
                         <li><i class="fas fa-mountain text-yellow-500"></i> 20 Sethomes</li>
-                        <li><i class="fas fa-mountain text-yellow-500"></i> /extinguish (auto)</li>
-                        <li><i class="fas fa-mountain text-yellow-500"></i> /top & /thru</li>
-                        <li><i class="fas fa-mountain text-yellow-500"></i> /trash (portable)</li>
-                        <li><i class="fas fa-mountain text-yellow-500"></i> Infinite Auction Slots</li>
+                        <li><i class="fas fa-mountain text-yellow-500"></i> Portable Trash</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('titan')" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Buy Now</button>
+                <button onclick="addToBasket('Titan Rank', 129)" class="w-full py-4 bg-white/5 rounded-xl font-black text-[10px] uppercase hover:bg-yellow-500 hover:text-black transition">Add to Basket</button>
             </div>
 
             <div class="rank-card p-8 flex flex-col justify-between border-yellow-500/20">
@@ -173,13 +123,10 @@
                     <ul class="perk-list text-[10px] text-slate-400 space-y-3 mb-8">
                         <li><i class="fas fa-bolt text-yellow-500"></i> /nick (Hex Colors)</li>
                         <li><i class="fas fa-bolt text-yellow-500"></i> /glow (Any Color)</li>
-                        <li><i class="fas fa-bolt text-yellow-500"></i> /hat (Block Helmet)</li>
-                        <li><i class="fas fa-bolt text-yellow-500"></i> /stack items</li>
                         <li><i class="fas fa-bolt text-yellow-500"></i> 50 Sethomes</li>
-                        <li><i class="fas fa-bolt text-yellow-500"></i> /repair (No CD)</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('mythic')" class="w-full py-4 bg-yellow-500 text-black rounded-xl font-black text-[10px] uppercase transition">Buy Now</button>
+                <button onclick="addToBasket('Mythic Rank', 199)" class="w-full py-4 bg-yellow-500 text-black rounded-xl font-black text-[10px] uppercase transition">Add to Basket</button>
             </div>
 
             <div class="rank-card p-8 flex flex-col justify-between border-red-500/30 bg-red-500/5">
@@ -187,72 +134,260 @@
                     <h3 class="mythic-font text-xl mb-2 text-red-500">GOD</h3>
                     <div class="text-3xl font-black text-red-500 mb-6">₹209</div>
                     <ul class="perk-list text-[10px] text-slate-300 space-y-3 mb-8">
-                        <li><i class="fas fa-crown text-red-500"></i> /god & /near (Global)</li>
-                        <li><i class="fas fa-crown text-red-500"></i> /repair all</li>
+                        <li><i class="fas fa-crown text-red-500"></i> /god Mode Enabled</li>
                         <li><i class="fas fa-crown text-red-500"></i> Unlimited Sethomes</li>
-                        <li><i class="fas fa-crown text-red-500"></i> /speed 10 (Fast)</li>
-                        <li><i class="fas fa-crown text-red-500"></i> /vanish mode</li>
-                        <li><i class="fas fa-crown text-red-500"></i> Custom Join Message</li>
                         <li><i class="fas fa-crown text-red-500"></i> Access to God-Kit</li>
                     </ul>
                 </div>
-                <button onclick="processPurchase('god')" class="w-full py-4 bg-red-600 rounded-xl font-black text-[10px] uppercase transition shadow-lg shadow-red-500/20">Ascend Now</button>
-            </div>
-        </div>
-
-        <h2 class="mythic-font text-2xl text-center mb-12 uppercase tracking-widest text-white">Mythic Coins</h2>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white/5 p-6 rounded-2xl flex justify-between items-center border border-white/5 hover:border-yellow-500/30 transition">
-                <div><p class="text-lg font-black">1k</p><p class="text-[8px] text-yellow-500 font-black uppercase">Coins</p><p class="mt-1 text-slate-500 font-bold text-xs">₹99</p></div>
-                <button onclick="processPurchase('coins1k')" class="bg-yellow-500 text-black w-10 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-plus"></i></button>
-            </div>
-            <div class="bg-white/5 p-6 rounded-2xl flex justify-between items-center border border-white/5 hover:border-yellow-500/30 transition">
-                <div><p class="text-lg font-black">5k</p><p class="text-[8px] text-yellow-500 font-black uppercase">Coins</p><p class="mt-1 text-slate-500 font-bold text-xs">₹399</p></div>
-                <button onclick="processPurchase('coins5k')" class="bg-yellow-500 text-black w-10 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-plus"></i></button>
-            </div>
-            <div class="bg-white/5 p-6 rounded-2xl flex justify-between items-center border border-white/5 hover:border-yellow-500/30 transition">
-                <div><p class="text-lg font-black">15k</p><p class="text-[8px] text-yellow-500 font-black uppercase">Coins</p><p class="mt-1 text-slate-500 font-bold text-xs">₹999</p></div>
-                <button onclick="processPurchase('coins15k')" class="bg-yellow-500 text-black w-10 h-10 rounded-lg flex items-center justify-center"><i class="fas fa-plus"></i></button>
-            </div>
-            <div class="bg-yellow-500/10 p-6 rounded-2xl flex justify-between items-center border border-yellow-500/20">
-                <div><p class="text-lg font-black">40k</p><p class="text-[8px] text-yellow-500 font-black uppercase">Vault</p><p class="mt-1 text-white font-bold text-xs">₹2,499</p></div>
-                <button onclick="processPurchase('coins40k')" class="bg-yellow-500 text-black w-10 h-10 rounded-lg flex items-center justify-center shadow-lg"><i class="fas fa-shopping-cart"></i></button>
+                <button onclick="addToBasket('God Rank', 209)" class="w-full py-4 bg-red-600 rounded-xl font-black text-[10px] uppercase transition shadow-lg shadow-red-500/20">Add to Basket</button>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 bg-black text-center border-t border-white/5">
-<div class="max-w-7xl mx-auto px-6 py-12 border-t border-white/5">
-    <div class="bg-yellow-500 text-black p-4 rounded-2xl flex items-center justify-between">
-        <span class="font-black uppercase text-xs tracking-widest">Latest Update: Portal & Hub 2.0 is Live!</span>
-        <span class="font-bold text-[10px] opacity-75">Check the Ranks & Recruitment Sections</span>
-    </div>
-</div>  
-     
- <div class="mythic-font text-2xl mb-4 tracking-widest text-white">Mythical<span class="text-yellow-500">Network</span></div>
-        <div class="flex justify-center gap-6 mb-8 text-slate-500">
-            <a href="https://discord.gg/yourlink" target="_blank" class="hover:text-blue-400 transition text-2xl"><i class="fab fa-discord"></i></a>
-            <a href="https://www.youtube.com/@MSOfficial69" target="_blank" class="hover:text-red-500 transition text-2xl"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/ucsroyal/" target="_blank" class="hover:text-pink-500 transition text-2xl"><i class="fab fa-instagram"></i></a>
+    <section class="max-w-5xl mx-auto px-6 py-12 border-t border-white/5">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="mythic-font text-2xl text-yellow-500 uppercase tracking-widest mb-6">Why Buy From Us?</h2>
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed font-medium">
+                When you support Mythical Dominion, you aren't just buying digital perks or a colorful text tag in global chat. Every single transaction goes directly into securing high-performance dedicated hardware servers, optimizing custom plugin infrastructures, and ensuring zero-lag connectivity for our growing player base. We don't hide behind automated, faceless corporate entities or gate our checkouts with complex third-party global processing fees. Our custom built-in UPI gateway ensures a direct, completely free line of communication between our community and the development team. Your trust directly fuels our development, helping us scale new server divisions and roll out unique, custom features every single week.
+            </p>
         </div>
-        <p class="text-[10px] text-slate-600 uppercase tracking-[0.5em] mb-2">© Mythical Network</p>
-        <p class="text-[8px] text-slate-800 uppercase tracking-widest">Owned by CHETHAN • Not an Official Minecraft Product</p>
-    </footer>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-6 py-16 mb-24 border-t border-white/5">
+        <h2 class="mythic-font text-2xl text-center text-yellow-500 uppercase tracking-widest mb-12">Meet the Leadership</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div class="info-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></div>
+                        <h3 class="mythic-font text-lg font-bold text-white tracking-wide">Chethan</h3>
+                    </div>
+                    <p class="text-[10px] uppercase tracking-wider font-black text-yellow-500 mb-3">Founder & Lead Developer</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">As the visionary force behind the Mythical Network, Chethan directs the technical architecture and systemic vision of the entire project. Balancing full-stack web engineering, custom AI interfaces, and highly optimized server environments, he works continuously behind the scenes to push what is possible on a modern Minecraft infrastructure. Every custom feature, responsive interface layout, and direct integration loop is designed under his direct oversight to guarantee absolute stability for our community.</p>
+                </div>
+            </div>
+
+            <div class="info-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-blue-500"></div>
+                        <h3 class="mythic-font text-lg font-bold text-white tracking-wide">Lalith</h3>
+                    </div>
+                    <p class="text-[10px] uppercase tracking-wider font-black text-blue-400 mb-3">Admin & Developer</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Lalith stands as a foundational pillar of our core network operations, executing both server administration and architectural development. Specializing in technical infrastructure management, backend configuration, and system optimizations, he ensures the day-to-day stability of the server landscape. When custom configurations need deployment or backend performance challenges arise, Lalith is the engine working to keep the systems running smoothly.</p>
+                </div>
+            </div>
+
+            <div class="info-card p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                        <h3 class="mythic-font text-lg font-bold text-white tracking-wide">Mangeoo</h3>
+                    </div>
+                    <p class="text-[10px] uppercase tracking-wider font-black text-green-400 mb-3">Developer</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Mangeoo is a core member of our software engineering pipeline, focusing heavily on plugin integration, system workflows, and custom feature implementations. Constantly tinkering with backend components and data logic, he transforms complex concepts into responsive gameplay mechanics. His dedication to clean code structure makes the gameplay environment fluid, unique, and fully optimized for performance.</p>
+                </div>
+            </div>
+
+            <div class="info-card p-6 flex flex-col justify-between border-red-500/20 bg-red-500/[0.02]">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                        <h3 class="mythic-font text-lg font-bold text-red-400 tracking-wide">Sayien</h3>
+                    </div>
+                    <p class="text-[10px] uppercase tracking-wider font-black text-red-500 mb-3">Most Valuable Moderator (Legacy)</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Though he has stepped away from active duty, Sayien holds an enduring legacy as our Most Valuable Moderator. As a definitive pillar of community management during pivotal eras of the project, his unparalleled dedication, fair moderation, and tireless community engagement helped build the foundation of trust the network stands on today. Though he has left the active staff team, his presence remains permanently woven into the history and spirit of the Mythical community.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="basket-sidebar" class="fixed top-0 right-0 h-full w-full sm:w-[400px] z-[150] modal-glass translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
+        <div class="p-6 overflow-y-auto flex-1">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <h3 class="mythic-font text-lg font-black text-white"><i class="fas fa-shopping-basket text-yellow-500 mr-2"></i>Your Basket</h3>
+                <button onclick="toggleBasketSidebar()" class="text-white/40 hover:text-white text-lg"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            
+            <div id="basket-items-list" class="space-y-3">
+                <p class="text-xs text-slate-500 text-center py-8">Your shopping basket is completely empty.</p>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-white/10 bg-black/40">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-xs uppercase font-black tracking-wider text-slate-400">Total Due:</span>
+                <span id="basket-total" class="text-2xl font-black text-yellow-500">₹0</span>
+            </div>
+            <button onclick="proceedToPaymentGate()" class="w-full py-4 bg-yellow-500 text-black font-black text-xs uppercase tracking-widest rounded-xl hover:bg-white transition flex items-center justify-center gap-2">
+                Proceed To Pay <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/90 px-4">
+        <div class="modal-glass w-full max-w-md rounded-3xl p-6 relative">
+            <button onclick="closeCheckout()" class="absolute top-4 right-4 text-white/40 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            <h3 class="mythic-font text-xl text-yellow-500 mb-4 uppercase tracking-wider">UPI Payment Gateway</h3>
+
+            <div class="bg-white/5 border border-white/5 rounded-2xl p-4 mb-4">
+                <p class="text-[10px] text-slate-400">Billing to Account: <span id="modal-ign" class="text-white font-bold uppercase">---</span></p>
+                <div class="flex justify-between mt-2 border-t border-white/5 pt-2">
+                    <span class="text-xs font-bold text-slate-400">Final Order Invoice Total:</span>
+                    <span id="modal-total-price" class="font-black text-yellow-500">₹0</span>
+                </div>
+            </div>
+
+            <div class="bg-blue-500/10 border border-blue-500/20 px-4 py-3 rounded-xl mb-6 text-center">
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-0.5">⚠️ Merchant Notice</p>
+                <p class="text-[11px] text-blue-400 font-medium leading-tight">The banking name may display as <span class="font-bold text-white underline">U.Kullayamma</span> during payment. Don't stress out—this is completely normal and verified!</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 mb-6">
+                <button id="tab-qr" onclick="switchMethod('qr')" class="py-3 rounded-xl font-black text-[10px] uppercase border bg-yellow-500 text-black border-yellow-500">1. Scan QR Code</button>
+                <button id="tab-pay" onclick="switchMethod('pay')" class="py-3 rounded-xl font-black text-[10px] uppercase border border-white/10 bg-white/5 text-white">2. Direct App Link</button>
+            </div>
+
+            <div id="method-qr" class="flex flex-col items-center py-2">
+                <div class="bg-white p-3 rounded-2xl mb-4 shadow-xl"><img id="upi-qr" src="" alt="Dynamic UPI QR" class="w-48 h-48"></div>
+                <p class="text-[11px] text-center text-slate-400 px-4">Scan QR with GPay, PhonePe, or Paytm to complete transaction instantly.</p>
+            </div>
+
+            <div id="method-pay" class="hidden flex flex-col items-center py-4 text-center">
+                <a id="upi-deeplink" href="#" class="w-full py-4 bg-indigo-600 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 mb-4"><i class="fas fa-mobile-alt"></i> Invoke Payment App</a>
+                <p class="text-[10px] text-slate-500 uppercase mb-2">Manual Transfer handle Destination:</p>
+                <div class="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-xs font-mono font-bold text-yellow-500 select-all">chethan131011@ibl</div>
+            </div>
+
+            <div class="border-t border-white/5 pt-4 mt-2">
+                <div class="bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-xl text-[10px] text-slate-400 font-medium flex gap-2">
+                    <i class="fas fa-info-circle text-yellow-500 mt-0.5"></i>
+                    <span>Once payment goes through, capture a clear receipt screenshot showing the dynamic note tag. Drop it in a Discord support ticket!</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const STORE_URL = "https://emberforgeoff.tebex.io";
-        const PKG_IDS = {
-            squire: "7315110", knight: "7315112", hero: "7315113", titan: "7315110", mythic: "7315110", god: "7315110",
-            coins1k: "7318707", coins5k: "7318709", coins15k: "7318710", coins40k: "7318716"
-        };
-        function siteLogin() { const u = document.getElementById('mc-user').value; if(u){localStorage.setItem('myth_user', u); toggleUI(u);}}
+        const UPI_ID = "chethan131011@ibl";
+        const MERCHANT_NAME = "Chethan"; 
+        let basket = [];
+
+        function siteLogin() {
+            const u = document.getElementById('mc-user').value.trim();
+            if(u){ localStorage.setItem('myth_user', u); toggleUI(u); updateBasketUI(); }
+        }
         function siteLogout() { localStorage.removeItem('myth_user'); location.reload(); }
-        function toggleUI(u) { document.getElementById('login-form').classList.add('hidden'); document.getElementById('user-profile').classList.remove('hidden'); document.getElementById('user-profile').classList.add('flex'); document.getElementById('active-user').innerText = u; }
+        function toggleUI(u) {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('user-profile').classList.remove('hidden');
+            document.getElementById('user-profile').classList.add('flex');
+            document.getElementById('active-user').innerText = u;
+        }
         window.onload = () => { const u = localStorage.getItem('myth_user'); if(u) toggleUI(u); };
-        function processPurchase(key) {
+
+        function toggleBasketSidebar() {
+            const el = document.getElementById('basket-sidebar');
+            el.classList.toggle('translate-x-full');
+        }
+
+        function addToBasket(name, price) {
             const u = localStorage.getItem('myth_user');
-            if(!u) { alert("Link your MC Username at the top first!"); return; }
-            window.location.href = `${STORE_URL}/checkout/packages/add/${PKG_IDS[key]}/single?ign=${encodeURIComponent(u)}`;
+            if(!u) {
+                alert("Link your MC Username at the top navigation hub first!");
+                document.getElementById('mc-user').focus();
+                return;
+            }
+            basket.push({ id: Date.now() + Math.random(), name: name, price: price });
+            updateBasketUI();
+            document.getElementById('basket-sidebar').classList.remove('translate-x-full');
+        }
+
+        function removeFromBasket(id) {
+            basket = basket.filter(item => item.id !== id);
+            updateBasketUI();
+        }
+
+        function updateBasketUI() {
+            const listEl = document.getElementById('basket-items-list');
+            document.getElementById('basket-count').innerText = basket.length;
+            
+            if(basket.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-8">Your shopping basket is completely empty.</p>`;
+                document.getElementById('basket-total').innerText = "₹0";
+                return;
+            }
+
+            let htmlStr = "";
+            let total = 0;
+            
+            basket.forEach(item => {
+                total += item.price;
+                htmlStr += `
+                    <div class="flex justify-between items-center bg-white/5 border border-white/5 p-4 rounded-xl">
+                        <div>
+                            <p class="font-black text-white text-sm uppercase">${item.name}</p>
+                            <p class="text-xs text-yellow-500 font-bold mt-0.5">₹${item.price}</p>
+                        </div>
+                        <button onclick="removeFromBasket(${item.id})" class="text-slate-500 hover:text-red-500 transition text-sm px-2"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+            });
+
+            listEl.innerHTML = htmlStr;
+            document.getElementById('basket-total').innerText = `₹${total}`;
+        }
+
+        function proceedToPaymentGate() {
+            const u = localStorage.getItem('myth_user');
+            if(basket.length === 0) { alert("Your basket is empty. Add a package first!"); return; }
+            if(!u) { alert("Please link your Minecraft IGN account first!"); return; }
+
+            toggleBasketSidebar();
+
+            let totalAmount = basket.reduce((acc, current) => acc + current.price, 0);
+            document.getElementById('modal-ign').innerText = u;
+            document.getElementById('modal-total-price').innerText = `₹${totalAmount}`;
+
+            const itemsSummary = basket.map(i => i.name.replace(/Rank| /g, '')).join('+');
+            const targetTransactionNote = encodeURIComponent(`${u}-${itemsSummary}`);
+            
+            const upiUrlPayloadString = `upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${totalAmount}&cu=INR&tn=${targetTransactionNote}`;
+
+            document.getElementById('upi-deeplink').href = upiUrlPayloadString;
+            
+            // FIXED: Replaced dead Google Charts API with QRServer generator endpoint
+            document.getElementById('upi-qr').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrlPayloadString)}`;
+
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.getElementById('checkout-modal').classList.add('flex');
+            switchMethod('qr');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('flex');
+        }
+
+        function switchMethod(method) {
+            const tQr = document.getElementById('tab-qr');
+            const tPay = document.getElementById('tab-pay');
+            const mQr = document.getElementById('method-qr');
+            const mPay = document.getElementById('method-pay');
+
+            if(method === 'qr') {
+                tQr.className = "py-3 rounded-xl font-black text-[10px] uppercase border bg-yellow-500 text-black border-yellow-500";
+                tPay.className = "py-3 rounded-xl font-black text-[10px] uppercase border border-white/10 bg-white/5 text-white";
+                mQr.classList.remove('hidden');
+                mPay.classList.add('hidden');
+            } else {
+                tPay.className = "py-3 rounded-xl font-black text-[10px] uppercase border bg-yellow-500 text-black border-yellow-500";
+                tQr.className = "py-3 rounded-xl font-black text-[10px] uppercase border border-white/10 bg-white/5 text-white";
+                mPay.classList.remove('hidden');
+                mQr.classList.add('hidden');
+            }
         }
     </script>
 </body>
