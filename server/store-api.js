@@ -119,5 +119,9 @@ app.get("/api/admin/products",auth,async(req,res)=>{
   try{res.json((await readProducts()).items)}catch(e){res.status(500).json({error:e.message})}
 });
 
-const port=Number(process.env.PORT||3000);
-app.listen(port,()=>console.log("Mythical Studios Store API listening on "+port));
+function startStoreApi(){
+  const port=Number(process.env.PORT||3000);
+  return app.listen(port,()=>console.log("Mythical Studios Store API listening on "+port));
+}
+if(require.main===module)startStoreApi();
+module.exports={app,startStoreApi};
