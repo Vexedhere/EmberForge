@@ -1,0 +1,9 @@
+[
+  {"id":"elite","category":"ranks","title":"ELITE","price":1080,"image":"","file":"","description":"Premium Elite Minecraft rank.","features":["Premium Elite rank","Exclusive server perks","Elite chat status"]},
+  {"id":"overlord","category":"ranks","title":"OVERLORD","price":730,"image":"","file":"","description":"Powerful Overlord Minecraft rank.","features":["Overlord rank access","Exclusive server perks","Overlord chat status"]},
+  {"id":"vip-plus","category":"ranks","title":"VIP+","price":650,"image":"","file":"","description":"VIP+ rank with premium server perks.","features":["VIP+ rank access","Premium server perks","VIP+ chat status"]},
+  {"id":"vip","category":"ranks","title":"VIP","price":360,"image":"","file":"","description":"VIP rank with server perks.","features":["VIP rank access","Server perks","VIP chat status"]},
+  {"id":"mvp","category":"ranks","title":"MVP","price":519,"image":"","file":"","description":"MVP rank with premium server perks.","features":["MVP rank access","Premium server perks","MVP chat status"]},
+  {"id":"karen","category":"ranks","title":"KAREN","price":240,"image":"","file":"","description":"Karen rank with special chat status.","features":["Karen rank access","Server perks","Special chat status"]},
+  {"id":"rookie","category":"ranks","title":"ROOKIE","price":150,"image":"","file":"","description":"Starter Rookie rank.","features":["Rookie rank access","Starter server perks","Rookie chat status"]}
+]
