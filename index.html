@@ -101,9 +101,9 @@ footer{border-top:1px solid var(--line);padding:30px 24px;color:#766e7e;text-ali
 <section class="layout" id="store">
   <aside class="sidebar">
     <div class="side-title">Store Categories</div>
-    <button class="cat active" data-category="ranks">MC Ranks<small>Premium server ranks</small></button>
-    <button class="cat" data-category="schematics">Schematics<small>Coming soon</small></button>
-    <button class="cat" data-category="development">Server Development<small>In development</small></button>
+    <a class="cat active" href="/store/categories/ranks/">MC Ranks<small>Premium server ranks</small></a>
+    <a class="cat" href="/store/categories/schematic/">Schematics<small>Coming soon</small></a>
+    <a class="cat" href="/store/categories/development/">Server Development<small>In development</small></a>
   </aside>
 
   <div>
@@ -140,29 +140,7 @@ footer{border-top:1px solid var(--line);padding:30px 24px;color:#766e7e;text-ali
 <div id="toast" class="toast"></div>
 
 <script>
-const cats=document.querySelectorAll('.cat');
-const ranks=document.getElementById('ranks-panel');
-const empty=document.getElementById('empty-panel');
-const title=document.getElementById('category-title');
-const count=document.getElementById('category-count');
-cats.forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    cats.forEach(x=>x.classList.remove('active')); btn.classList.add('active');
-    const c=btn.dataset.category;
-    if(c==='ranks'){
-      ranks.style.display='grid'; empty.style.display='none';
-      title.textContent='Minecraft Ranks'; count.textContent='7 ranks available';
-    }else if(c==='schematics'){
-      ranks.style.display='none'; empty.style.display='grid';
-      title.textContent='Schematics'; count.textContent='Coming soon';
-      empty.innerHTML='<div><div class="empty-icon">🧱</div><h3>Schematics are coming soon</h3><p>This category is intentionally empty for now. New builds and downloadable schematics will appear here when they are ready.</p></div>';
-    }else{
-      ranks.style.display='none'; empty.style.display='grid';
-      title.textContent='Server Development'; count.textContent='In development';
-      empty.innerHTML='<div><div class="empty-icon">⚙️</div><h3>Server Development is in development</h3><p>Custom server development is not available through the store yet. Join the EmberForge Discord to discuss a project with the team.</p><a class="btn primary" style="display:inline-block;margin-top:8px" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Open Discord ↗</a></div>';
-    }
-  });
-});
+
 function notify(message){
   const t=document.getElementById('toast'); t.textContent=message; t.classList.add('show');
   clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
