@@ -68,7 +68,7 @@ app.post("/api/admin/logout",auth,(req,res)=>{
 });
 
 app.get("/api/products",async(req,res)=>{
-  try{const {items}=await readProducts();res.set("Cache-Control","no-store");res.json(items)}
+  try{const {items}=await readProducts();res.set("Cache-Control","no-store");res.json(items.filter(item=>item.category!=="ranks"))}
   catch(e){console.error(e);res.status(500).json({error:e.message})}
 });
 
