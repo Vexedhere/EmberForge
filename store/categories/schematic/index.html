@@ -27,7 +27,9 @@
 <footer>© 2026 Mythical Studios • Minecraft Store</footer>
 <div id="modal" class="modal" aria-hidden="true"><button class="close" id="close">×</button><div class="box"><div id="modalPreview" class="preview modalPreview"></div><div class="modalBody"><div id="modalNumber" class="eyebrow"></div><div id="modalTitle" class="modalTitle"></div><div id="modalDesc" class="modalDesc"></div><div id="modalPrice" class="modalPrice"></div><button id="checkout" class="checkout">BUY NOW — TEBEX</button><div class="hint">Secure checkout • Digital delivery through Tebex</div></div></div></div>
 <script>
-const PRODUCTS=[
+const SUPABASE_URL="https://nzaelikbjumaidaombmp.supabase.co";
+const SUPABASE_KEY="sb_publishable_xI4i15jxoh44D8USeKLLKQ_daeg0gtt";
+const TEBEX=[
 ["001","Fantasy Kingdom Spawn","A premium fantasy kingdom spawn build.",5.99,"7721409","🏰"],
 ["002","Roman Colosseum","A grand Roman-style Minecraft colosseum.",4.99,"7721410","🏛️"],
 ["003","Merchant Marketplace","A polished marketplace for trading and server hubs.",3.99,"7721411","🏪"],
@@ -50,36 +52,75 @@ const PRODUCTS=[
 ["020","Nether Fortress Base","A Nether fortress survival base.",6.49,"7721460","🔥"]
 ].map(x=>({n:x[0],title:x[1],desc:x[2],price:x[3],packageId:x[4],icon:x[5]}));
 
-let selected=null;
+let PRODUCTS=[...TEBEX],selected=null;
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-function theme(n){const palettes=[["#24143c","#9b5cff","#9b5cff55"],["#30220f","#d19a3b","#f4c95d55"],["#152c32","#39b7a4","#39b7a455"],["#152443","#4d8dff","#4d8dff55"],["#30220e","#f4c95d","#f4c95d55"],["#30132b","#ff70c8","#ff70c855"],["#100d28","#694cff","#694cff55"],["#211a13","#a97849","#a9784955"],["#271a2c","#ff9fbd","#ff9fbd55"],["#30210f","#d88936","#d8893655"]];return palettes[(Number(n)-1)%palettes.length]}
+function theme(n){const p=[["#24143c","#9b5cff","#9b5cff55"],["#30220f","#d19a3b","#f4c95d55"],["#152c32","#39b7a4","#39b7a455"],["#152443","#4d8dff","#4d8dff55"],["#30220e","#f4c95d","#f4c95d55"],["#30132b","#ff70c8","#ff70c855"],["#100d28","#694cff","#694cff55"],["#211a13","#a97849","#a9784955"],["#271a2c","#ff9fbd","#ff9fbd55"],["#30210f","#d88936","#d8893655"]];return p[(Number(n)-1)%p.length]}
 function visible(){
  let list=[...PRODUCTS],q=document.getElementById("search").value.trim().toLowerCase(),p=document.getElementById("price").value,s=document.getElementById("sort").value;
  if(q)list=list.filter(x=>(x.title+" "+x.desc).toLowerCase().includes(q));
  if(p==="under5")list=list.filter(x=>x.price<5);
  if(p==="5to6")list=list.filter(x=>x.price>=5&&x.price<6);
  if(p==="6plus")list=list.filter(x=>x.price>=6);
- if(s==="low")list.sort((a,b)=>a.price-b.price);else if(s==="high")list.sort((a,b)=>b.price-a.price);else list.sort((a,b)=>Number(a.n)-Number(b.n));
- return list
+ if(s==="low")list.sort((a,b)=>a.price-b.price); else if(s==="high")list.sort((a,b)=>b.price-a.price); else list.sort((a,b)=>String(a.n).localeCompare(String(b.n),undefined,{numeric:true}));
+ return list;
 }
-function previewMarkup(p,extra=""){const [c1,c2,glow]=theme(p.n);return '<div class="preview '+extra+'" style="--c1:'+c1+';--c2:'+c2+';--glow:'+glow+'"><span class="number">'+p.n+'</span><span class="previewIcon">'+p.icon+'</span></div>'}
+function previewMarkup(p,extra=""){const [c1,c2,glow]=theme(p.n||"1");return '<div class="preview '+extra+'" style="--c1:'+c1+';--c2:'+c2+';--glow:'+glow+'"><span class="number">'+esc(p.n||"")+'</span><span class="previewIcon">'+(p.icon||"🧱")+'</span></div>'}
 function render(){
- const list=visible(),box=document.getElementById("grid");document.getElementById("count").textContent=list.length+" resource"+(list.length===1?"":"s");
+ const list=visible(),box=document.getElementById("grid");
+ document.getElementById("count").textContent=list.length+" resource"+(list.length===1?"":"s");
  if(!list.length){box.className="empty";box.innerHTML="<strong>No schematics found.</strong><p>Try a different search or price filter.</p>";return}
  box.className="grid";
- box.innerHTML=list.map(p=>'<article class="card" data-id="'+p.n+'">'+previewMarkup(p)+'<div class="body"><div class="title">'+esc(p.n+" — "+p.title)+'</div><p class="desc">'+esc(p.desc)+'</p><div class="bottom"><span class="price">$'+p.price.toFixed(2)+'</span><span class="buy">VIEW / BUY</span></div></div></article>').join("");
- box.querySelectorAll(".card").forEach(c=>c.onclick=()=>open(PRODUCTS.find(p=>p.n===c.dataset.id)));
+ box.innerHTML=list.map(p=>'<article class="card" data-id="'+esc(p.id||p.n)+'">'+previewMarkup(p)+'<div class="body"><div class="title">'+esc((p.n?p.n+" — ":"")+p.title)+'</div><p class="desc">'+esc(p.desc||p.description||"Premium Minecraft schematic.")+'</p><div class="bottom"><span class="price">'+(Number(p.price)===0?"FREE":"$"+Number(p.price).toFixed(2))+'</span><span class="buy">'+(p.packageId?"VIEW / BUY":"VIEW / DOWNLOAD")+'</span></div></div></article>').join("");
+ box.querySelectorAll(".card").forEach(c=>c.onclick=()=>open(PRODUCTS.find(p=>String(p.id||p.n)===c.dataset.id)));
 }
-function open(p){selected=p;document.getElementById("modalNumber").textContent="SCHEMATIC "+p.n;document.getElementById("modalTitle").textContent=p.title;document.getElementById("modalDesc").textContent=p.desc;document.getElementById("modalPrice").textContent="$"+p.price.toFixed(2)+" USD";document.getElementById("modalPreview").outerHTML=previewMarkup(p,"modalPreview");const b=document.getElementById("checkout");b.disabled=false;b.textContent="BUY NOW — TEBEX";document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");}
+function open(p){
+ selected=p;
+ document.getElementById("modalNumber").textContent=p.n?"SCHEMATIC "+p.n:"MINECRAFT RESOURCE";
+ document.getElementById("modalTitle").textContent=p.title;
+ document.getElementById("modalDesc").textContent=p.desc||p.description||"Premium Minecraft resource from Mythical Studios.";
+ document.getElementById("modalPrice").textContent=Number(p.price)===0?"FREE":"$"+Number(p.price).toFixed(2)+" USD";
+ document.getElementById("modalPreview").outerHTML=previewMarkup(p,"modalPreview");
+ const b=document.getElementById("checkout");b.disabled=false;
+ b.textContent=p.packageId?"BUY NOW — TEBEX":"VIEW / DOWNLOAD";
+ document.getElementById("modal").classList.add("open");
+ document.getElementById("modal").setAttribute("aria-hidden","false");
+}
 async function buy(){
- if(!selected)return;const b=document.getElementById("checkout");b.disabled=true;b.textContent="OPENING TEBEX…";
- try{const r=await fetch("/.netlify/functions/tebex-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({packageId:selected.packageId})});const j=await r.json();if(!r.ok||!j.checkout)throw new Error(j.error||"Tebex checkout could not be created.");location.href=j.checkout}catch(e){alert(e.message);b.disabled=false;b.textContent="BUY NOW — TEBEX";}
+ if(!selected)return;
+ if(!selected.packageId){
+   if(selected.file_path){const u=selected.file_url||selected.file_path;location.href=u;return}
+   alert("This resource does not have a download attached yet.");return;
+ }
+ const b=document.getElementById("checkout");b.disabled=true;b.textContent="OPENING TEBEX…";
+ try{
+   const r=await fetch("/.netlify/functions/tebex-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({packageId:selected.packageId})});
+   const j=await r.json();if(!r.ok||!j.checkout)throw new Error(j.error||"Tebex checkout could not be created.");
+   location.href=j.checkout;
+ }catch(e){alert(e.message);b.disabled=false;b.textContent="BUY NOW — TEBEX";}
+}
+async function loadSupabase(){
+ try{
+   const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+   const {data,error}=await sb.from("products").select("*").eq("published",true).eq("category","schematic").order("created_at",{ascending:false});
+   if(error)throw error;
+   const extra=(data||[]).map((p,i)=>({
+     id:p.id,n:"R"+String(i+1).padStart(3,"0"),title:p.title,desc:p.description,price:Number(p.price||0),icon:"🧱",
+     file_path:p.file_path,file_url:p.file_path?sb.storage.from("store-resources").getPublicUrl(p.file_path).data.publicUrl:""
+   }));
+   const byTitle=new Map(extra.map(x=>[x.title.toLowerCase(),x]));
+   PRODUCTS=TEBEX.map(x=>byTitle.has(x.title.toLowerCase())?{...x,...byTitle.get(x.title.toLowerCase()),packageId:x.packageId}:x);
+   const tebexTitles=new Set(TEBEX.map(x=>x.title.toLowerCase()));
+   PRODUCTS=[...PRODUCTS,...extra.filter(x=>!tebexTitles.has(x.title.toLowerCase()))];
+ }catch(e){console.warn("Supabase catalog unavailable; using Tebex catalog.",e)}
+ render();
 }
 document.getElementById("checkout").onclick=buy;
 document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("open");
 document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")document.getElementById("modal").classList.remove("open")};
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modal").classList.remove("open")});
-document.getElementById("price").onchange=render;document.getElementById("sort").onchange=render;document.getElementById("search").oninput=render;render();
+document.getElementById("price").onchange=render;document.getElementById("sort").onchange=render;document.getElementById("search").oninput=render;
+render();
+loadSupabase();
 </script>
 </body>
 </html>
