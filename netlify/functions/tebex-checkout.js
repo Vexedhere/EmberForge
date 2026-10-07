@@ -20,39 +20,32 @@ exports.handler = async (event) => {
     ]);
 
     if (!allowed.has(packageId)) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid Tebex package." }) };
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid or unpublished Tebex package." }) };
     }
 
     const token = process.env.TEBEX_WEBSTORE_TOKEN;
     if (!token) {
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({
-          error: "Tebex is not configured yet. Add the TEBEX_WEBSTORE_TOKEN environment variable in Netlify."
-        })
-      };
+      return { statusCode: 500, headers, body: JSON.stringify({ error: "Tebex checkout is not configured on the store. Add TEBEX_WEBSTORE_TOKEN in Netlify → Site configuration → Environment variables." }) };
     }
 
-    const origin = event.headers?.origin || event.headers?.referer || "https://store.mythicalstudios.online/";
     const siteUrl = "https://store.mythicalstudios.online";
-
     const basketRes = await fetch("https://headless.tebex.io/api/accounts/" + encodeURIComponent(token) + "/baskets", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({
         complete_url: siteUrl + "/store/categories/schematic/?purchase=complete",
-        cancel_url: siteUrl + "/store/categories/schematic/?purchase=cancelled"
+        cancel_url: siteUrl + "/store/categories/schematic/?purchase=cancelled",
+        complete_auto_redirect: false
       })
     });
 
-    const basket = await basketRes.json();
+    const basket = await basketRes.json().catch(() => ({}));
     if (!basketRes.ok) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: basket?.message || basket?.error || "Tebex basket creation failed." }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: basket?.message || basket?.error || "Tebex could not create the checkout basket.", status: basketRes.status }) };
     }
 
     const ident = basket?.data?.ident || basket?.ident;
-    if (!ident) throw new Error("Tebex did not return a basket identifier.");
+    if (!ident) throw new Error("Tebex created a basket but returned no basket identifier.");
 
     const addRes = await fetch("https://headless.tebex.io/api/baskets/" + encodeURIComponent(ident) + "/packages", {
       method: "POST",
@@ -60,15 +53,15 @@ exports.handler = async (event) => {
       body: JSON.stringify({ package_id: packageId, quantity: 1 })
     });
 
-    const added = await addRes.json();
+    const added = await addRes.json().catch(() => ({}));
     if (!addRes.ok) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: added?.message || added?.error || "Tebex could not add the package to the basket." }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: added?.message || added?.error || "Tebex could not add this schematic to the basket.", status: addRes.status, packageId }) };
     }
 
-    const checkout = added?.links?.checkout || added?.data?.links?.checkout;
-    if (!checkout) throw new Error("Tebex did not return a checkout URL.");
+    const checkoutUrl = added?.links?.checkout || added?.data?.links?.checkout;
+    if (!checkoutUrl) throw new Error("Tebex accepted the package but did not return a checkout URL.");
 
-    return { statusCode: 200, headers, body: JSON.stringify({ checkout }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ checkout: checkoutUrl }) };
   } catch (e) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: e.message || "Checkout failed." }) };
   }
