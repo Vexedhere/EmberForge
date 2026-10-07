@@ -95,7 +95,7 @@ async function loadSupabaseImages(){
   const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
   const {data,error}=await sb.from("products").select("id,title,image_path").eq("published",true).in("category",["schematic","schematics"]);
   if(error)throw error;
-  const rows=(data||[]).map(p=>({p,n:(String(p.id||"").match(/(?:^|\\D)(\\d{3})(?:\\D|$)/)||String(p.title||"").match(/(?:^|\\D)(\\d{3})(?:\\D|$)/)||[])[1],image:p.image_path?sb.storage.from("store-resources").getPublicUrl(p.image_path).data.publicUrl:""})).filter(x=>x.n&&x.image);
+  const rows=(data||[]).map(p=>({p,n:(String(p.id||"").match(/(?:^|\D)(\d{3})(?:\D|$)/)||String(p.title||"").match(/(?:^|\D)(\d{3})(?:\D|$)/)||[])[1],image:p.image_path?sb.storage.from("store-resources").getPublicUrl(p.image_path).data.publicUrl:""})).filter(x=>x.n&&x.image);
   const byNo=new Map(rows.map(x=>[x.n,x.image]));
   products=products.map(p=>({...p,image:byNo.get(p.n)||p.image}));
  }catch(e){console.warn("Supabase image catalog unavailable",e)}
