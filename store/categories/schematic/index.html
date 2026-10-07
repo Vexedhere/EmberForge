@@ -101,7 +101,7 @@ async function buy(){
 async function loadSupabase(){
  try{
    const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-   const {data,error}=await sb.from("products").select("*").eq("published",true).eq("category","schematic").order("created_at",{ascending:false});
+   const {data,error}=await sb.from("products").select("*").eq("published",true).in("category",["schematic","schematics"]).order("created_at",{ascending:false});
    if(error)throw error;
    const extra=(data||[]).map((p,i)=>({
      id:p.id,n:"R"+String(i+1).padStart(3,"0"),title:p.title,desc:p.description,price:Number(p.price||0),icon:"🧱",
