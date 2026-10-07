@@ -28,7 +28,10 @@
 </main>
 <footer class="footer">© 2026 Mythical Studios • Premium Minecraft Resources • <a href="https://discord.gg/tzVTqK8Yt" target="_blank">Discord</a></footer>
 <div id="modal" class="modal" aria-hidden="true"><div class="box"><button id="close" class="close">×</button><div id="modalImg" class="modalImg"></div><div class="modalBody"><div id="modalNum" class="eyebrow"></div><div id="modalTitle" class="modalTitle"></div><div id="modalDesc" class="modalDesc"></div><div id="modalPrice" class="modalPrice"></div><button id="checkout" class="checkout">BUY NOW — TEBEX</button><div class="hint">Secure checkout • digital delivery handled by Tebex</div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL="https://nzaelikbjumaidaombmp.supabase.co";
+const SUPABASE_KEY="sb_publishable_xI4i15jxoh44D8USeKLLKQ_daeg0gtt";
 const FALLBACK_IMAGES=[
 "https://i.imgur.com/CnAs0XOg.jpg",
 "https://static.planetminecraft.com/files/image/minecraft/project/2025/263/19372688_xl.webp",
@@ -87,6 +90,17 @@ async function buy(){
  try{const r=await fetch("/.netlify/functions/tebex-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({packageId:selected.packageId})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.checkout)throw new Error(j.error||"Tebex checkout failed. Please try again.");location.assign(j.checkout)}
  catch(e){alert(e.message);b.disabled=false;b.textContent="BUY NOW — TEBEX"}
 }
+async function loadSupabaseImages(){
+ try{
+  const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  const {data,error}=await sb.from("products").select("id,title,image_path").eq("published",true).in("category",["schematic","schematics"]);
+  if(error)throw error;
+  const rows=(data||[]).map(p=>({p,n:(String(p.id||"").match(/(?:^|\\D)(\\d{3})(?:\\D|$)/)||String(p.title||"").match(/(?:^|\\D)(\\d{3})(?:\\D|$)/)||[])[1],image:p.image_path?sb.storage.from("store-resources").getPublicUrl(p.image_path).data.publicUrl:""})).filter(x=>x.n&&x.image);
+  const byNo=new Map(rows.map(x=>[x.n,x.image]));
+  products=products.map(p=>({...p,image:byNo.get(p.n)||p.image}));
+ }catch(e){console.warn("Supabase image catalog unavailable",e)}
+ render();
+}
 async function loadTebex(){
  try{
   const r=await fetch("/.netlify/functions/tebex-packages",{cache:"no-store"});if(!r.ok)throw new Error();
@@ -95,6 +109,6 @@ async function loadTebex(){
  }catch(e){console.warn("Using storefront fallback catalog",e)}
  render();
 }
-document.getElementById("checkout").onclick=buy;document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("open");document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")document.getElementById("modal").classList.remove("open")};document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modal").classList.remove("open")});document.getElementById("sort").onchange=render;document.getElementById("filter").onchange=render;document.getElementById("search").oninput=render;render();loadTebex();
+document.getElementById("checkout").onclick=buy;document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("open");document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")document.getElementById("modal").classList.remove("open")};document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modal").classList.remove("open")});document.getElementById("sort").onchange=render;document.getElementById("filter").onchange=render;document.getElementById("search").oninput=render;render();loadSupabaseImages();loadTebex();
 </script>
 </body></html>
