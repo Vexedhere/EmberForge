@@ -1,676 +1,371 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Mythical Studios: premium Minecraft schematics, server resources and custom development.">
-<title>Mythical Studios | Minecraft Schematics & Server Resources</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>document.documentElement.classList.add('js')</script>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Mythical Studios by Mythical Network: Minecraft schematics, bundles, ranks and custom server development.">
+<title>Mythical Studios | Minecraft Schematics, Bundles & Custom Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#12151a;--bg2:#171b21;--panel:#1b2027;--panel2:#232933;--line:#2d343f;--line2:#3b4452;
-  --text:#eef0f4;--muted:#9ba3b2;--torch:#f4a93b;--torch-ink:#1d1305;--amethyst:#a68af0;
-  --max:1200px;--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --ease:cubic-bezier(.2,.7,.2,1);
-  --notch:polygon(0 12px,12px 12px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 12px),0 calc(100% - 12px));
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit}
-h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
-p{margin:0}
-:focus-visible{outline:3px solid var(--torch);outline-offset:3px;border-radius:6px}
+:root{--bg:#0c0b12;--bg2:#12101b;--panel:#17141f;--panel2:#1f1b2b;--line:#2a2538;--line2:#3a3350;--text:#f1eefb;--muted:#a49fb8;--vio:#8b5cf6;--vio2:#b79cff;--mint:#2dd4a0;--gold:#fbbf24;--ink:#0c0b12;--max:1200px;--d:"Sora",system-ui,sans-serif;--b:"DM Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 var(--b);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit}h1,h2,h3,h4{font-family:var(--d);margin:0;line-height:1.08;letter-spacing:-.025em}p{margin:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
 .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
-.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 canvas{display:block;width:100%;height:100%}
-
-/* progress bar */
-.progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--torch);z-index:100}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:60;background:rgba(18,21,26,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;font-size:18px}
-.mark{width:34px;height:34px;display:grid;place-items:center;background:var(--torch);color:var(--torch-ink);font-weight:800;clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px))}
-.links{display:flex;gap:6px;font-size:15px;font-weight:600}
-.links a{padding:8px 14px;border-radius:8px;color:var(--muted);transition:color .2s,background .2s}
-.links a:hover{color:var(--text)}
-.links a.on{color:var(--text);background:var(--panel2)}
-.navr{display:flex;gap:10px;align-items:center}
+.nav{position:sticky;top:0;z-index:60;background:rgba(12,11,18,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;font:800 17px var(--d)}
+.mark{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--vio),var(--mint));color:var(--ink);font-weight:800}
+.links{display:flex;gap:2px;font-size:14.5px;font-weight:500}.links a{padding:8px 12px;border-radius:8px;color:var(--muted)}.links a:hover{color:var(--text);background:var(--panel)}
 .burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel);place-items:center;cursor:pointer}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;font-weight:700;font-size:15px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);color:var(--text);cursor:pointer;transition:background .2s,border-color .2s,transform .2s var(--ease)}
-.btn:hover{background:var(--panel2);transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn.primary{background:var(--torch);color:var(--torch-ink);border-color:var(--torch)}
-.btn.primary:hover{background:#ffbd5a;border-color:#ffbd5a}
-.btn.sm{min-height:40px;padding:0 16px;font-size:14px}
-.btn .i{width:18px;height:18px}
-
-/* HERO */
-.hero{padding:64px 0 48px;position:relative;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(44px,6.2vw,82px);font-weight:800;letter-spacing:-.04em}
-.hero .lead{margin-top:22px;max-width:30em;color:var(--muted);font-size:18px}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
-.facts{display:flex;gap:10px 26px;flex-wrap:wrap;margin-top:36px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-.facts b{color:var(--text)}
-.stage{position:relative;aspect-ratio:1/.92}
-.stage:before{content:"";position:absolute;inset:6% 4%;background:radial-gradient(closest-side,rgba(244,169,59,.18),rgba(166,138,240,.1) 55%,transparent 75%);filter:blur(10px)}
-.stage .scene{position:absolute;inset:0;animation:float 7s ease-in-out infinite}
-.stage .shadow{position:absolute;left:24%;right:24%;bottom:2%;height:6%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);filter:blur(6px)}
-.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(27,32,39,.82);backdrop-filter:blur(10px);border:1px solid var(--line2);font-size:14px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.35)}
-.chip .i{color:var(--torch);width:20px;height:20px}
-.chip small{display:block;color:var(--muted);font-weight:500;font-size:12px;line-height:1.3}
-.chip.a{left:0;top:12%;animation:float 6s ease-in-out -2s infinite}
-.chip.b{right:0;bottom:14%;animation:float 8s ease-in-out -4s infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hero .wrap>*{animation:rise .8s var(--ease) both}
-.hero .wrap>*:nth-child(2){animation-delay:.12s}
-@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-
-/* compat strip */
-.strip{border-block:1px solid var(--line);background:var(--bg2);padding:20px 0}
-.strip .wrap{display:flex;align-items:center;justify-content:center;gap:12px 34px;flex-wrap:wrap;color:var(--muted);font-size:15px}
-.strip b{color:var(--text);font-family:var(--display);font-size:17px;font-weight:700}
-
-/* stats */
-.stats{padding:56px 0 0}
-.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden}
-.stat{padding:28px 24px;border-right:1px solid var(--line)}
-.stat:last-child{border-right:0}
-.stat b{display:block;font-family:var(--display);font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1}
-.stat span{display:block;margin-top:8px;color:var(--muted);font-size:15px}
-
-section{padding:88px 0}
-.head{max-width:640px;margin-bottom:40px}
-.head h2{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-.03em}
-.head p{margin-top:14px;color:var(--muted);font-size:17px}
-
-/* reveal */
-.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:var(--d,0s)}
-.js .rv.in{opacity:1;transform:none}
-
-/* BENTO */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(200px,auto);gap:14px}
-.tile{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--panel);display:flex;flex-direction:column;justify-content:flex-end;padding:26px;transition:border-color .25s,transform .3s var(--ease)}
-.tile:hover{border-color:var(--torch);transform:translateY(-3px)}
-.tile h3{font-size:26px;font-weight:700}
-.tile p{margin-top:8px;color:var(--muted);font-size:15px;max-width:26em}
-.tile .go{margin-top:16px;font-weight:700;font-size:14px;color:var(--torch);display:inline-flex;gap:8px;align-items:center}
-.tile .go .i{width:16px;height:16px;transition:transform .25s var(--ease)}
-.tile:hover .go .i{transform:translateX(4px)}
-.tile.big{grid-column:span 4;grid-row:span 2;min-height:430px;background:radial-gradient(70% 70% at 70% 30%,#242b36,var(--panel))}
-.tile.big .art{position:absolute;right:-2%;top:2%;width:80%;height:78%}
-.tile.big .txt{position:relative;z-index:2;max-width:22em}
-.tile.big h3{font-size:40px}
-.tile.sm{grid-column:span 2}
-.ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--panel2);border:1px solid var(--line2);color:var(--amethyst);margin-bottom:auto}
-
-/* GALLERY */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.gcard{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);transition:border-color .25s,transform .3s var(--ease)}
-.gcard:hover{border-color:var(--torch);transform:translateY(-4px)}
-.gcard .art{height:240px;background:radial-gradient(80% 80% at 50% 35%,#272f3b,var(--panel))}
-.gcard .meta{padding:18px 22px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.gcard h3{font-size:20px;font-weight:700}
-.gcard p{margin-top:3px;color:var(--muted);font-size:14px}
-.gcard .arrow{width:38px;height:38px;border-radius:10px;border:1px solid var(--line2);display:grid;place-items:center;color:var(--torch);flex:none;transition:background .25s,color .25s}
-.gcard:hover .arrow{background:var(--torch);color:var(--torch-ink)}
-
-/* FEATURES */
-.feat{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
-.fc{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:26px;grid-column:span 2;transition:border-color .25s}
-.fc:hover{border-color:var(--line2)}
-.fc.w{grid-column:span 3}
-.fc h3{font-size:21px;font-weight:700;margin:20px 0 8px}
-.fc p{color:var(--muted);font-size:15px}
-.fc .ico{margin-bottom:0}
-.fc .mini{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
-.tag{padding:6px 12px;border-radius:999px;border:1px solid var(--line2);font-size:13px;font-weight:600;color:var(--muted);background:var(--bg2)}
-code,.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.fc .cmd{margin-top:20px;padding:14px 16px;border-radius:12px;background:#0e1115;border:1px solid var(--line);font-size:14px;color:#ffd987;line-height:1.8}
-.fc .cmd span{color:var(--muted)}
-
-/* INSTALL TABS */
-.install{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
-.install h2{font-size:clamp(30px,4vw,46px);font-weight:800;letter-spacing:-.03em}
-.install .intro{margin-top:14px;color:var(--muted);font-size:17px;max-width:26em}
-.tabs{display:flex;flex-direction:column;gap:8px;margin-top:28px}
-.tab{display:flex;gap:14px;align-items:center;text-align:left;padding:16px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-weight:700;transition:border-color .2s,background .2s}
-.tab span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--panel2);font-family:var(--display);color:var(--muted);flex:none}
-.tab[aria-selected=true]{border-color:var(--torch);background:var(--panel2)}
-.tab[aria-selected=true] span{background:var(--torch);color:var(--torch-ink)}
-.panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:30px;min-height:330px}
-.panel[hidden]{display:none}
-.panel h3{font-size:24px;font-weight:700}
-.panel p{margin-top:10px;color:var(--muted);font-size:16px}
-.codebox{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:14px 14px 14px 18px;border-radius:12px;background:#0e1115;border:1px solid var(--line);font-size:15px;color:#ffd987;overflow-x:auto}
-.codebox code{white-space:nowrap}
-.copy{display:inline-flex;align-items:center;gap:8px;flex:none;min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--line2);background:var(--panel);cursor:pointer;font-size:13px;font-weight:700;color:var(--text);transition:background .2s}
-.copy:hover{background:var(--panel2)}
-.copy .i{width:16px;height:16px}
-.note{margin-top:18px;font-size:14px;color:var(--muted);padding-left:14px;border-left:3px solid var(--line2)}
-
-/* STEPS */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s;position:relative}
-.steps li{counter-increment:s;padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
-.steps li:before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;margin-bottom:20px;background:var(--torch);color:var(--torch-ink);font-family:var(--display);font-weight:800;border-radius:9px}
-.steps h3{font-size:20px;font-weight:700}
-.steps p{margin-top:8px;color:var(--muted);font-size:15px}
-
-/* BRIEF */
-.brief{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
-.brief .l{padding:44px;background:radial-gradient(90% 90% at 0 0,rgba(166,138,240,.14),transparent 60%)}
-.brief .l h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.03em}
-.brief .l p{margin-top:14px;color:var(--muted);font-size:17px;max-width:24em}
-.brief .r{padding:44px;border-left:1px solid var(--line);background:var(--bg2)}
-.lab{display:block;font-weight:700;font-size:14px;margin-bottom:10px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
-.pick{padding:9px 15px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);font-size:14px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s}
-.pick:hover{color:var(--text)}
-.pick[aria-pressed=true]{background:var(--torch);border-color:var(--torch);color:var(--torch-ink)}
-.field{width:100%;padding:13px 15px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);font:inherit;font-size:15px;margin-bottom:22px}
-.field::placeholder{color:#6d7585}
-textarea.field{min-height:110px;resize:vertical}
-.brief .btn{width:100%}
-
-/* FAQ */
-.faq{display:grid;gap:10px;max-width:860px}
-details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 24px;transition:border-color .2s}
-details[open]{border-color:var(--line2)}
-summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:700;font-size:17px}
-summary::-webkit-details-marker{display:none}
-summary:after{content:"+";font-size:26px;line-height:1;color:var(--torch);transition:transform .25s var(--ease)}
-details[open] summary:after{transform:rotate(45deg)}
-details p{margin:0 0 22px;color:var(--muted);max-width:44em}
-
-/* FINAL */
-.final{padding:0 0 96px}
-.final .box{position:relative;padding:72px 40px;text-align:center;background:var(--panel);clip-path:var(--notch);overflow:hidden}
-.final .box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 0,rgba(244,169,59,.16),transparent 70%)}
-.final .box>*{position:relative}
-.final h2{font-size:clamp(32px,5vw,58px);font-weight:800;letter-spacing:-.035em}
-.final p{margin:16px auto 0;max-width:34em;color:var(--muted);font-size:18px}
-.final .cta-row{justify-content:center}
-
-footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;gap:14px 30px;flex-wrap:wrap;align-items:center}
-footer nav{display:flex;gap:22px;flex-wrap:wrap}
-footer a:hover{color:var(--text)}
-
-.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--text);color:#12151a;padding:12px 20px;border-radius:12px;font-weight:700;font-size:15px;z-index:120;transition:all .3s var(--ease)}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-
-/* RESPONSIVE */
-@media(max-width:1000px){
-  .hero .wrap,.install,.brief{grid-template-columns:1fr}
-  .hero{padding-top:44px}.stage{max-width:620px;margin:0 auto;width:100%}
-  .brief .r{border-left:0;border-top:1px solid var(--line)}
-  .steps{grid-template-columns:1fr 1fr}
-  .gallery{grid-template-columns:1fr 1fr}
-  .bento{grid-template-columns:1fr 1fr}
-  .tile.big{grid-column:span 2;grid-row:auto;min-height:380px}.tile.sm{grid-column:span 1}
-  .feat{grid-template-columns:1fr 1fr}.fc,.fc.w{grid-column:span 1}
-  .stats .grid{grid-template-columns:1fr 1fr}
-  .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
-}
-@media(max-width:720px){
-  .burger{display:grid}
-  .links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px 18px;display:none}
-  .links.open{display:flex}.links a{padding:14px}
-  .navr .btn{display:none}
-  section{padding:62px 0}
-  .gallery,.steps,.feat,.bento{grid-template-columns:1fr}
-  .tile.big,.tile.sm,.fc,.fc.w{grid-column:span 1}
-  .tile.big{min-height:360px}.tile.big .art{width:100%;top:-4%}
-  .brief .l,.brief .r,.panel{padding:26px}
-  .chip{display:none}
-  .final .box{padding:48px 22px}
-}
-@media(max-width:480px){.stats .grid{grid-template-columns:1fr}.stat{border-right:0!important;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
-</style>
-</head>
-<body>
-
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;font-weight:700;font-size:15px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{background:var(--panel2);transform:translateY(-2px)}.btn.p{background:var(--vio);border-color:var(--vio);color:#fff}.btn.p:hover{background:#9d74ff}.btn.g{background:var(--gold);border-color:var(--gold);color:var(--ink)}.btn.sm{min-height:40px;padding:0 16px;font-size:14px}
+.hero{padding:70px 0 56px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:-20% -10% auto auto;width:70%;height:120%;background:radial-gradient(closest-side,rgba(139,92,246,.22),transparent 70%)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;position:relative}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border:1px solid var(--line2);border-radius:99px;background:var(--panel);font-size:14px;color:var(--muted)}
+.badge b{color:var(--text)}.badge i{width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font:800 13px var(--d);font-style:normal}
+.hero h1{font-size:clamp(42px,6vw,80px);font-weight:800;letter-spacing:-.045em;margin-top:22px}
+.hero .lead{margin-top:20px;max-width:30em;color:var(--muted);font-size:18px}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.stage{aspect-ratio:1/.92}
+.strip{border-block:1px solid var(--line);background:var(--bg2);padding:18px 0}.strip .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 32px;color:var(--muted);font-size:15px}.strip b{color:var(--text);font-family:var(--d)}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;margin-top:56px}
+.stat{padding:26px 24px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat b{display:block;font:800 36px var(--d);letter-spacing:-.03em}.stat span{color:var(--muted);font-size:15px}
+section{padding:84px 0}
+.head{max-width:660px;margin-bottom:38px}.head h2{font-size:clamp(30px,4vw,46px);font-weight:800}.head p{margin-top:12px;color:var(--muted);font-size:17px}
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s,transform .55s}.js .rv.in{opacity:1;transform:none}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{position:relative;border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:24px;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:border-color .25s,transform .25s}
+.cat:hover{border-color:var(--vio);transform:translateY(-4px)}.cat .art{position:absolute;inset:0 0 40% 0}.cat h3{font-size:24px;position:relative}.cat p{color:var(--muted);font-size:14.5px;margin-top:6px;position:relative}
+.cat .ic{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:12px;background:var(--panel2);border:1px solid var(--line2);display:grid;place-items:center;color:var(--vio2)}
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;align-items:center}
+.search{flex:1;min-width:220px;padding:13px 16px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);font:inherit}
+.pill{padding:9px 16px;border-radius:99px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);font-weight:600;font-size:14px;cursor:pointer}.pill[aria-pressed=true]{background:var(--vio);border-color:var(--vio);color:#fff}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}.card:hover{border-color:var(--vio);transform:translateY(-4px)}
+.card .art{height:230px;background:radial-gradient(80% 80% at 50% 35%,#2a2440,var(--panel));position:relative}
+.tagc{position:absolute;top:12px;left:12px;padding:4px 11px;border-radius:99px;background:rgba(12,11,18,.75);border:1px solid var(--line2);font-size:12px;font-weight:700;color:var(--mint)}
+.heart{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:rgba(12,11,18,.75);cursor:pointer;display:grid;place-items:center}.heart[aria-pressed=true]{color:var(--gold);background:rgba(251,191,36,.15);border-color:var(--gold)}
+.card .meta{padding:18px 20px 20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;flex:1}.card h3{font-size:19px}.card p{color:var(--muted);font-size:14px}
+.card .foot{margin-top:auto;padding-top:12px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+.empty{display:none;text-align:center;padding:40px;color:var(--muted);border:1px dashed var(--line2);border-radius:18px}
+.bund{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bd{display:grid;grid-template-columns:.9fr 1.1fr;border:1px solid var(--line);border-radius:20px;background:var(--panel);overflow:hidden}.bd .art{min-height:240px;background:radial-gradient(80% 80% at 50% 40%,#2a2440,var(--panel))}.bd>div:last-child{padding:24px;display:flex;flex-direction:column;gap:10px}.bd h3{font-size:22px}.bd p{color:var(--muted);font-size:15px}.bd ul{margin:0;padding:0;list-style:none;font-size:14px;color:var(--text)}.bd li{padding:3px 0;display:flex;gap:8px}.bd li:before{content:"+";color:var(--mint);font-weight:800}.bd .btn{margin-top:auto}
+.dev{display:grid;grid-template-columns:1.15fr .85fr;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
+.dev .l{padding:44px;background:radial-gradient(90% 90% at 0 0,rgba(45,212,160,.12),transparent 60%)}.dev h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}.dev .l p{margin-top:16px;color:var(--muted);font-size:16.5px;max-width:34em}
+.dev .r{padding:44px;border-left:1px solid var(--line);background:var(--bg2)}
+.lab{display:block;font-weight:700;font-size:14px;margin-bottom:10px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.field{width:100%;padding:13px 15px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);font:inherit;margin-bottom:20px}textarea.field{min-height:100px;resize:vertical}.dev .btn{width:100%}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.fc{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:26px}.fc .ic{width:44px;height:44px;border-radius:12px;background:var(--panel2);border:1px solid var(--line2);display:grid;place-items:center;color:var(--mint)}.fc h3{font-size:20px;margin:18px 0 8px}.fc p{color:var(--muted);font-size:15px}
+.install{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start}.install h2{font-size:clamp(30px,4vw,44px);font-weight:800}.install .intro{margin-top:12px;color:var(--muted);font-size:17px}
+.tabs{display:flex;flex-direction:column;gap:8px;margin-top:26px}.tab{display:flex;gap:14px;align-items:center;text-align:left;padding:15px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-weight:700}.tab span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--panel2);color:var(--muted)}
+.tab[aria-selected=true]{border-color:var(--vio)}.tab[aria-selected=true] span{background:var(--vio);color:#fff}
+.panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:30px;min-height:300px}.panel[hidden]{display:none}.panel h3{font-size:24px}.panel p{margin-top:10px;color:var(--muted)}
+.codebox{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding:12px 12px 12px 18px;border-radius:12px;background:#09080e;border:1px solid var(--line);color:#ffd987;overflow-x:auto;font:14px ui-monospace,Menlo,Consolas,monospace}
+.copy{display:inline-flex;gap:7px;align-items:center;flex:none;min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--line2);background:var(--panel);cursor:pointer;font:700 13px var(--b)}
+.note{margin-top:16px;font-size:14px;color:var(--muted);padding-left:14px;border-left:3px solid var(--line2)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.about h2{font-size:clamp(30px,4vw,46px);font-weight:800}.about p{margin-top:16px;color:var(--muted);font-size:17px}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:12px}.val{padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.val b{font:700 17px var(--d)}.val p{margin-top:6px!important;font-size:14.5px!important}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tm{text-align:left;border:1px solid var(--line);border-radius:20px;background:var(--panel);padding:0;cursor:pointer;overflow:hidden;transition:border-color .25s,transform .25s;display:flex;flex-direction:column}.tm:hover{border-color:var(--gold);transform:translateY(-5px)}
+.av{height:190px;display:grid;place-items:center;font:800 64px var(--d);color:var(--ink);background:linear-gradient(135deg,var(--vio),var(--mint))}.tm:nth-child(2) .av{background:linear-gradient(135deg,var(--gold),#f97316)}.tm:nth-child(3) .av{background:var(--panel2);color:var(--vio2);border-bottom:1px dashed var(--line2)}
+.tm .t{padding:18px 20px 20px}.tm h3{font-size:20px}.tm small{display:block;color:var(--gold);font-weight:700;margin-top:4px}.tm span{display:block;margin-top:10px;color:var(--muted);font-size:13.5px}
+dialog{border:1px solid var(--line2);border-radius:22px;background:var(--panel);color:var(--text);padding:0;width:min(560px,calc(100% - 32px));max-height:90vh;overflow:auto}dialog::backdrop{background:rgba(5,4,10,.75);backdrop-filter:blur(4px)}
+dialog .av{height:130px;font-size:48px}dialog .in{padding:26px 28px 28px}dialog h3{font-size:26px}dialog .role{color:var(--gold);font-weight:700;margin-top:4px}dialog p{margin-top:14px;color:var(--muted)}dialog .sk{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(12,11,18,.7);cursor:pointer;font-size:20px}
+details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 24px}details[open]{border-color:var(--line2)}summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:19px 0;font-weight:700}summary::-webkit-details-marker{display:none}summary:after{content:"+";font-size:24px;color:var(--gold);line-height:1}details[open] summary:after{content:"\2212"}details p{margin:0 0 20px;color:var(--muted)}.faq{display:grid;gap:10px;max-width:860px}
+.final .box{padding:70px 36px;text-align:center;border-radius:26px;border:1px solid var(--line2);background:radial-gradient(60% 100% at 50% 0,rgba(139,92,246,.25),var(--panel) 75%)}.final h2{font-size:clamp(30px,5vw,54px);font-weight:800}.final p{margin:14px auto 0;max-width:32em;color:var(--muted);font-size:18px}.final .row{justify-content:center}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px 30px}footer nav{display:flex;gap:20px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--text);color:var(--ink);padding:12px 20px;border-radius:12px;font-weight:700;z-index:200;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1000px){.hero .wrap,.install,.about,.dev{grid-template-columns:1fr}.stage{max-width:600px;margin:auto;width:100%}.cats{grid-template-columns:1fr 1fr}.team{grid-template-columns:1fr 1fr}.grid3,.feat{grid-template-columns:1fr 1fr}.bund{grid-template-columns:1fr}.dev .r{border-left:0;border-top:1px solid var(--line)}.stats .grid{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:720px){.burger{display:grid}.links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px 16px;display:none}.links.open{display:flex}.nav .btn{display:none}section{padding:60px 0}.cats,.team,.grid3,.feat,.vals{grid-template-columns:1fr}.bd{grid-template-columns:1fr}.dev .l,.dev .r,.panel{padding:26px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
+</style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
-  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></symbol>
-  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
-  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8l-6.3 3.7 1.6-7.2L2 9.6 9 9z"/></symbol>
-  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.6-.6-2.6z"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="a" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="cu" viewBox="0 0 24 24"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></symbol>
+<symbol id="co" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+<symbol id="st" viewBox="0 0 24 24"><path d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8l-6.3 3.7 1.6-7.2L2 9.6 9 9z"/></symbol>
+<symbol id="bx" viewBox="0 0 24 24"><path d="M3 8h18v13H3zM1 3h22v5H1zM10 12h4"/></symbol>
+<symbol id="bo" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+<symbol id="sh" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="ch" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/></symbol>
+<symbol id="cp" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="ok" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="mn" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+<symbol id="hr" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></symbol>
+<symbol id="gl" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></symbol>
 </svg>
 
-<div class="progress" id="progress"></div>
-
-<nav class="nav" aria-label="Main">
-  <div class="wrap">
-    <a class="brand" href="#top"><span class="mark">M</span>Mythical Studios</a>
-    <div class="links" id="links">
-      <a href="#categories">Categories</a>
-      <a href="#builds">Builds</a>
-      <a href="#why">Features</a>
-      <a href="#install">Install guide</a>
-      <a href="#custom">Custom work</a>
-      <a href="#faq">FAQ</a>
-    </div>
-    <div class="navr">
-      <a class="btn sm primary" href="/store/categories/schematic/">Open the store</a>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg class="i"><use href="#i-menu"/></svg></button>
-    </div>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap">
+<a class="brand" href="#top"><span class="mark">M</span>Mythical Studios</a>
+<div class="links" id="links"><a href="#categories">Categories</a><a href="#schematics">Schematics</a><a href="#bundles">Bundles</a><a href="#custom">Custom Dev</a><a href="#about">About</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
+<div style="display:flex;gap:10px"><a class="btn sm p" href="/store/categories/schematic/">Open the store</a><button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><svg class="i"><use href="#mn"/></svg></button></div>
+</div></nav>
 
 <main id="top">
-
-<header class="hero">
-  <div class="wrap">
-    <div>
-      <h1>Build a server players remember.</h1>
-      <p class="lead">Premium Minecraft schematics, server resources and custom development for owners who care how their world looks, feels and performs.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="/store/categories/schematic/">Browse schematics <svg class="i"><use href="#i-arrow"/></svg></a>
-        <a class="btn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg> Join Discord</a>
-      </div>
-      <div class="facts">
-        <span><b>20+</b> schematics</span><span><b>Instant</b> delivery</span><span><b>Secure</b> Tebex checkout</span>
-      </div>
-    </div>
-    <div class="stage" id="heroStage">
-      <div class="shadow"></div>
-      <div class="scene"><canvas data-scene="castle:grass:11:8" aria-label="Isometric Minecraft castle on a floating island" role="img"></canvas></div>
-      <div class="chip a"><svg class="i"><use href="#i-bolt"/></svg><div>Instant delivery<small>Download right after checkout</small></div></div>
-      <div class="chip b"><svg class="i"><use href="#i-cube"/></svg><div>Paste-ready builds<small>Made for your server</small></div></div>
-    </div>
-  </div>
-</header>
-
-<div class="strip">
-  <div class="wrap"><span>Made for the tools you already use</span><b>WorldEdit</b><b>FAWE</b><b>Paper</b><b>Spigot</b><b>Purpur</b></div>
+<header class="hero"><div class="wrap">
+<div>
+<span class="badge"><i>C</i><span>Founded by <b>Chethan</b></span></span>
+<h1>Build a server players remember.</h1>
+<p class="lead">Premium Minecraft schematics, bundles, ranks and custom server development from Mythical Network. Made for owners who care how their world looks, feels and performs.</p>
+<div class="row"><a class="btn g" href="/store/categories/schematic/">Browse schematics <svg class="i"><use href="#a"/></svg></a><a class="btn" href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener"><svg class="i"><use href="#ch"/></svg> Join Discord</a></div>
 </div>
+<div class="stage"><canvas data-scene="castle:grass:11:8" role="img" aria-label="Isometric castle on a floating island"></canvas></div>
+</div></header>
 
-<div class="stats">
-  <div class="wrap">
-    <div class="grid">
-      <div class="stat"><b><span data-count="20">20</span>+</b><span>schematic listings</span></div>
-      <div class="stat"><b>Instant</b><span>digital delivery</span></div>
-      <div class="stat"><b>Secure</b><span>Tebex checkout</span></div>
-      <div class="stat"><b>Custom</b><span>development available</span></div>
-    </div>
-  </div>
+<div class="strip"><div class="wrap"><span>Works with</span><b>WorldEdit</b><b>FAWE</b><b>Paper</b><b>Spigot</b><b>Purpur</b></div></div>
+<div class="stats"><div class="wrap"><div class="grid">
+<div class="stat"><b>19+</b><span>schematic listings</span></div><div class="stat"><b>Instant</b><span>digital delivery</span></div><div class="stat"><b>Tebex</b><span>secure checkout</span></div><div class="stat"><b>Custom</b><span>server development</span></div></div></div></div>
+
+<section id="categories"><div class="wrap">
+<div class="head rv"><h2>Start with what your server needs next.</h2><p>Four categories, one store. Pick a build, save with a bundle, or have us make something only you will have.</p></div>
+<div class="cats">
+<a class="cat rv" href="/store/categories/schematic/"><div class="art"><canvas data-scene="village:grass:4:8" aria-hidden="true"></canvas></div><h3>Schematics</h3><p>Spawns, hubs, towns and castles ready to paste.</p></a>
+<a class="cat rv" href="/store/categories/bundles/"><div class="art"><canvas data-scene="hub:end:6:7" aria-hidden="true"></canvas></div><h3>Bundles</h3><p>Matching builds grouped together at a better price.</p></a>
+<a class="cat rv" href="/store/categories/ranks/"><div class="ic"><svg class="i"><use href="#st"/></svg></div><h3>Ranks</h3><p>Store-ready ranks and progression for your community.</p></a>
+<a class="cat rv" href="/store/categories/custom-dev/"><div class="ic"><svg class="i"><use href="#co"/></svg></div><h3>Custom Dev</h3><p>Plugins, setups and full servers made for you.</p></a>
+</div></div></section>
+
+<section id="schematics" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>The schematic vault.</h2><p>Every preview below is drawn from the build type it represents. Search, filter and save favourites.</p></div>
+<div class="tools"><input class="search" id="q" type="search" placeholder="Search schematics..." aria-label="Search schematics"><select class="search" id="sort" style="flex:0 0 auto;min-width:0" aria-label="Sort"><option value="f">Featured</option><option value="l">Price: low to high</option><option value="h">Price: high to low</option></select><div id="filters" style="display:flex;gap:8px;flex-wrap:wrap;width:100%"></div></div>
+<div class="grid3" id="vault"></div>
+<div class="empty" id="empty">Nothing matches that search. Try another word, or request a custom build below.</div>
+<div class="row" style="justify-content:center"><a class="btn p" href="/store/categories/schematic/">See every schematic <svg class="i"><use href="#a"/></svg></a></div>
+</div></section>
+
+<section id="bundles" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>Bundles: more build for less.</h2><p>Themed packs that fit together, so your whole server looks like one world.</p></div>
+<div class="bund">
+<div class="bd rv"><div class="art"><canvas data-scene="hub:grass:2:7" aria-hidden="true"></canvas></div><div><h3>Server Starter Pack</h3><p>Everything to open a server with a strong first impression.</p><ul><li>Spawn build</li><li>Lobby hub</li><li>Starter town</li></ul><a class="btn p sm" href="/store/categories/bundles/">View bundle</a></div></div>
+<div class="bd rv"><div class="art"><canvas data-scene="castle:snow:5:8" aria-hidden="true"></canvas></div><div><h3>Kingdom Collection</h3><p>Castles, villages and dungeons for survival and roleplay.</p><ul><li>Castle and fortress</li><li>Medieval village</li><li>Dungeon</li></ul><a class="btn p sm" href="/store/categories/bundles/">View bundle</a></div></div>
 </div>
+<p class="note">Bundle contents shown are examples. Check each bundle page in the store for the exact files included.</p>
+</div></section>
 
-<section id="categories">
-  <div class="wrap">
-    <div class="head rv">
-      <h2>Start with what your server needs next.</h2>
-      <p>A spawn that makes the first impression, a rank system that rewards loyalty, or custom code working behind the scenes.</p>
-    </div>
-    <div class="bento">
-      <a class="tile big rv" href="/store/categories/schematic/">
-        <div class="art"><canvas data-scene="village:grass:4:8" aria-hidden="true"></canvas></div>
-        <div class="txt"><h3>Schematics</h3><p>Spawns, hubs, towns and server-ready builds you can drop straight into your world.</p><span class="go">Browse schematics <svg class="i"><use href="#i-arrow"/></svg></span></div>
-      </a>
-      <a class="tile sm rv" style="--d:.08s" href="/store/categories/development/">
-        <div class="ico"><svg class="i"><use href="#i-code"/></svg></div>
-        <div><h3>Development</h3><p>Custom plugins, setups and server work.</p><span class="go">Request development <svg class="i"><use href="#i-arrow"/></svg></span></div>
-      </a>
-      <a class="tile sm rv" style="--d:.16s" href="/store/categories/ranks/">
-        <div class="ico"><svg class="i"><use href="#i-star"/></svg></div>
-        <div><h3>Ranks</h3><p>Store-ready ranks and progression for your community.</p><span class="go">View ranks <svg class="i"><use href="#i-arrow"/></svg></span></div>
-      </a>
-    </div>
-  </div>
-</section>
+<section id="custom" style="padding-top:10px"><div class="wrap">
+<div class="dev rv">
+<div class="l"><h2>Custom Dev: your server, built your way.</h2>
+<p>We start with a conversation. You tell us your server type, your theme and what you want players to experience, and we turn that into a clear plan with scope, timeline and price before any work begins.</p>
+<p>Our team then builds in stages: layout and builds first, then plugins and configuration, then a full test on a staging server. You see progress along the way, can ask for changes, and receive everything ready to install, with help getting it live. Custom builds, plugins, rank systems and complete server setups are all handled the same way.</p>
+<div class="row"><a class="btn g" href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener"><svg class="i"><use href="#ch"/></svg> Talk to us on Discord</a><a class="btn" href="/store/categories/custom-dev/">View Custom Dev in store</a></div></div>
+<div class="r"><span class="lab">Build your brief</span><div class="chips" id="picks"></div>
+<label class="lab" for="st1">Server type</label><input class="field" id="st1" placeholder="Survival, Skyblock, Factions, Minigames...">
+<label class="lab" for="sd">Project details</label><textarea class="field" id="sd" placeholder="Style, size, Minecraft version, deadline..."></textarea>
+<button class="btn p" id="send"><svg class="i"><use href="#cp"/></svg>Copy brief and open Discord</button></div>
+</div></div></section>
 
-<section id="builds" style="padding-top:10px">
-  <div class="wrap">
-    <div class="head rv">
-      <h2>Give your server a world worth exploring.</h2>
-      <p>Pick the kind of space you need. Every type lives in the schematic vault.</p>
-    </div>
-    <div class="gallery">
-      <a class="gcard rv" href="/store/categories/schematic/"><div class="art"><canvas data-scene="hub:grass:2:7" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Spawns</h3><p>The first thing players see</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-      <a class="gcard rv" style="--d:.07s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="hub:end:6:7" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Lobbies &amp; hubs</h3><p>Central spaces for game modes</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-      <a class="gcard rv" style="--d:.14s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="village:snow:8:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Towns &amp; villages</h3><p>Places to live, trade and roleplay</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-      <a class="gcard rv" href="/store/categories/schematic/"><div class="art"><canvas data-scene="castle:sand:5:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Castles &amp; fortresses</h3><p>Landmarks with presence</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-      <a class="gcard rv" style="--d:.07s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="sky:grass:9:5.6" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Skyblock islands</h3><p>Start-island layouts</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-      <a class="gcard rv" style="--d:.14s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="ruins:nether:3:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Nether &amp; dungeons</h3><p>Dark spaces for PvE and events</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
-    </div>
-  </div>
-</section>
+<section id="why" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>Built for server owners.</h2></div>
+<div class="feat">
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#cu"/></svg></div><h3>Paste-ready builds</h3><p>Place schematics on a live server without rebuilding first.</p></div>
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#bo"/></svg></div><h3>Instant delivery</h3><p>Download as soon as checkout completes.</p></div>
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#sh"/></svg></div><h3>Secure checkout</h3><p>Payments run through the connected Tebex storefront.</p></div>
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#bx"/></svg></div><h3>Bundle savings</h3><p>Matching packs so your whole server shares one style.</p></div>
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#co"/></svg></div><h3>Custom commissions</h3><p>Plugins, configurations and server setup on request.</p></div>
+<div class="fc rv"><div class="ic"><svg class="i"><use href="#ch"/></svg></div><h3>Direct support</h3><p>Reach the team on Discord with questions or feedback.</p></div>
+</div></div></section>
 
-<section id="why" style="padding-top:10px">
-  <div class="wrap">
-    <div class="head rv">
-      <h2>Built for server owners.</h2>
-      <p>Every resource solves a real server problem: presentation, gameplay spaces, progression or development.</p>
-    </div>
-    <div class="feat">
-      <div class="fc w rv">
-        <div class="ico"><svg class="i"><use href="#i-cube"/></svg></div>
-        <h3>Paste-ready builds</h3>
-        <p>Schematics are made to be placed on a live server without rebuilding them first.</p>
-        <div class="cmd code"><span>//</span>schem load <span>your_build</span><br><span>//</span>paste</div>
-      </div>
-      <div class="fc w rv" style="--d:.08s">
-        <div class="ico"><svg class="i"><use href="#i-wrench"/></svg></div>
-        <h3>Custom commissions</h3>
-        <p>Need something that isn't in the vault? Tell the team what you have in mind.</p>
-        <div class="mini"><span class="tag">Custom builds</span><span class="tag">Plugins</span><span class="tag">Configurations</span><span class="tag">Server setup</span></div>
-      </div>
-      <div class="fc rv">
-        <div class="ico"><svg class="i"><use href="#i-bolt"/></svg></div>
-        <h3>Instant delivery</h3>
-        <p>Get your resource as soon as checkout completes and start building.</p>
-      </div>
-      <div class="fc rv" style="--d:.08s">
-        <div class="ico"><svg class="i"><use href="#i-shield"/></svg></div>
-        <h3>Secure checkout</h3>
-        <p>Payments run through the connected Tebex storefront.</p>
-      </div>
-      <div class="fc rv" style="--d:.16s">
-        <div class="ico"><svg class="i"><use href="#i-chat"/></svg></div>
-        <h3>Direct support</h3>
-        <p>Reach the team on Discord with questions, requests or feedback.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="install" style="padding-top:10px"><div class="wrap install">
+<div><h2>Install a schematic in minutes.</h2><p class="intro">Three steps from download to finished build.</p>
+<div class="tabs" role="tablist"><button class="tab" role="tab" aria-selected="true" aria-controls="p1"><span>1</span>Download your file</button><button class="tab" role="tab" aria-selected="false" aria-controls="p2" tabindex="-1"><span>2</span>Add it to your server</button><button class="tab" role="tab" aria-selected="false" aria-controls="p3" tabindex="-1"><span>3</span>Paste it in game</button></div></div>
+<div>
+<div class="panel" role="tabpanel" id="p1"><h3>Download your file</h3><p>After checkout, open your delivery from the Tebex confirmation. You get the schematic file, usually a .schem file.</p><p class="note">Check each product page for the file format and supported Minecraft versions.</p></div>
+<div class="panel" role="tabpanel" id="p2" hidden><h3>Add it to your server</h3><p>Upload the file to your schematics folder, then restart or reload WorldEdit.</p><div class="codebox"><code>plugins/WorldEdit/schematics/</code><button class="copy" data-copy="plugins/WorldEdit/schematics/"><svg class="i"><use href="#cp"/></svg>Copy</button></div><p class="note">Using FAWE? Use plugins/FastAsyncWorldEdit/schematics/</p></div>
+<div class="panel" role="tabpanel" id="p3" hidden><h3>Paste it in game</h3><p>Load the schematic, stand where you want it, then paste.</p><div class="codebox"><code>//schem load your_build</code><button class="copy" data-copy="//schem load your_build"><svg class="i"><use href="#cp"/></svg>Copy</button></div><div class="codebox"><code>//paste</code><button class="copy" data-copy="//paste"><svg class="i"><use href="#cp"/></svg>Copy</button></div><p class="note">Add -a to skip air blocks, or //rotate 90 before pasting.</p></div>
+</div></div></section>
 
-<section id="install" style="padding-top:10px">
-  <div class="wrap install">
-    <div class="rv">
-      <h2>Install a schematic in minutes.</h2>
-      <p class="intro">Three steps from your download to a finished build in your world.</p>
-      <div class="tabs" role="tablist" aria-label="Install steps">
-        <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1"><span>1</span>Download your file</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1"><span>2</span>Add it to your server</button>
-        <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3" tabindex="-1"><span>3</span>Paste it in game</button>
-      </div>
-    </div>
-    <div class="rv" style="--d:.1s">
-      <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
-        <h3>Download your file</h3>
-        <p>After checkout, open your delivery from the Tebex confirmation. You'll get the schematic file for your build, usually a <code>.schem</code> file.</p>
-        <p class="note">Check each product page for the file format and supported Minecraft versions before you buy.</p>
-      </div>
-      <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
-        <h3>Add it to your server</h3>
-        <p>Upload the file to your schematics folder, then restart or reload WorldEdit.</p>
-        <div class="codebox"><code>plugins/WorldEdit/schematics/</code><button class="copy" data-copy="plugins/WorldEdit/schematics/"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
-        <p class="note">Using FastAsyncWorldEdit? The folder is <code>plugins/FastAsyncWorldEdit/schematics/</code>.</p>
-      </div>
-      <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
-        <h3>Paste it in game</h3>
-        <p>Load the schematic, stand where you want it, then paste.</p>
-        <div class="codebox"><code>//schem load your_build</code><button class="copy" data-copy="//schem load your_build"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
-        <div class="codebox"><code>//paste</code><button class="copy" data-copy="//paste"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
-        <p class="note">Add <code>-a</code> to skip air blocks, or run <code>//rotate 90</code> before pasting to turn the build.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="about" style="padding-top:10px"><div class="wrap about">
+<div class="rv"><h2>About Mythical Network</h2><p>Mythical Network is a Minecraft community and creative studio founded by Chethan. Mythical Studios is its store: the place where our builds, bundles, ranks and development work are shared with other server owners.</p><p>We make resources we would want on our own servers: clean, ready to use and carefully finished.</p><div class="row"><a class="btn" href="#team">Meet the team</a></div></div>
+<div class="vals rv"><div class="val"><b>Quality first</b><p>Every build is checked before it is listed.</p></div><div class="val"><b>Server-ready</b><p>Made for live servers, not screenshots.</p></div><div class="val"><b>Community</b><p>Built with feedback from real server owners.</p></div><div class="val"><b>Custom-friendly</b><p>If it is not in the vault, we can make it.</p></div></div>
+</div></section>
 
-<section id="how" style="padding-top:10px">
-  <div class="wrap">
-    <div class="head rv"><h2>From browsing to building in four steps.</h2><p>No complicated marketplace flow. Find a resource, check out and get back to your server.</p></div>
-    <ol class="steps">
-      <li class="rv"><h3>Find a resource</h3><p>Browse the vault and compare what's available for your server.</p></li>
-      <li class="rv" style="--d:.07s"><h3>Preview it</h3><p>Open a product page to see the build, description and details before you buy.</p></li>
-      <li class="rv" style="--d:.14s"><h3>Check out</h3><p>Pay through the connected Tebex storefront, a secure digital checkout.</p></li>
-      <li class="rv" style="--d:.21s"><h3>Install it</h3><p>Download your resource and add it to your server.</p></li>
-    </ol>
-  </div>
-</section>
+<section id="team" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>Meet the team.</h2><p>Select a card to read more about each person.</p></div>
+<div class="team" id="teamGrid"></div>
+</div></section>
 
-<section id="custom" style="padding-top:10px">
-  <div class="wrap">
-    <div class="brief rv">
-      <div class="l">
-        <h2>Have something custom in mind?</h2>
-        <p>Pick what you need, describe your server and we'll copy a ready-made brief for you to send on Discord.</p>
-      </div>
-      <div class="r">
-        <span class="lab">What do you need?</span>
-        <div class="chips" id="picks">
-          <button class="pick" aria-pressed="false">Custom build</button>
-          <button class="pick" aria-pressed="false">Spawn or hub</button>
-          <button class="pick" aria-pressed="false">Custom plugin</button>
-          <button class="pick" aria-pressed="false">Ranks setup</button>
-          <button class="pick" aria-pressed="false">Full server setup</button>
-          <button class="pick" aria-pressed="false">Something else</button>
-        </div>
-        <label class="lab" for="stype">Server type</label>
-        <input class="field" id="stype" placeholder="Survival, Skyblock, Factions, Minigames...">
-        <label class="lab" for="sdesc">Project details</label>
-        <textarea class="field" id="sdesc" placeholder="Style, theme, size, Minecraft version, deadline..."></textarea>
-        <button class="btn primary" id="sendBrief"><svg class="i"><use href="#i-copy"/></svg>Copy brief and open Discord</button>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="faq" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>Questions, answered.</h2></div>
+<div class="faq">
+<details><summary>What do I get when I buy a schematic?</summary><p>A digital file delivered through the store, ready to use on your Minecraft server.</p></details>
+<details><summary>How do I install it?</summary><p>Upload it to your WorldEdit schematics folder, then use //schem load and //paste. See the install guide above.</p></details>
+<details><summary>What is in a bundle?</summary><p>A themed set of builds sold together. Each bundle page lists its exact contents.</p></details>
+<details><summary>How does Custom Dev work?</summary><p>We agree scope and price on Discord, build in stages, test, and deliver install-ready files.</p></details>
+<details><summary>Is checkout secure?</summary><p>Yes. Purchases go through the connected Tebex storefront.</p></details>
+<details><summary>Where do I get support?</summary><p>Join the Mythical Discord and message the team.</p></details>
+</div></div></section>
 
-<section id="faq" style="padding-top:10px">
-  <div class="wrap">
-    <div class="head rv"><h2>Questions, answered.</h2></div>
-    <div class="faq rv">
-      <details><summary>What do I get when I buy a schematic?</summary><p>You receive the digital resource through the store's delivery flow, so you can use it on your Minecraft server.</p></details>
-      <details><summary>How do I install it?</summary><p>Upload the file to your WorldEdit schematics folder, then use <code>//schem load</code> and <code>//paste</code> in game. The install guide above has the full steps.</p></details>
-      <details><summary>Can I request a custom build?</summary><p>Yes. Message Mythical Studios on Discord with your idea, style and requirements. The brief builder above makes that quick.</p></details>
-      <details><summary>Do you offer server development?</summary><p>Yes. Custom development requests can be discussed directly with the Mythical Studios team.</p></details>
-      <details><summary>Is checkout secure?</summary><p>Yes. Purchases go through the connected Tebex storefront.</p></details>
-      <details><summary>Where do I get support?</summary><p>Join the Mythical Studios Discord and send your request to the team.</p></details>
-    </div>
-  </div>
-</section>
-
-<section class="final">
-  <div class="wrap">
-    <div class="box rv">
-      <h2>Your server deserves more than default.</h2>
-      <p>Start with a resource from the vault and build something your players will actually remember.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="/store/categories/schematic/">Open the schematic vault <svg class="i"><use href="#i-arrow"/></svg></a>
-        <a class="btn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Join Discord</a>
-      </div>
-    </div>
-  </div>
-</section>
-
+<section class="final" style="padding-top:10px"><div class="wrap"><div class="box">
+<h2>Your server deserves more than default.</h2><p>Start with a resource from the vault, or tell us what you want made.</p>
+<div class="row"><a class="btn g" href="/store/categories/schematic/">Open the schematic vault</a><a class="btn" href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener">Join Discord</a></div>
+</div></div></section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Mythical Studios</span>
-    <nav aria-label="Footer"><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/development/">Development</a><a href="/store/categories/ranks/">Ranks</a><a href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Discord</a></nav>
-  </div>
-</footer>
+<footer><div class="wrap"><span>© 2026 Mythical Studios · Mythical Network · Founded by Chethan</span><nav><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/bundles/">Bundles</a><a href="/store/categories/ranks/">Ranks</a><a href="/store/categories/custom-dev/">Custom Dev</a><a href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener">Discord</a></nav></div></footer>
 
+<dialog id="dlg" aria-labelledby="dn"><button class="x" id="dx" aria-label="Close">×</button><div class="av" id="da"></div><div class="in"><h3 id="dn"></h3><div class="role" id="dr"></div><p id="db"></p><p id="db2"></p><div class="sk" id="ds"></div></div></dialog>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-/* ============ CONFIG ============ */
-const CONFIG={discord:"https://discord.gg/tzVTqK8Yt"};
-
-/* ============ VOXEL SCENES (no external images needed) ============ */
-const THEMES={
- grass:{top:'#62b04f',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#9aa0aa',roof:'#c8553d',wood:'#7a5a36',plank:'#c9a66b',leaf:'#3f8a3a',accent:'#f4a93b',fluid:'#3d86d1',path:'#b8a279'},
- snow:{top:'#eef5fa',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#aab2bd',roof:'#4f7fc9',wood:'#6e4f31',plank:'#d8c19a',leaf:'#2f6b57',accent:'#f4a93b',fluid:'#6fb3e0',path:'#c9d3dc'},
- sand:{top:'#e3ca8c',side:'#c9ad6c',deep:'#b0955a',under:'#a58f62',stone:'#dccda8',roof:'#2f9e8f',wood:'#8a6a3a',plank:'#e8d6a8',leaf:'#4f9a3e',accent:'#f4a93b',fluid:'#3d86d1',path:'#cdb27a'},
- nether:{top:'#8c3a3a',side:'#6a2a2a',deep:'#4d1f1f',under:'#3d2a2f',stone:'#5a464d',roof:'#7a2a2a',wood:'#4a2f2f',plank:'#6a4040',leaf:'#c2552f',accent:'#ff9a3c',fluid:'#ff6a1a',path:'#5a3a3a'},
- end:{top:'#d9d5a0',side:'#bdb884',deep:'#a09b6c',under:'#8f8a60',stone:'#3a2d55',roof:'#a68af0',wood:'#3a2d55',plank:'#4b3a6e',leaf:'#7e57c2',accent:'#d7b8ff',fluid:'#a68af0',path:'#b8b37a'}
-};
-const LIT='#ffd987',DARK='#232832';
-const GLOW=new Set([LIT,'#f4a93b','#ff9a3c','#d7b8ff','#ff6a1a','#a66cff']);
-
-function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
-function rgb(h){const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
-function shade(h,f){const[r,g,b]=rgb(h);return`rgb(${Math.min(255,r*f|0)},${Math.min(255,g*f|0)},${Math.min(255,b*f|0)})`}
-
-function buildScene(theme,plan,seed,rad){
- const T=THEMES[theme],R=rng(seed),B=new Map(),H={};
- const set=(x,y,z,c)=>B.set(x+','+y+','+z,c);
- const box=(x0,y0,z0,w,d,h,c)=>{for(let x=0;x<w;x++)for(let y=0;y<d;y++)for(let z=0;z<h;z++)set(x0+x,y0+y,z0+z,c)};
- const N=17,C=8,ok=(x,y)=>H[x+','+y]===2;
- for(let x=0;x<N;x++)for(let y=0;y<N;y++){
-  const d=Math.hypot(x-C,y-C),m=rad+.6-d+(R()-.5)*1.6;
-  if(m<=0)continue;
-  const top=m<1.4?1:2;H[x+','+y]=top;
-  for(let z=0;z<=top;z++)set(x,y,z,z===top?T.top:T.side);
-  const depth=Math.floor(m*.85);
-  for(let z=1;z<=depth;z++)set(x,y,-z,z<2?T.side:(R()<.5?T.deep:T.under));
- }
- const tree=(x,y,h=3)=>{if(!ok(x,y))return;for(let i=0;i<h;i++)set(x,y,3+i,T.wood);const zt=3+h-1;
-  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){set(x+a,y+b,zt,T.leaf);set(x+a,y+b,zt+1,T.leaf)}set(x,y,zt+2,T.leaf)};
- const tower=(x,y,h)=>{box(x-1,y-1,3,3,3,h,T.stone);const zt=3+h;
-  box(x-2,y-2,zt,5,5,1,T.roof);box(x-1,y-1,zt+1,3,3,1,T.roof);set(x,y,zt+2,T.roof);set(x,y,zt+3,T.accent);
-  set(x,y+1,zt-2,LIT);set(x+1,y,zt-2,LIT)};
- const house=(x,y,rf)=>{if(!ok(x,y)||!ok(x+3,y+2))return;
-  box(x,y,3,4,3,2,T.plank);box(x-1,y-1,5,6,5,1,rf||T.roof);box(x,y,6,4,3,1,rf||T.roof);box(x+1,y+1,7,2,1,1,rf||T.roof);
-  set(x+1,y+2,3,DARK);set(x+1,y+2,4,DARK);set(x+3,y+1,4,LIT);set(x+2,y+2,4,LIT)};
-
- if(plan==='castle'){
-  box(C-1,C-1,3,3,3,5,T.stone);
-  box(C-2,C-2,8,5,5,1,T.roof);box(C-1,C-1,9,3,3,1,T.roof);set(C,C,10,T.roof);set(C,C,11,T.accent);
-  set(C,C+1,6,LIT);set(C+1,C,6,LIT);set(C,C+1,4,DARK);
-  for(let i=-3;i<=3;i++){box(C+i,C-3,3,1,1,2,T.stone);box(C+i,C+3,3,1,1,2,T.stone);box(C-3,C+i,3,1,1,2,T.stone);box(C+3,C+i,3,1,1,2,T.stone)}
-  set(C,C+3,3,DARK);set(C,C+3,4,DARK);
-  [[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>tower(C+a,C+b,4));
-  for(let y=C+4;y<=C+8;y++)if(ok(C,y))set(C,y,2,T.path);
-  tree(C-6,C+1);tree(C+6,C-1,4);tree(C-5,C-5,3);
- }
- if(plan==='village'){
-  house(C-4,C-1);house(C+1,C-4,T.accent==='#f4a93b'&&theme!=='snow'?'#3d6fb5':T.roof);house(C-2,C+2);
-  box(C+3,C+1,3,2,2,1,T.stone);set(C+3,C+1,4,T.fluid);set(C+4,C+2,4,T.wood);set(C+4,C+2,5,T.wood);
-  for(let x=C-5;x<=C+5;x++)if(ok(x,C+1)&&!B.has(x+','+(C+1)+',3'))set(x,C+1,2,T.path);
-  tree(C+4,C+4);tree(C-5,C-3,4);tree(C+5,C-2);
- }
- if(plan==='hub'){
-  for(let x=0;x<N;x++)for(let y=0;y<N;y++){const d=Math.hypot(x-C,y-C);if(ok(x,y)&&d>3.2&&d<4.5)set(x,y,2,(x+y)%2?T.stone:T.accent)}
-  box(C-1,C-1,3,3,3,1,T.stone);box(C-2,C-2,2,5,5,1,T.stone);
-  for(let z=4;z<=10;z++)set(C,C,z,z<5?T.stone:T.accent);
-  [[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>{if(ok(C+a,C+b)){for(let z=3;z<7;z++)set(C+a,C+b,z,T.stone);set(C+a,C+b,7,T.accent)}});
-  set(C,C+1,3,DARK);
- }
- if(plan==='ruins'){
-  for(let a=1;a<=3;a++)for(let b=1;b<=3;b++)set(C+a,C+b,2,T.fluid);
-  for(let x=C-2;x<=C+1;x++)for(let z=3;z<=7;z++){const edge=x===C-2||x===C+1||z===3||z===7;set(x,C-3,z,edge?'#2a1f3d':'#a66cff')}
-  for(let i=0;i<6;i++){const a=Math.round(R()*6-3),b=Math.round(R()*6-3),h=2+Math.floor(R()*4);
-   if(ok(C+a,C+b)&&!B.has((C+a)+','+(C+b)+',3')){for(let z=3;z<3+h;z++)set(C+a,C+b,z,T.stone);if(R()<.6)set(C+a,C+b,3+h,T.accent)}}
- }
- if(plan==='sky'){
-  tree(C,C-1,4);set(C+1,C+1,3,'#b5833a');set(C+2,C,3,'#e84a5f');set(C-2,C+1,3,'#f2d14b');set(C-1,C+2,3,'#e84a5f');
-  for(let y=C+1;y<=C+3;y++)if(ok(C,y)&&!B.has(C+','+y+',3'))set(C,y,2,T.path);
- }
- return B;
-}
-
-const STORE=new Map();
-function render(cv){
- const B=STORE.get(cv);if(!B)return;
- const dpr=Math.min(window.devicePixelRatio||1,2),W=cv.clientWidth,Ht=cv.clientHeight;
- if(!W||!Ht)return;
- cv.width=W*dpr;cv.height=Ht*dpr;
- const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,Ht);
- const list=[];let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
- B.forEach((c,k)=>{const[x,y,z]=k.split(',').map(Number);list.push([x,y,z,c]);
-  const px=x-y,py=(x+y)/2-(z+1);x0=Math.min(x0,px-1);x1=Math.max(x1,px+1);y0=Math.min(y0,py);y1=Math.max(y1,py+2)});
- const pad=8,s=Math.min((W-pad*2)/(x1-x0),(Ht-pad*2)/(y1-y0));
- const offX=(W-(x1-x0)*s)/2-x0*s,offY=(Ht-(y1-y0)*s)/2-y0*s;
- list.sort((a,b)=>(a[0]+a[1]+a[2])-(b[0]+b[1]+b[2])||a[2]-b[2]);
- g.lineJoin='round';g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=Math.max(.5,s*.05);
- const poly=(p,f)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=f;g.fill();g.stroke()};
- for(const[x,y,z,c]of list){
-  const j=.94+((((x*73856093)^(y*19349663)^(z*83492791))>>>0)%100)/100*.12,gl=GLOW.has(c);
-  const ox=offX+(x-y)*s,oy=offY+((x+y)/2-(z+1))*s;
-  if(!B.has(x+','+y+','+(z+1)))poly([ox,oy,ox+s,oy+s/2,ox,oy+s,ox-s,oy+s/2],shade(c,(gl?1.05:1.1)*j));
-  if(!B.has(x+','+(y+1)+','+z))poly([ox-s,oy+s/2,ox,oy+s,ox,oy+2*s,ox-s,oy+1.5*s],shade(c,(gl?1:.78)*j));
-  if(!B.has((x+1)+','+y+','+z))poly([ox,oy+s,ox+s,oy+s/2,ox+s,oy+1.5*s,ox,oy+2*s],shade(c,(gl?.92:.58)*j));
- }
-}
-function initCanvas(cv){
- const[plan,theme,seed,rad]=cv.dataset.scene.split(':');
- STORE.set(cv,buildScene(theme,plan,+seed,+rad));
- render(cv);
-}
-const canvases=[...document.querySelectorAll('canvas[data-scene]')];
+const DISCORD="https://discord.gg/T4zyGz5EV";
+/* EDIT TEAM HERE */
+const TEAM=[
+{n:"Chethan",r:"Founder",a:"C",s:["Leadership","Building","Server design"],b:"Chethan founded Mythical Network and Mythical Studios with one goal: give Minecraft server owners resources that look great and work properly. He leads the vision, the build quality and the direction of the store.",b2:"When he is not planning the next release, he is working with the community to decide what gets built next."},
+{n:"Vijay",r:"Co-Owner",a:"V",s:["Co-ownership","Operations","Community"],b:"Vijay is co-owner of Mythical Network and helps run the studio day to day. He looks after operations, store quality and keeping the community supported.",b2:"He works closely with Chethan on partnerships, planning and making sure every customer gets a smooth experience."},
+{n:"Join us",r:"We are growing",a:"+",s:["Builders","Developers","Support"],b:"Mythical Network is looking for talented builders, developers and community helpers.",b2:"Join our Discord and tell us what you can do."}
+];
+/* YOUR PRODUCTS: [name, category, tag, description, scene, price, tebexPackageId]
+   To use real screenshots, paste an image URL for that package id in IMG below. */
+const PKG=id=>"https://store.mythicalstudios.online/package/"+id;
+const IMG={/* 7721430:"https://your-image-url.png", */};
+const P=[
+["Starter Base Village","Towns & Villages","Village","A compact village to start any survival server",
+"village:grass:4:8",2.99,7721430],
+["Nether Fortress Base","Bases","Base","A dark fortress base built for the Nether look",
+"castle:nether:5:8",6.49,7721460],
+["Ocean Monument Base","Bases","Base","An underwater-style monument base with columns",
+"temple:ocean:3:8",5.99,7721459],
+["Giant Treehouse Base","Bases","Base","A huge treehouse base high above the ground",
+"treehouse:grass:6:8",4.49,7721442],
+["Underground Bunker","Bases","Base","A hidden bunker base with a surface hatch",
+"bunker:cave:5:8",4.49,7721441],
+["Japanese Survival Village","Towns & Villages","Village","A sakura-style village for survival and roleplay",
+"village:sakura:8:8",5.49,7721438],
+["Mountain Kingdom","Spawns & Lobbies","Spawn","A kingdom on a snowy mountain, ideal as a spawn",
+"castle:snow:3:8",5.99,7721437],
+["Automatic Farm District","Towns & Villages","Farms","A farm district laid out for automatic farming",
+"farm:grass:7:8",4.49,7721436],
+["Survival Trading Hall","Towns & Villages","Trading","A trading hall with stalls for survival servers",
+"market:grass:5:8",3.99,7721434],
+["Medieval Town","Towns & Villages","Town","A full medieval town with streets and houses",
+"village:grass:12:8",5.49,7721431],
+["Fantasy Kingdom Spawn","Spawns & Lobbies","Spawn","A magical fantasy kingdom spawn",
+"castle:end:11:8",5.99,7721409],
+["Desert Pharaoh","Themed","Desert","An ancient desert pyramid for adventure servers",
+"pyramid:sand:2:8",5.49,7721428],
+["Sakura Islands","Themed","Islands","Floating cherry blossom islands",
+"sky:sakura:9:5.6",4.99,7721427],
+["Dwarven Mines BedWars","Bedwars","BedWars","A mine-themed BedWars map",
+"bw:cave:4:8",5.99,7721426],
+["Void Abyss","Themed","Void","A dark void-themed build for events and maps",
+"sky:void:3:5.6",6.49,7721425],
+["CandyLand BedWars","Bedwars","BedWars","A sweet, colourful BedWars map",
+"bw:candy:6:8",5.99,7721423],
+["Olympus Temple Spawn","Spawns & Lobbies","Spawn","A marble temple spawn in the clouds",
+"temple:marble:2:8",6.99,7721419],
+["Sky Islands Lobby","Spawns & Lobbies","Lobby","A sky island lobby for game modes",
+"hub:grass:2:7",5.49,7721418],
+["Merchant Marketplace","Towns & Villages","Market","A busy marketplace with trading stalls",
+"market:sand:9:8",3.99,7721411],
+["Roman Colosseum","Themed","Arena","A Roman colosseum arena for PvP and events",
+"ring:sand:3:8",4.99,7721410]];
+const T={
+ocean:{top:'#3aa6b5',side:'#2b7f8f',deep:'#1f5f73',under:'#2a4d62',stone:'#4fb8a8',roof:'#2c9a95',wood:'#2f5f6e',plank:'#6fd0c4',leaf:'#2fa98c',accent:'#ffd987',fluid:'#2b6fd1',path:'#7fd0c8'},
+sakura:{top:'#6fb85a',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#c9c4cc',roof:'#b3363f',wood:'#6a3f2a',plank:'#e3cfa6',leaf:'#f2a4c6',accent:'#f4a93b',fluid:'#3d86d1',path:'#d9c9b0'},
+candy:{top:'#f7a8d4',side:'#e86fae',deep:'#c9559a',under:'#a8468a',stone:'#fbe6f2',roof:'#e84a5f',wood:'#b5733a',plank:'#fff0c9',leaf:'#7fe0c2',accent:'#fff17a',fluid:'#8fd3ff',path:'#ffe0a8'},
+void:{top:'#3a3350',side:'#2a2540',deep:'#1d1a30',under:'#161426',stone:'#4b4568',roof:'#6a4bd1',wood:'#2f2a47',plank:'#51497a',leaf:'#7e57c2',accent:'#d7b8ff',fluid:'#a68af0',path:'#5a5280'},
+cave:{top:'#7b7f88',side:'#5f636b',deep:'#4a4d55',under:'#3b3d44',stone:'#9aa0aa',roof:'#8a5a2b',wood:'#6a4a2a',plank:'#a8845a',leaf:'#4f6f5a',accent:'#fbbf24',fluid:'#ff6a1a',path:'#8d9099'},
+marble:{top:'#f2f0ea',side:'#d8d4c8',deep:'#bdb8a8',under:'#9a9588',stone:'#f6f3ea',roof:'#e6c25a',wood:'#bfae80',plank:'#efe7d0',leaf:'#6fb85a',accent:'#fbbf24',fluid:'#6fb3e0',path:'#e3dccb'},
+grass:{top:'#62b04f',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#9aa0aa',roof:'#c8553d',wood:'#7a5a36',plank:'#c9a66b',leaf:'#3f8a3a',accent:'#f4a93b',fluid:'#3d86d1',path:'#b8a279'},
+snow:{top:'#eef5fa',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#aab2bd',roof:'#4f7fc9',wood:'#6e4f31',plank:'#d8c19a',leaf:'#2f6b57',accent:'#f4a93b',fluid:'#6fb3e0',path:'#c9d3dc'},
+sand:{top:'#e3ca8c',side:'#c9ad6c',deep:'#b0955a',under:'#a58f62',stone:'#dccda8',roof:'#2f9e8f',wood:'#8a6a3a',plank:'#e8d6a8',leaf:'#4f9a3e',accent:'#f4a93b',fluid:'#3d86d1',path:'#cdb27a'},
+nether:{top:'#8c3a3a',side:'#6a2a2a',deep:'#4d1f1f',under:'#3d2a2f',stone:'#5a464d',roof:'#7a2a2a',wood:'#4a2f2f',plank:'#6a4040',leaf:'#c2552f',accent:'#ff9a3c',fluid:'#ff6a1a',path:'#5a3a3a'},
+end:{top:'#d9d5a0',side:'#bdb884',deep:'#a09b6c',under:'#8f8a60',stone:'#3a2d55',roof:'#a68af0',wood:'#3a2d55',plank:'#4b3a6e',leaf:'#7e57c2',accent:'#d7b8ff',fluid:'#a68af0',path:'#b8b37a'}};
+const LIT='#ffd987',DK='#232832',GL=new Set([LIT,'#f4a93b','#ff9a3c','#d7b8ff','#ff6a1a','#a66cff']);
+const rng=s=>{s>>>=0;return()=>(s=(s*1664525+1013904223)>>>0)/4294967296};
+const rgb=h=>{const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]};
+const shade=(h,f)=>{const[r,g,b]=rgb(h);return`rgb(${Math.min(255,r*f|0)},${Math.min(255,g*f|0)},${Math.min(255,b*f|0)})`};
+function scene(th,plan,seed,rad){
+const t=T[th],R=rng(seed),B=new Map(),H={},set=(x,y,z,c)=>B.set(x+','+y+','+z,c);
+const box=(x0,y0,z0,w,d,h,c)=>{for(let x=0;x<w;x++)for(let y=0;y<d;y++)for(let z=0;z<h;z++)set(x0+x,y0+y,z0+z,c)};
+const N=17,C=8,ok=(x,y)=>H[x+','+y]===2;
+for(let x=0;x<N;x++)for(let y=0;y<N;y++){const m=rad+.6-Math.hypot(x-C,y-C)+(R()-.5)*1.6;if(m<=0)continue;const top=m<1.4?1:2;H[x+','+y]=top;
+for(let z=0;z<=top;z++)set(x,y,z,z===top?t.top:t.side);const dp=Math.floor(m*.85);for(let z=1;z<=dp;z++)set(x,y,-z,z<2?t.side:(R()<.5?t.deep:t.under))}
+const tree=(x,y,h=3)=>{if(!ok(x,y))return;for(let i=0;i<h;i++)set(x,y,3+i,t.wood);const z=3+h-1;for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){set(x+a,y+b,z,t.leaf);set(x+a,y+b,z+1,t.leaf)}set(x,y,z+2,t.leaf)};
+const tower=(x,y,h)=>{box(x-1,y-1,3,3,3,h,t.stone);const z=3+h;box(x-2,y-2,z,5,5,1,t.roof);box(x-1,y-1,z+1,3,3,1,t.roof);set(x,y,z+2,t.roof);set(x,y,z+3,t.accent);set(x,y+1,z-2,LIT);set(x+1,y,z-2,LIT)};
+const house=(x,y,rf)=>{if(!ok(x,y)||!ok(x+3,y+2))return;box(x,y,3,4,3,2,t.plank);box(x-1,y-1,5,6,5,1,rf||t.roof);box(x,y,6,4,3,1,rf||t.roof);box(x+1,y+1,7,2,1,1,rf||t.roof);set(x+1,y+2,3,DK);set(x+1,y+2,4,DK);set(x+3,y+1,4,LIT);set(x+2,y+2,4,LIT)};
+if(plan==='castle'){box(C-1,C-1,3,3,3,5,t.stone);box(C-2,C-2,8,5,5,1,t.roof);box(C-1,C-1,9,3,3,1,t.roof);set(C,C,10,t.roof);set(C,C,11,t.accent);set(C,C+1,6,LIT);set(C+1,C,6,LIT);set(C,C+1,4,DK);
+for(let i=-3;i<=3;i++){box(C+i,C-3,3,1,1,2,t.stone);box(C+i,C+3,3,1,1,2,t.stone);box(C-3,C+i,3,1,1,2,t.stone);box(C+3,C+i,3,1,1,2,t.stone)}
+set(C,C+3,3,DK);set(C,C+3,4,DK);[[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>tower(C+a,C+b,4));for(let y=C+4;y<=C+8;y++)if(ok(C,y))set(C,y,2,t.path);tree(C-6,C+1);tree(C+6,C-1,4);tree(C-5,C-5)}
+if(plan==='village'){house(C-4,C-1);house(C+1,C-4,th!=='snow'?'#3d6fb5':t.roof);house(C-2,C+2);box(C+3,C+1,3,2,2,1,t.stone);set(C+3,C+1,4,t.fluid);set(C+4,C+2,4,t.wood);set(C+4,C+2,5,t.wood);
+for(let x=C-5;x<=C+5;x++)if(ok(x,C+1)&&!B.has(x+','+(C+1)+',3'))set(x,C+1,2,t.path);tree(C+4,C+4);tree(C-5,C-3,4);tree(C+5,C-2)}
+if(plan==='hub'){for(let x=0;x<N;x++)for(let y=0;y<N;y++){const d=Math.hypot(x-C,y-C);if(ok(x,y)&&d>3.2&&d<4.5)set(x,y,2,(x+y)%2?t.stone:t.accent)}
+box(C-1,C-1,3,3,3,1,t.stone);box(C-2,C-2,2,5,5,1,t.stone);for(let z=4;z<=10;z++)set(C,C,z,z<5?t.stone:t.accent);
+[[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>{if(ok(C+a,C+b)){for(let z=3;z<7;z++)set(C+a,C+b,z,t.stone);set(C+a,C+b,7,t.accent)}});set(C,C+1,3,DK)}
+if(plan==='ruins'){for(let a=1;a<=3;a++)for(let b=1;b<=3;b++)set(C+a,C+b,2,t.fluid);
+for(let x=C-2;x<=C+1;x++)for(let z=3;z<=7;z++){const e=x===C-2||x===C+1||z===3||z===7;set(x,C-3,z,e?'#2a1f3d':'#a66cff')}
+for(let i=0;i<6;i++){const a=Math.round(R()*6-3),b=Math.round(R()*6-3),h=2+Math.floor(R()*4);if(ok(C+a,C+b)&&!B.has((C+a)+','+(C+b)+',3')){for(let z=3;z<3+h;z++)set(C+a,C+b,z,t.stone);if(R()<.6)set(C+a,C+b,3+h,t.accent)}}}
+if(plan==='sky'){tree(C,C-1,4);set(C+1,C+1,3,'#b5833a');set(C+2,C,3,'#e84a5f');set(C-2,C+1,3,'#f2d14b');set(C-1,C+2,3,'#e84a5f');for(let y=C+1;y<=C+3;y++)if(ok(C,y)&&!B.has(C+','+y+',3'))set(C,y,2,t.path)}
+if(plan==='temple'){box(C-4,C-4,3,9,9,1,t.stone);for(let i=-3;i<=3;i+=2){[[i,-3],[i,3],[-3,i],[3,i]].forEach(([a,b])=>{for(let z=4;z<=7;z++)set(C+a,C+b,z,t.stone)})}
+box(C-4,C-4,8,9,9,1,t.roof);box(C-2,C-2,9,5,5,1,t.roof);set(C,C,10,t.accent);set(C,C,4,LIT);set(C,C,5,LIT)}
+if(plan==='treehouse'){for(let z=3;z<=9;z++)box(C-1,C-1,z,3,3,1,t.wood);box(C-3,C-3,10,7,7,1,t.plank);box(C-1,C-1,11,3,3,2,t.plank);set(C,C+1,12,LIT);set(C+1,C,12,LIT);box(C-2,C-2,13,5,5,1,t.roof);box(C-1,C-1,14,3,3,1,t.roof);
+for(let a=-5;a<=5;a++)for(let b=-5;b<=5;b++)if(Math.hypot(a,b)>3.4&&Math.hypot(a,b)<5&&R()<.8){set(C+a,C+b,12,t.leaf);set(C+a,C+b,13,t.leaf)}
+for(let z=3;z<10;z++)set(C,C-2,z,t.plank)}
+if(plan==='bunker'){box(C-3,C-3,3,7,7,1,t.stone);box(C-1,C-1,4,3,3,1,t.stone);set(C,C,4,DK);set(C-3,C-3,4,LIT);set(C+3,C+3,4,LIT);set(C-3,C+3,4,LIT);set(C+3,C-3,4,LIT);set(C+2,C-2,5,t.accent);tree(C-5,C+1);tree(C+5,C-1,4)}
+if(plan==='farm'){for(let x=C-5;x<=C+4;x++)for(let y=C-5;y<=C+4;y++){if(!ok(x,y))continue;if((x-C)%3===0)set(x,y,2,t.fluid);else set(x,y,3,(x+y)%5===0?'#e0a93a':'#d9b341')}
+box(C+3,C+3,3,2,2,4,t.plank);box(C+3,C+3,7,2,2,1,t.roof);set(C+3,C+3,4,DK);set(C+4,C+3,6,LIT)}
+if(plan==='market'){for(let i=0;i<3;i++){const x=C-5+i*4;box(x,C-1,3,3,2,1,t.plank);[[0,0],[2,0],[0,1],[2,1]].forEach(([a,b])=>{set(x+a,C-1+b,4,t.wood);set(x+a,C-1+b,5,t.wood)});box(x-1,C-2,6,5,4,1,i%2?t.roof:t.accent);set(x+1,C,4,'#e84a5f')}
+for(let x=C-6;x<=C+6;x++)if(ok(x,C+2))set(x,C+2,2,t.path);set(C+5,C+4,3,t.fluid);tree(C+5,C-4)}
+if(plan==='pyramid'){for(let l=0;l<5;l++)box(C-4+l,C-4+l,3+l,9-2*l,9-2*l,1,l%2?t.accent:t.stone);set(C,C,8,t.accent);set(C,C-4,4,DK);set(C,C-4,3,DK);tree(C+6,C+1,4);tree(C-6,C+3)}
+if(plan==='ring'){for(let x=0;x<N;x++)for(let y=0;y<N;y++){const d=Math.hypot(x-C,y-C);if(!ok(x,y))continue;if(d>3.6&&d<5){for(let z=3;z<=5;z++)set(x,y,z,t.stone);if((x+y)%2===0)set(x,y,6,t.stone);if(x===C&&y<C)set(x,y,4,DK)}else if(d<=3.6)set(x,y,2,t.path)}
+set(C,C,3,t.accent);set(C-1,C,3,t.accent)}
+if(plan==='bw'){box(C-1,C-1,3,3,3,1,t.accent);[[-4,0,'#e84a5f'],[4,0,'#3d86d1'],[0,-4,'#3fb36b'],[0,4,'#f2d14b']].forEach(([a,b,c])=>{box(C+a-1,C+b-1,3,3,3,1,t.stone);set(C+a,C+b,4,c);set(C+a+(a?Math.sign(a):1),C+b,4,t.wood);for(let k=1;k<=3;k++)set(C+Math.round(a*k/4)*1,C+Math.round(b*k/4),3,t.path)})}
+return B}
+const ST=new Map();
+function render(cv){const B=ST.get(cv);if(!B)return;const dpr=Math.min(devicePixelRatio||1,2),W=cv.clientWidth,Hh=cv.clientHeight;if(!W||!Hh)return;
+cv.width=W*dpr;cv.height=Hh*dpr;const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,Hh);
+const L=[];let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+B.forEach((c,k)=>{const[x,y,z]=k.split(',').map(Number);L.push([x,y,z,c]);const px=x-y,py=(x+y)/2-(z+1);x0=Math.min(x0,px-1);x1=Math.max(x1,px+1);y0=Math.min(y0,py);y1=Math.max(y1,py+2)});
+const pad=8,s=Math.min((W-pad*2)/(x1-x0),(Hh-pad*2)/(y1-y0)),oX=(W-(x1-x0)*s)/2-x0*s,oY=(Hh-(y1-y0)*s)/2-y0*s;
+L.sort((a,b)=>(a[0]+a[1]+a[2])-(b[0]+b[1]+b[2])||a[2]-b[2]);g.lineJoin='round';g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=Math.max(.5,s*.05);
+const poly=(p,f)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=f;g.fill();g.stroke()};
+for(const[x,y,z,c]of L){const j=.94+((((x*73856093)^(y*19349663)^(z*83492791))>>>0)%100)/100*.12,gl=GL.has(c),ox=oX+(x-y)*s,oy=oY+((x+y)/2-(z+1))*s;
+if(!B.has(x+','+y+','+(z+1)))poly([ox,oy,ox+s,oy+s/2,ox,oy+s,ox-s,oy+s/2],shade(c,(gl?1.05:1.1)*j));
+if(!B.has(x+','+(y+1)+','+z))poly([ox-s,oy+s/2,ox,oy+s,ox,oy+2*s,ox-s,oy+1.5*s],shade(c,(gl?1:.78)*j));
+if(!B.has((x+1)+','+y+','+z))poly([ox,oy+s,ox+s,oy+s/2,ox+s,oy+1.5*s,ox,oy+2*s],shade(c,(gl?.92:.58)*j))}}
 const ready=new Set();
-const cio='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!ready.has(e.target)){ready.add(e.target);initCanvas(e.target);cio.unobserve(e.target)}}),{rootMargin:'300px'}):null;
-canvases.forEach(c=>cio?cio.observe(c):(ready.add(c),initCanvas(c)));
+const watch=()=>document.querySelectorAll('canvas[data-scene]').forEach(cv=>{if(ready.has(cv))return;const[p,th,sd,r]=cv.dataset.scene.split(':');ST.set(cv,scene(th,p,+sd,+r));ready.add(cv);render(cv)});
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ready.forEach(render),150)});
 
-/* ============ UI ============ */
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)};
-const copyText=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}a.remove();return ok}};
+const copyText=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let k=false;try{k=document.execCommand('copy')}catch(_){}a.remove();return k}};
 
-/* progress bar */
-const bar=$('#progress');
-addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100||0)+'%'},{passive:true});
+/* vault */
+const types=['All',...new Set(P.map(p=>p[1]))];let ft='All';const favs=new Set();
+$('#filters').innerHTML=types.map(t=>`<button class="pill" aria-pressed="${t==='All'}" data-t="${t}">${t}</button>`).join('');
+function drawVault(){const q=$('#q').value.toLowerCase().trim(),so=$('#sort').value;let list=P.filter(p=>(ft==='All'||p[1]===ft)&&(p[0]+p[2]+p[3]).toLowerCase().includes(q));
+if(so==='l')list=[...list].sort((a,b)=>a[5]-b[5]);if(so==='h')list=[...list].sort((a,b)=>b[5]-a[5]);
+$('#vault').innerHTML=list.map(p=>`<article class="card"><div class="art"><canvas data-scene="${p[4]}" role="img" aria-label="${p[0]} preview"></canvas>${IMG[p[6]]?`<img src="${IMG[p[6]]}" alt="${p[0]}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`:''}<span class="tagc">${p[2]}</span><button class="heart" aria-pressed="${favs.has(p[0])}" aria-label="Save ${p[0]}" data-n="${p[0]}"><svg class="i"><use href="#hr"/></svg></button></div><div class="meta"><h3>${p[0]}</h3><p>${p[3]}</p><div class="foot"><b style="font:800 20px var(--d);color:var(--text)">$${p[5].toFixed(2)}</b><a class="btn g sm" href="${PKG(p[6])}">Buy now</a></div></div></article>`).join('');
+$('#empty').style.display=list.length?'none':'block';watch()}
+$('#filters').addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b)return;ft=b.dataset.t;$$('#filters .pill').forEach(x=>x.setAttribute('aria-pressed',x===b));drawVault()});
+$('#q').addEventListener('input',drawVault);$('#sort').addEventListener('change',drawVault);
+$('#vault').addEventListener('click',e=>{const h=e.target.closest('.heart');if(!h)return;const n=h.dataset.n;favs.has(n)?favs.delete(n):favs.add(n);h.setAttribute('aria-pressed',favs.has(n));toast(favs.has(n)?'Saved: '+n:'Removed: '+n)});
+drawVault();
 
-/* mobile menu */
-const burger=$('#burger'),links=$('#links');
-burger.addEventListener('click',()=>{const o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
-links.addEventListener('click',e=>{if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+/* team */
+$('#teamGrid').innerHTML=TEAM.map((m,i)=>`<button class="tm rv" data-i="${i}" aria-label="Read about ${m.n}"><div class="av">${m.a}</div><div class="t"><h3>${m.n}</h3><small>${m.r}</small><span>Select to read more</span></div></button>`).join('');
+const dlg=$('#dlg');
+$('#teamGrid').addEventListener('click',e=>{const b=e.target.closest('.tm');if(!b)return;const m=TEAM[b.dataset.i];
+$('#da').textContent=m.a;$('#da').style.background=getComputedStyle(b.querySelector('.av')).background;$('#dn').textContent=m.n;$('#dr').textContent=m.r;$('#db').textContent=m.b;$('#db2').textContent=m.b2;
+$('#ds').innerHTML=m.s.map(s=>`<span class="pill">${s}</span>`).join('');dlg.showModal()});
+$('#dx').onclick=()=>dlg.close();dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
 
-/* scrollspy */
-const spy=$$('.links a');
-if('IntersectionObserver' in window){
- const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)spy.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
- ['categories','builds','why','install','custom','faq'].forEach(id=>{const el=document.getElementById(id);el&&so.observe(el)});
-}
+/* brief */
+['Custom build','Spawn or hub','Custom plugin','Ranks setup','Full server setup','Something else'].forEach(t=>{const b=document.createElement('button');b.className='pill';b.setAttribute('aria-pressed','false');b.textContent=t;b.onclick=()=>b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');$('#picks').appendChild(b)});
+$('#send').onclick=async()=>{const n=$$('#picks .pill[aria-pressed=true]').map(p=>p.textContent);
+const msg=["Hi Mythical Studios! I'd like to start a project.","",'What I need: '+(n.join(', ')||'Not sure yet'),'Server type: '+($('#st1').value.trim()||'Not specified'),'Details: '+($('#sd').value.trim()||'Not specified')].join('\n');
+const k=await copyText(msg);toast(k?'Brief copied. Paste it in Discord.':'Opening Discord. Please write your brief there.');setTimeout(()=>open(DISCORD,'_blank','noopener'),700)};
 
-/* reveal */
-const rv=$$('.rv');
-if('IntersectionObserver' in window){
- const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.12});
- rv.forEach(el=>ro.observe(el));
-}else rv.forEach(el=>el.classList.add('in'));
-
-/* count up */
-const cn=$('[data-count]');
-if(cn&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
- const target=+cn.dataset.count;cn.textContent='0';
- new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200);cn.textContent=Math.round(target*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}})).observe(cn);
-}
-
-/* tabs */
-const tabs=$$('.tab');
-function selectTab(i){tabs.forEach((t,k)=>{const on=k===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
-tabs.forEach((t,i)=>{t.addEventListener('click',()=>selectTab(i));t.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();selectTab((i+1)%3);tabs[(i+1)%3].focus()}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();selectTab((i+2)%3);tabs[(i+2)%3].focus()}})});
-
-/* copy buttons */
-$$('.copy').forEach(b=>b.addEventListener('click',async()=>{
- const ok=await copyText(b.dataset.copy),orig=b.innerHTML;
- b.innerHTML='<svg class="i"><use href="#i-check"/></svg>'+(ok?'Copied':'Press Ctrl+C');
- setTimeout(()=>b.innerHTML=orig,1600);
-}));
-
-/* brief builder */
-$$('.pick').forEach(p=>p.addEventListener('click',()=>p.setAttribute('aria-pressed',p.getAttribute('aria-pressed')!=='true')));
-$('#sendBrief').addEventListener('click',async()=>{
- const needs=$$('.pick[aria-pressed=true]').map(p=>p.textContent);
- const msg=['Hi Mythical Studios! I\'d like to start a project.','',
-  'What I need: '+(needs.length?needs.join(', '):'Not sure yet'),
-  'Server type: '+($('#stype').value.trim()||'Not specified'),
-  'Details: '+($('#sdesc').value.trim()||'Not specified')].join('\n');
- const ok=await copyText(msg);
- toast(ok?'Brief copied. Paste it in Discord.':'Opening Discord. Please write your brief there.');
- setTimeout(()=>window.open(CONFIG.discord,'_blank','noopener'),700);
-});
-</script>
-</body>
-</html>
+/* nav, tabs, copy, reveal */
+$('#burger').onclick=()=>{const o=$('#links').classList.toggle('open');$('#burger').setAttribute('aria-expanded',o)};
+$('#links').onclick=e=>{if(e.target.tagName==='A')$('#links').classList.remove('open')};
+const tabs=$$('.tab');const sel=i=>tabs.forEach((t,k)=>{const on=k===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$('#'+t.getAttribute('aria-controls')).hidden=!on});
+tabs.forEach((t,i)=>t.onclick=()=>sel(i));
+$$('.copy').forEach(b=>b.onclick=async()=>{const k=await copyText(b.dataset.copy),o=b.innerHTML;b.innerHTML='<svg class="i"><use href="#ok"/></svg>'+(k?'Copied':'Press Ctrl+C');setTimeout(()=>b.innerHTML=o,1600)});
+watch();
+</script></body></html>
