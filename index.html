@@ -3,195 +3,674 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Mythical Studios — premium Minecraft schematics, server resources and development.">
-<title>Mythical Studios — Minecraft Resources</title>
+<meta name="description" content="Mythical Studios: premium Minecraft schematics, server resources and custom development.">
+<title>Mythical Studios | Minecraft Schematics & Server Resources</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
 <style>
-:root{--bg:#060609;--panel:#0b0b10;--panel2:#101016;--line:#ffffff12;--line2:#ffffff1c;--text:#f7f7fb;--muted:#94919f;--soft:#c3bfcc;--purple:#8b5cf6;--cyan:#22d3ee;--pink:#ec4899;--max:1240px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.055;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(#000,transparent 72%)}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+:root{
+  --bg:#12151a;--bg2:#171b21;--panel:#1b2027;--panel2:#232933;--line:#2d343f;--line2:#3b4452;
+  --text:#eef0f4;--muted:#9ba3b2;--torch:#f4a93b;--torch-ink:#1d1305;--amethyst:#a68af0;
+  --max:1200px;--display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --notch:polygon(0 12px,12px 12px,12px 0,calc(100% - 12px) 0,calc(100% - 12px) 12px,100% 12px,100% calc(100% - 12px),calc(100% - 12px) calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,12px calc(100% - 12px),0 calc(100% - 12px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:3px solid var(--torch);outline-offset:3px;border-radius:6px}
+.wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+canvas{display:block;width:100%;height:100%}
+
+/* progress bar */
+.progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--torch);z-index:100}
 
 /* NAV */
-.nav{position:sticky;top:0;z-index:100;background:#060609d9;backdrop-filter:blur(24px);border-bottom:1px solid var(--line)}.navin{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:11px;font-weight:950;letter-spacing:.13em;text-transform:uppercase}.mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--cyan));color:#050507;font-weight:1000;box-shadow:0 10px 35px #8b5cf633}.navlinks{display:flex;gap:28px;color:#85818e;font-size:10px;font-weight:850}.navlinks a:hover{color:#fff}.navcta{padding:10px 14px;border:1px solid #8b5cf655;border-radius:10px;background:#8b5cf610;font-size:10px;font-weight:950}
+.nav{position:sticky;top:0;z-index:60;background:rgba(18,21,26,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--display);font-weight:700;font-size:18px}
+.mark{width:34px;height:34px;display:grid;place-items:center;background:var(--torch);color:var(--torch-ink);font-weight:800;clip-path:polygon(0 6px,6px 6px,6px 0,calc(100% - 6px) 0,calc(100% - 6px) 6px,100% 6px,100% calc(100% - 6px),calc(100% - 6px) calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,6px calc(100% - 6px),0 calc(100% - 6px))}
+.links{display:flex;gap:6px;font-size:15px;font-weight:600}
+.links a{padding:8px 14px;border-radius:8px;color:var(--muted);transition:color .2s,background .2s}
+.links a:hover{color:var(--text)}
+.links a.on{color:var(--text);background:var(--panel2)}
+.navr{display:flex;gap:10px;align-items:center}
+.burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--panel);place-items:center;cursor:pointer}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;font-weight:700;font-size:15px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);color:var(--text);cursor:pointer;transition:background .2s,border-color .2s,transform .2s var(--ease)}
+.btn:hover{background:var(--panel2);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--torch);color:var(--torch-ink);border-color:var(--torch)}
+.btn.primary:hover{background:#ffbd5a;border-color:#ffbd5a}
+.btn.sm{min-height:40px;padding:0 16px;font-size:14px}
+.btn .i{width:18px;height:18px}
 
 /* HERO */
-.hero{padding:74px 0 42px;text-align:center;position:relative}.hero:before{content:"";position:absolute;width:620px;height:380px;left:50%;top:20px;transform:translateX(-50%);background:radial-gradient(circle,#8b5cf61c,transparent 68%);filter:blur(12px);pointer-events:none}.eyebrow{position:relative;color:#b8a7ff;font-size:9px;letter-spacing:.24em;font-weight:950;text-transform:uppercase}.hero h1{position:relative;margin:18px auto 18px;max-width:940px;font-size:clamp(55px,8vw,104px);line-height:.86;letter-spacing:-.075em}.gradient{background:linear-gradient(100deg,#fff 15%,#c4b5fd 48%,#67e8f9 85%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{position:relative;max-width:650px;margin:auto;color:#9996a3;font-size:13px;line-height:1.85}.actions{position:relative;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 17px;border-radius:11px;border:1px solid var(--line2);background:#ffffff06;font-size:10px;font-weight:950}.primary{border:0;background:linear-gradient(100deg,var(--purple),#6366f1,var(--cyan));box-shadow:0 16px 45px #8b5cf633}.btn:hover{transform:translateY(-2px);transition:.2s}.heroImage{width:100%;height:390px;margin:54px auto 0;border:1px solid var(--line2);border-radius:26px;overflow:hidden;position:relative;background:url("https://i.imgur.com/CnAs0XOg.jpg") center/cover}.heroImage:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06060908 25%,#060609c9 100%),linear-gradient(90deg,#8b5cf61c,#22d3ee08)}.heroCaption{position:absolute;z-index:2;left:25px;right:25px;bottom:23px;display:flex;align-items:end;justify-content:space-between;text-align:left;gap:20px}.heroCaption b{font-size:15px}.heroCaption span{display:block;margin-top:5px;color:#aaa6b3;font-size:9px}.pill{padding:9px 11px;border:1px solid #ffffff1c;background:#060609aa;backdrop-filter:blur(12px);border-radius:9px;color:#cfcbd7;font-size:9px;font-weight:900;white-space:nowrap}
+.hero{padding:64px 0 48px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(44px,6.2vw,82px);font-weight:800;letter-spacing:-.04em}
+.hero .lead{margin-top:22px;max-width:30em;color:var(--muted);font-size:18px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.facts{display:flex;gap:10px 26px;flex-wrap:wrap;margin-top:36px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.facts b{color:var(--text)}
+.stage{position:relative;aspect-ratio:1/.92}
+.stage:before{content:"";position:absolute;inset:6% 4%;background:radial-gradient(closest-side,rgba(244,169,59,.18),rgba(166,138,240,.1) 55%,transparent 75%);filter:blur(10px)}
+.stage .scene{position:absolute;inset:0;animation:float 7s ease-in-out infinite}
+.stage .shadow{position:absolute;left:24%;right:24%;bottom:2%;height:6%;background:radial-gradient(closest-side,rgba(0,0,0,.45),transparent);filter:blur(6px)}
+.chip{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;background:rgba(27,32,39,.82);backdrop-filter:blur(10px);border:1px solid var(--line2);font-size:14px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.chip .i{color:var(--torch);width:20px;height:20px}
+.chip small{display:block;color:var(--muted);font-weight:500;font-size:12px;line-height:1.3}
+.chip.a{left:0;top:12%;animation:float 6s ease-in-out -2s infinite}
+.chip.b{right:0;bottom:14%;animation:float 8s ease-in-out -4s infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero .wrap>*{animation:rise .8s var(--ease) both}
+.hero .wrap>*:nth-child(2){animation-delay:.12s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-/* TRUST */
-.trust{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:0 0 80px;background:#ffffff03}.trustItem{padding:19px 16px;text-align:center;border-right:1px solid var(--line)}.trustItem:last-child{border-right:0}.trustItem b{display:block;font-size:21px;letter-spacing:-.04em}.trustItem span{display:block;margin-top:4px;color:#777481;font-size:9px}
+/* compat strip */
+.strip{border-block:1px solid var(--line);background:var(--bg2);padding:20px 0}
+.strip .wrap{display:flex;align-items:center;justify-content:center;gap:12px 34px;flex-wrap:wrap;color:var(--muted);font-size:15px}
+.strip b{color:var(--text);font-family:var(--display);font-size:17px;font-weight:700}
 
-/* GENERAL */
-.section{padding:78px 0}.sectionTop{text-align:center;max-width:680px;margin:0 auto 34px}.sectionTop .eyebrow{display:block}.sectionTop h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.06em;line-height:1;margin:10px 0 12px}.sectionTop p{margin:0;color:#888591;font-size:11px;line-height:1.8}.divider{height:1px;background:var(--line);margin:0}
+/* stats */
+.stats{padding:56px 0 0}
+.stats .grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden}
+.stat{padding:28px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--display);font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.stat span{display:block;margin-top:8px;color:var(--muted);font-size:15px}
 
-/* CATEGORIES */
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.category{min-height:250px;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;background:var(--panel);transition:.25s}.category:hover{transform:translateY(-4px);border-color:#8b5cf644}.categoryImg{height:145px;background-size:cover;background-position:center;position:relative}.categoryImg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#0b0b10)}.categoryBody{padding:17px}.categoryNo{font-size:8px;color:#9e8cff;letter-spacing:.18em;font-weight:950}.category h3{font-size:16px;margin:7px 0 5px}.category p{margin:0;color:#7f7b88;font-size:9px;line-height:1.65}.categoryArrow{display:block;margin-top:14px;color:#c5b6ff;font-size:9px;font-weight:950}
+section{padding:88px 0}
+.head{max-width:640px;margin-bottom:40px}
+.head h2{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-.03em}
+.head p{margin-top:14px;color:var(--muted);font-size:17px}
 
-/* SHOWCASE */
-.showcase{display:grid;grid-template-columns:1fr 1fr;gap:14px}.showCard{height:390px;border:1px solid var(--line);border-radius:20px;overflow:hidden;position:relative;background:#0a0a0f}.showCard img{width:100%;height:100%;object-fit:cover;transition:.5s}.showCard:hover img{transform:scale(1.045)}.showCard:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,#050507f5 100%)}.showInfo{position:absolute;z-index:2;left:22px;right:22px;bottom:20px}.showInfo .tag{font-size:8px;color:#b9a8ff;letter-spacing:.18em;font-weight:950}.showInfo h3{font-size:22px;margin:8px 0 6px;letter-spacing:-.04em}.showInfo p{margin:0;color:#a29eaa;font-size:10px;line-height:1.65;max-width:470px}.showInfo a{display:inline-block;margin-top:13px;font-size:9px;font-weight:950;color:#fff}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
 
-/* FEATURE ROW */
-.featureRow{display:grid;grid-template-columns:1fr 1fr;gap:14px}.featureBox{border:1px solid var(--line);border-radius:19px;padding:27px;background:linear-gradient(145deg,#ffffff07,#ffffff02)}.featureBox .icon{width:43px;height:43px;border-radius:12px;display:grid;place-items:center;background:#8b5cf615;border:1px solid #8b5cf633;color:#c4b5fd;font-size:19px}.featureBox h3{font-size:18px;margin:18px 0 7px}.featureBox p{color:#85818e;font-size:10px;line-height:1.8;margin:0}.featureBox a{display:inline-block;margin-top:18px;color:#c7baff;font-size:9px;font-weight:950}
+/* BENTO */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(200px,auto);gap:14px}
+.tile{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--panel);display:flex;flex-direction:column;justify-content:flex-end;padding:26px;transition:border-color .25s,transform .3s var(--ease)}
+.tile:hover{border-color:var(--torch);transform:translateY(-3px)}
+.tile h3{font-size:26px;font-weight:700}
+.tile p{margin-top:8px;color:var(--muted);font-size:15px;max-width:26em}
+.tile .go{margin-top:16px;font-weight:700;font-size:14px;color:var(--torch);display:inline-flex;gap:8px;align-items:center}
+.tile .go .i{width:16px;height:16px;transition:transform .25s var(--ease)}
+.tile:hover .go .i{transform:translateX(4px)}
+.tile.big{grid-column:span 4;grid-row:span 2;min-height:430px;background:radial-gradient(70% 70% at 70% 30%,#242b36,var(--panel))}
+.tile.big .art{position:absolute;right:-2%;top:2%;width:80%;height:78%}
+.tile.big .txt{position:relative;z-index:2;max-width:22em}
+.tile.big h3{font-size:40px}
+.tile.sm{grid-column:span 2}
+.ico{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--panel2);border:1px solid var(--line2);color:var(--amethyst);margin-bottom:auto}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gcard{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);transition:border-color .25s,transform .3s var(--ease)}
+.gcard:hover{border-color:var(--torch);transform:translateY(-4px)}
+.gcard .art{height:240px;background:radial-gradient(80% 80% at 50% 35%,#272f3b,var(--panel))}
+.gcard .meta{padding:18px 22px 22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.gcard h3{font-size:20px;font-weight:700}
+.gcard p{margin-top:3px;color:var(--muted);font-size:14px}
+.gcard .arrow{width:38px;height:38px;border-radius:10px;border:1px solid var(--line2);display:grid;place-items:center;color:var(--torch);flex:none;transition:background .25s,color .25s}
+.gcard:hover .arrow{background:var(--torch);color:var(--torch-ink)}
+
+/* FEATURES */
+.feat{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.fc{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:26px;grid-column:span 2;transition:border-color .25s}
+.fc:hover{border-color:var(--line2)}
+.fc.w{grid-column:span 3}
+.fc h3{font-size:21px;font-weight:700;margin:20px 0 8px}
+.fc p{color:var(--muted);font-size:15px}
+.fc .ico{margin-bottom:0}
+.fc .mini{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:6px 12px;border-radius:999px;border:1px solid var(--line2);font-size:13px;font-weight:600;color:var(--muted);background:var(--bg2)}
+code,.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.fc .cmd{margin-top:20px;padding:14px 16px;border-radius:12px;background:#0e1115;border:1px solid var(--line);font-size:14px;color:#ffd987;line-height:1.8}
+.fc .cmd span{color:var(--muted)}
+
+/* INSTALL TABS */
+.install{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.install h2{font-size:clamp(30px,4vw,46px);font-weight:800;letter-spacing:-.03em}
+.install .intro{margin-top:14px;color:var(--muted);font-size:17px;max-width:26em}
+.tabs{display:flex;flex-direction:column;gap:8px;margin-top:28px}
+.tab{display:flex;gap:14px;align-items:center;text-align:left;padding:16px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);cursor:pointer;font-weight:700;transition:border-color .2s,background .2s}
+.tab span{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--panel2);font-family:var(--display);color:var(--muted);flex:none}
+.tab[aria-selected=true]{border-color:var(--torch);background:var(--panel2)}
+.tab[aria-selected=true] span{background:var(--torch);color:var(--torch-ink)}
+.panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:30px;min-height:330px}
+.panel[hidden]{display:none}
+.panel h3{font-size:24px;font-weight:700}
+.panel p{margin-top:10px;color:var(--muted);font-size:16px}
+.codebox{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;padding:14px 14px 14px 18px;border-radius:12px;background:#0e1115;border:1px solid var(--line);font-size:15px;color:#ffd987;overflow-x:auto}
+.codebox code{white-space:nowrap}
+.copy{display:inline-flex;align-items:center;gap:8px;flex:none;min-height:36px;padding:0 12px;border-radius:8px;border:1px solid var(--line2);background:var(--panel);cursor:pointer;font-size:13px;font-weight:700;color:var(--text);transition:background .2s}
+.copy:hover{background:var(--panel2)}
+.copy .i{width:16px;height:16px}
+.note{margin-top:18px;font-size:14px;color:var(--muted);padding-left:14px;border-left:3px solid var(--line2)}
 
 /* STEPS */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{border:1px solid var(--line);border-radius:17px;padding:23px;background:#ffffff03}.stepNo{font-size:8px;letter-spacing:.18em;color:#22d3ee;font-weight:950}.step h3{font-size:15px;margin:13px 0 7px}.step p{color:#85818e;font-size:9px;line-height:1.75;margin:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s;position:relative}
+.steps li{counter-increment:s;padding:26px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.steps li:before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;margin-bottom:20px;background:var(--torch);color:var(--torch-ink);font-family:var(--display);font-weight:800;border-radius:9px}
+.steps h3{font-size:20px;font-weight:700}
+.steps p{margin-top:8px;color:var(--muted);font-size:15px}
+
+/* BRIEF */
+.brief{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel)}
+.brief .l{padding:44px;background:radial-gradient(90% 90% at 0 0,rgba(166,138,240,.14),transparent 60%)}
+.brief .l h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.03em}
+.brief .l p{margin-top:14px;color:var(--muted);font-size:17px;max-width:24em}
+.brief .r{padding:44px;border-left:1px solid var(--line);background:var(--bg2)}
+.lab{display:block;font-weight:700;font-size:14px;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.pick{padding:9px 15px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);font-size:14px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s}
+.pick:hover{color:var(--text)}
+.pick[aria-pressed=true]{background:var(--torch);border-color:var(--torch);color:var(--torch-ink)}
+.field{width:100%;padding:13px 15px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);font:inherit;font-size:15px;margin-bottom:22px}
+.field::placeholder{color:#6d7585}
+textarea.field{min-height:110px;resize:vertical}
+.brief .btn{width:100%}
 
 /* FAQ */
-.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}.faqItem{border:1px solid var(--line);border-radius:15px;padding:19px;background:#ffffff03}.faqItem b{font-size:11px}.faqItem p{margin:8px 0 0;color:#85818e;font-size:9px;line-height:1.7}
+.faq{display:grid;gap:10px;max-width:860px}
+details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 24px;transition:border-color .2s}
+details[open]{border-color:var(--line2)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-weight:700;font-size:17px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-size:26px;line-height:1;color:var(--torch);transition:transform .25s var(--ease)}
+details[open] summary:after{transform:rotate(45deg)}
+details p{margin:0 0 22px;color:var(--muted);max-width:44em}
 
-/* CTA */
-.cta{margin:80px 0 85px;padding:62px 25px;text-align:center;border:1px solid #8b5cf644;border-radius:25px;background:radial-gradient(circle at 20% 0,#8b5cf624,transparent 42%),radial-gradient(circle at 80% 100%,#22d3ee14,transparent 42%),#0a0a0f}.cta h2{font-size:clamp(35px,5vw,58px);letter-spacing:-.065em;line-height:.95;margin:10px 0 12px}.cta p{max-width:560px;margin:0 auto;color:#8d8996;font-size:10px;line-height:1.8}.cta .actions{margin-top:24px}
+/* FINAL */
+.final{padding:0 0 96px}
+.final .box{position:relative;padding:72px 40px;text-align:center;background:var(--panel);clip-path:var(--notch);overflow:hidden}
+.final .box:before{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 0,rgba(244,169,59,.16),transparent 70%)}
+.final .box>*{position:relative}
+.final h2{font-size:clamp(32px,5vw,58px);font-weight:800;letter-spacing:-.035em}
+.final p{margin:16px auto 0;max-width:34em;color:var(--muted);font-size:18px}
+.final .cta-row{justify-content:center}
 
-/* FOOTER */
-footer{border-top:1px solid var(--line);padding:30px 20px;color:#686570;font-size:9px;text-align:center}footer a{color:#aaa5b1}footer a:hover{color:#fff}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:14px 30px;flex-wrap:wrap;align-items:center}
+footer nav{display:flex;gap:22px;flex-wrap:wrap}
+footer a:hover{color:var(--text)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--text);color:#12151a;padding:12px 20px;border-radius:12px;font-weight:700;font-size:15px;z-index:120;transition:all .3s var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* RESPONSIVE */
-@media(max-width:950px){.categories{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr}.trust{grid-template-columns:1fr 1fr}.trustItem:nth-child(2){border-right:0}.trustItem:nth-child(-n+2){border-bottom:1px solid var(--line)}.showcase,.featureRow,.faq{grid-template-columns:1fr}}
-@media(max-width:650px){.wrap{width:min(100% - 28px,var(--max))}.navlinks{display:none}.navcta{padding:9px 11px}.hero{padding-top:55px}.hero h1{font-size:57px}.heroImage{height:290px;margin-top:38px}.heroCaption{display:block}.pill{display:inline-block;margin-top:12px}.categories,.steps,.trust{grid-template-columns:1fr 1fr}.trustItem{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.trustItem:nth-child(even){border-right:0}.trustItem:nth-last-child(-n+2){border-bottom:0}.category{min-height:235px}.categoryImg{height:120px}.showCard{height:330px}.section{padding:58px 0}.cta{margin:55px 0 60px;padding:45px 18px}}
-@media(max-width:430px){.categories,.steps,.trust{grid-template-columns:1fr}.trustItem,.trustItem:nth-child(even){border-right:0;border-bottom:1px solid var(--line)}.trustItem:last-child{border-bottom:0}.hero h1{font-size:49px}}
+@media(max-width:1000px){
+  .hero .wrap,.install,.brief{grid-template-columns:1fr}
+  .hero{padding-top:44px}.stage{max-width:620px;margin:0 auto;width:100%}
+  .brief .r{border-left:0;border-top:1px solid var(--line)}
+  .steps{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:1fr 1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .tile.big{grid-column:span 2;grid-row:auto;min-height:380px}.tile.sm{grid-column:span 1}
+  .feat{grid-template-columns:1fr 1fr}.fc,.fc.w{grid-column:span 1}
+  .stats .grid{grid-template-columns:1fr 1fr}
+  .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:720px){
+  .burger{display:grid}
+  .links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px 18px;display:none}
+  .links.open{display:flex}.links a{padding:14px}
+  .navr .btn{display:none}
+  section{padding:62px 0}
+  .gallery,.steps,.feat,.bento{grid-template-columns:1fr}
+  .tile.big,.tile.sm,.fc,.fc.w{grid-column:span 1}
+  .tile.big{min-height:360px}.tile.big .art{width:100%;top:-4%}
+  .brief .l,.brief .r,.panel{padding:26px}
+  .chip{display:none}
+  .final .box{padding:48px 22px}
+}
+@media(max-width:480px){.stats .grid{grid-template-columns:1fr}.stat{border-right:0!important;border-bottom:1px solid var(--line)}.stat:last-child{border-bottom:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="wrap navin">
-    <a class="brand" href="#top"><span class="mark">M</span><span>Mythical Studios</span></a>
-    <div class="navlinks"><a href="#top">Home</a><a href="#categories">Categories</a><a href="#showcase">Showcase</a><a href="#how">How it works</a><a href="#faq">FAQ</a></div>
-    <a class="navcta" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">DISCORD ↗</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8l-6.3 3.7 1.6-7.2L2 9.6 9 9z"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.6-.6-.6-2.6z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+</svg>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark">M</span>Mythical Studios</a>
+    <div class="links" id="links">
+      <a href="#categories">Categories</a>
+      <a href="#builds">Builds</a>
+      <a href="#why">Features</a>
+      <a href="#install">Install guide</a>
+      <a href="#custom">Custom work</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="navr">
+      <a class="btn sm primary" href="/store/categories/schematic/">Open the store</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
   </div>
 </nav>
 
 <main id="top">
 
-<section class="hero wrap">
-  <div class="eyebrow">MYTHICAL STUDIOS / MINECRAFT MARKETPLACE</div>
-  <h1>Build a server<br>players <span class="gradient">remember.</span></h1>
-  <p>Premium Minecraft schematics, server resources and custom development — curated for owners who care about how their world looks, feels and performs.</p>
-  <div class="actions">
-    <a class="btn primary" href="/store/categories/schematic/">EXPLORE THE VAULT →</a>
-    <a class="btn" href="#categories">VIEW CATEGORIES</a>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Build a server players remember.</h1>
+      <p class="lead">Premium Minecraft schematics, server resources and custom development for owners who care how their world looks, feels and performs.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="/store/categories/schematic/">Browse schematics <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg> Join Discord</a>
+      </div>
+      <div class="facts">
+        <span><b>20+</b> schematics</span><span><b>Instant</b> delivery</span><span><b>Secure</b> Tebex checkout</span>
+      </div>
+    </div>
+    <div class="stage" id="heroStage">
+      <div class="shadow"></div>
+      <div class="scene"><canvas data-scene="castle:grass:11:8" aria-label="Isometric Minecraft castle on a floating island" role="img"></canvas></div>
+      <div class="chip a"><svg class="i"><use href="#i-bolt"/></svg><div>Instant delivery<small>Download right after checkout</small></div></div>
+      <div class="chip b"><svg class="i"><use href="#i-cube"/></svg><div>Paste-ready builds<small>Made for your server</small></div></div>
+    </div>
   </div>
-  <div class="heroImage">
-    <div class="heroCaption">
-      <div><b>THE MYTHICAL RESOURCE VAULT</b><span>World-ready builds • Digital resources • Server-focused tools</span></div>
-      <span class="pill">CURATED FOR MINECRAFT</span>
+</header>
+
+<div class="strip">
+  <div class="wrap"><span>Made for the tools you already use</span><b>WorldEdit</b><b>FAWE</b><b>Paper</b><b>Spigot</b><b>Purpur</b></div>
+</div>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stat"><b><span data-count="20">20</span>+</b><span>schematic listings</span></div>
+      <div class="stat"><b>Instant</b><span>digital delivery</span></div>
+      <div class="stat"><b>Secure</b><span>Tebex checkout</span></div>
+      <div class="stat"><b>Custom</b><span>development available</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="categories">
+  <div class="wrap">
+    <div class="head rv">
+      <h2>Start with what your server needs next.</h2>
+      <p>A spawn that makes the first impression, a rank system that rewards loyalty, or custom code working behind the scenes.</p>
+    </div>
+    <div class="bento">
+      <a class="tile big rv" href="/store/categories/schematic/">
+        <div class="art"><canvas data-scene="village:grass:4:8" aria-hidden="true"></canvas></div>
+        <div class="txt"><h3>Schematics</h3><p>Spawns, hubs, towns and server-ready builds you can drop straight into your world.</p><span class="go">Browse schematics <svg class="i"><use href="#i-arrow"/></svg></span></div>
+      </a>
+      <a class="tile sm rv" style="--d:.08s" href="/store/categories/development/">
+        <div class="ico"><svg class="i"><use href="#i-code"/></svg></div>
+        <div><h3>Development</h3><p>Custom plugins, setups and server work.</p><span class="go">Request development <svg class="i"><use href="#i-arrow"/></svg></span></div>
+      </a>
+      <a class="tile sm rv" style="--d:.16s" href="/store/categories/ranks/">
+        <div class="ico"><svg class="i"><use href="#i-star"/></svg></div>
+        <div><h3>Ranks</h3><p>Store-ready ranks and progression for your community.</p><span class="go">View ranks <svg class="i"><use href="#i-arrow"/></svg></span></div>
+      </a>
     </div>
   </div>
 </section>
 
-<section class="wrap trust" aria-label="Mythical Studios highlights">
-  <div class="trustItem"><b>20+</b><span>schematic listings</span></div>
-  <div class="trustItem"><b>Instant</b><span>digital delivery</span></div>
-  <div class="trustItem"><b>Secure</b><span>Tebex checkout</span></div>
-  <div class="trustItem"><b>Custom</b><span>development available</span></div>
-</section>
-
-<div class="divider"></div>
-
-<section id="categories" class="section wrap">
-  <div class="sectionTop">
-    <span class="eyebrow">EXPLORE THE STORE</span>
-    <h2>Everything starts with the right resource.</h2>
-    <p>From a spawn that makes the first impression to custom development behind the scenes, choose what your server needs next.</p>
-  </div>
-  <div class="categories">
-    <a class="category" href="/store/categories/schematic/">
-      <div class="categoryImg" style="background-image:url('https://i.imgur.com/CnAs0XOg.jpg')"></div>
-      <div class="categoryBody"><div class="categoryNo">01 / BUILDS</div><h3>Schematics</h3><p>Spawns, hubs, towns and server-ready builds.</p><span class="categoryArrow">BROWSE SCHEMATICS →</span></div>
-    </a>
-    <a class="category" href="/store/categories/development/">
-      <div class="categoryImg" style="background-image:url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80')"></div>
-      <div class="categoryBody"><div class="categoryNo">02 / CODE</div><h3>Development</h3><p>Custom plugins, setups and server work.</p><span class="categoryArrow">REQUEST DEVELOPMENT →</span></div>
-    </a>
-    <a class="category" href="/store/categories/ranks/">
-      <div class="categoryImg" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=80')"></div>
-      <div class="categoryBody"><div class="categoryNo">03 / STORE</div><h3>Ranks</h3><p>Store-ready ranks and progression for communities.</p><span class="categoryArrow">VIEW RANKS →</span></div>
-    </a>
-    <a class="category" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">
-      <div class="categoryImg" style="background-image:url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80')"></div>
-      <div class="categoryBody"><div class="categoryNo">04 / CUSTOM</div><h3>Talk to us</h3><p>Have a project that does not fit a category?</p><span class="categoryArrow">OPEN DISCORD →</span></div>
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<section id="showcase" class="section wrap">
-  <div class="sectionTop">
-    <span class="eyebrow">BUILD SHOWCASE</span>
-    <h2>Give your server a world worth exploring.</h2>
-    <p>Use premium builds as the foundation, then shape the experience around your community.</p>
-  </div>
-  <div class="showcase">
-    <a class="showCard" href="/store/categories/schematic/">
-      <img src="https://i.imgur.com/CnAs0XOg.jpg" alt="Minecraft build showcase">
-      <div class="showInfo"><div class="tag">SCHEMATIC VAULT / 01</div><h3>World-ready architecture.</h3><p>Make your spawn, hub or adventure area feel intentional from the first block.</p><span>ENTER THE VAULT →</span></div>
-    </a>
-    <a class="showCard" href="/store/categories/schematic/">
-      <img src="https://images.unsplash.com/photo-1607513746994-51f730a44832?auto=format&fit=crop&w=1400&q=85" alt="Fantasy architecture">
-      <div class="showInfo"><div class="tag">SCHEMATIC VAULT / 02</div><h3>More than a spawn.</h3><p>Build recognizable spaces that give your players somewhere to gather, explore and return to.</p><span>VIEW ALL BUILDS →</span></div>
-    </a>
-  </div>
-</section>
-
-<section class="section wrap">
-  <div class="featureRow">
-    <div class="featureBox">
-      <div class="icon">✦</div>
-      <h3>Built for server owners</h3>
-      <p>Mythical Studios focuses on resources that solve real server problems — presentation, gameplay spaces, progression and development.</p>
-      <a href="/store/categories/schematic/">START WITH A BUILD →</a>
+<section id="builds" style="padding-top:10px">
+  <div class="wrap">
+    <div class="head rv">
+      <h2>Give your server a world worth exploring.</h2>
+      <p>Pick the kind of space you need. Every type lives in the schematic vault.</p>
     </div>
-    <div class="featureBox">
-      <div class="icon">⌁</div>
-      <h3>Need something custom?</h3>
-      <p>Tell us what your server needs. For custom plugins, configurations or development work, our Discord is the fastest way to reach the team.</p>
-      <a href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">TALK TO MYTHICAL STUDIOS →</a>
+    <div class="gallery">
+      <a class="gcard rv" href="/store/categories/schematic/"><div class="art"><canvas data-scene="hub:grass:2:7" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Spawns</h3><p>The first thing players see</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
+      <a class="gcard rv" style="--d:.07s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="hub:end:6:7" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Lobbies &amp; hubs</h3><p>Central spaces for game modes</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
+      <a class="gcard rv" style="--d:.14s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="village:snow:8:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Towns &amp; villages</h3><p>Places to live, trade and roleplay</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
+      <a class="gcard rv" href="/store/categories/schematic/"><div class="art"><canvas data-scene="castle:sand:5:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Castles &amp; fortresses</h3><p>Landmarks with presence</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
+      <a class="gcard rv" style="--d:.07s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="sky:grass:9:5.6" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Skyblock islands</h3><p>Start-island layouts</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
+      <a class="gcard rv" style="--d:.14s" href="/store/categories/schematic/"><div class="art"><canvas data-scene="ruins:nether:3:8" aria-hidden="true"></canvas></div><div class="meta"><div><h3>Nether &amp; dungeons</h3><p>Dark spaces for PvE and events</p></div><span class="arrow"><svg class="i" style="width:18px;height:18px"><use href="#i-arrow"/></svg></span></div></a>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<section id="how" class="section wrap">
-  <div class="sectionTop">
-    <span class="eyebrow">THE PROCESS</span>
-    <h2>Simple from browse to build.</h2>
-    <p>No complicated marketplace flow. Find a resource, complete checkout and get back to building your server.</p>
-  </div>
-  <div class="steps">
-    <div class="step"><div class="stepNo">01 / DISCOVER</div><h3>Find the right resource.</h3><p>Browse the vault, explore categories and compare the resources available for your server.</p></div>
-    <div class="step"><div class="stepNo">02 / PREVIEW</div><h3>See what you're buying.</h3><p>Open the product page to inspect the build, description and available details before purchase.</p></div>
-    <div class="step"><div class="stepNo">03 / CHECKOUT</div><h3>Complete your purchase.</h3><p>Use the connected Tebex storefront for a secure digital checkout experience.</p></div>
-    <div class="step"><div class="stepNo">04 / BUILD</div><h3>Bring it into your server.</h3><p>Download your resource and start turning your server into something memorable.</p></div>
+<section id="why" style="padding-top:10px">
+  <div class="wrap">
+    <div class="head rv">
+      <h2>Built for server owners.</h2>
+      <p>Every resource solves a real server problem: presentation, gameplay spaces, progression or development.</p>
+    </div>
+    <div class="feat">
+      <div class="fc w rv">
+        <div class="ico"><svg class="i"><use href="#i-cube"/></svg></div>
+        <h3>Paste-ready builds</h3>
+        <p>Schematics are made to be placed on a live server without rebuilding them first.</p>
+        <div class="cmd code"><span>//</span>schem load <span>your_build</span><br><span>//</span>paste</div>
+      </div>
+      <div class="fc w rv" style="--d:.08s">
+        <div class="ico"><svg class="i"><use href="#i-wrench"/></svg></div>
+        <h3>Custom commissions</h3>
+        <p>Need something that isn't in the vault? Tell the team what you have in mind.</p>
+        <div class="mini"><span class="tag">Custom builds</span><span class="tag">Plugins</span><span class="tag">Configurations</span><span class="tag">Server setup</span></div>
+      </div>
+      <div class="fc rv">
+        <div class="ico"><svg class="i"><use href="#i-bolt"/></svg></div>
+        <h3>Instant delivery</h3>
+        <p>Get your resource as soon as checkout completes and start building.</p>
+      </div>
+      <div class="fc rv" style="--d:.08s">
+        <div class="ico"><svg class="i"><use href="#i-shield"/></svg></div>
+        <h3>Secure checkout</h3>
+        <p>Payments run through the connected Tebex storefront.</p>
+      </div>
+      <div class="fc rv" style="--d:.16s">
+        <div class="ico"><svg class="i"><use href="#i-chat"/></svg></div>
+        <h3>Direct support</h3>
+        <p>Reach the team on Discord with questions, requests or feedback.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<section id="faq" class="section wrap">
-  <div class="sectionTop">
-    <span class="eyebrow">QUICK ANSWERS</span>
-    <h2>Questions, answered.</h2>
-    <p>The important stuff before you start shopping.</p>
-  </div>
-  <div class="faq">
-    <div class="faqItem"><b>What do I get when I purchase a schematic?</b><p>You receive the digital resource through the configured store delivery flow so you can use it on your Minecraft server.</p></div>
-    <div class="faqItem"><b>Can I request a custom build?</b><p>Yes. Contact Mythical Studios through Discord with your idea, style and requirements.</p></div>
-    <div class="faqItem"><b>Do you provide server development?</b><p>Yes. Custom development requests can be discussed directly with the Mythical Studios team.</p></div>
-    <div class="faqItem"><b>Where do I get support?</b><p>Join the Mythical Studios Discord and send your request to the team.</p></div>
+<section id="install" style="padding-top:10px">
+  <div class="wrap install">
+    <div class="rv">
+      <h2>Install a schematic in minutes.</h2>
+      <p class="intro">Three steps from your download to a finished build in your world.</p>
+      <div class="tabs" role="tablist" aria-label="Install steps">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1"><span>1</span>Download your file</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1"><span>2</span>Add it to your server</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3" tabindex="-1"><span>3</span>Paste it in game</button>
+      </div>
+    </div>
+    <div class="rv" style="--d:.1s">
+      <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+        <h3>Download your file</h3>
+        <p>After checkout, open your delivery from the Tebex confirmation. You'll get the schematic file for your build, usually a <code>.schem</code> file.</p>
+        <p class="note">Check each product page for the file format and supported Minecraft versions before you buy.</p>
+      </div>
+      <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+        <h3>Add it to your server</h3>
+        <p>Upload the file to your schematics folder, then restart or reload WorldEdit.</p>
+        <div class="codebox"><code>plugins/WorldEdit/schematics/</code><button class="copy" data-copy="plugins/WorldEdit/schematics/"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
+        <p class="note">Using FastAsyncWorldEdit? The folder is <code>plugins/FastAsyncWorldEdit/schematics/</code>.</p>
+      </div>
+      <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+        <h3>Paste it in game</h3>
+        <p>Load the schematic, stand where you want it, then paste.</p>
+        <div class="codebox"><code>//schem load your_build</code><button class="copy" data-copy="//schem load your_build"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
+        <div class="codebox"><code>//paste</code><button class="copy" data-copy="//paste"><svg class="i"><use href="#i-copy"/></svg>Copy</button></div>
+        <p class="note">Add <code>-a</code> to skip air blocks, or run <code>//rotate 90</code> before pasting to turn the build.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="cta wrap">
-  <div class="eyebrow">READY TO BUILD?</div>
-  <h2>Your server deserves<br>more than default.</h2>
-  <p>Start with a resource from the vault and build an experience your players actually remember.</p>
-  <div class="actions">
-    <a class="btn primary" href="/store/categories/schematic/">OPEN THE SCHEMATIC VAULT →</a>
-    <a class="btn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">JOIN DISCORD ↗</a>
+<section id="how" style="padding-top:10px">
+  <div class="wrap">
+    <div class="head rv"><h2>From browsing to building in four steps.</h2><p>No complicated marketplace flow. Find a resource, check out and get back to your server.</p></div>
+    <ol class="steps">
+      <li class="rv"><h3>Find a resource</h3><p>Browse the vault and compare what's available for your server.</p></li>
+      <li class="rv" style="--d:.07s"><h3>Preview it</h3><p>Open a product page to see the build, description and details before you buy.</p></li>
+      <li class="rv" style="--d:.14s"><h3>Check out</h3><p>Pay through the connected Tebex storefront, a secure digital checkout.</p></li>
+      <li class="rv" style="--d:.21s"><h3>Install it</h3><p>Download your resource and add it to your server.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="custom" style="padding-top:10px">
+  <div class="wrap">
+    <div class="brief rv">
+      <div class="l">
+        <h2>Have something custom in mind?</h2>
+        <p>Pick what you need, describe your server and we'll copy a ready-made brief for you to send on Discord.</p>
+      </div>
+      <div class="r">
+        <span class="lab">What do you need?</span>
+        <div class="chips" id="picks">
+          <button class="pick" aria-pressed="false">Custom build</button>
+          <button class="pick" aria-pressed="false">Spawn or hub</button>
+          <button class="pick" aria-pressed="false">Custom plugin</button>
+          <button class="pick" aria-pressed="false">Ranks setup</button>
+          <button class="pick" aria-pressed="false">Full server setup</button>
+          <button class="pick" aria-pressed="false">Something else</button>
+        </div>
+        <label class="lab" for="stype">Server type</label>
+        <input class="field" id="stype" placeholder="Survival, Skyblock, Factions, Minigames...">
+        <label class="lab" for="sdesc">Project details</label>
+        <textarea class="field" id="sdesc" placeholder="Style, theme, size, Minecraft version, deadline..."></textarea>
+        <button class="btn primary" id="sendBrief"><svg class="i"><use href="#i-copy"/></svg>Copy brief and open Discord</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:10px">
+  <div class="wrap">
+    <div class="head rv"><h2>Questions, answered.</h2></div>
+    <div class="faq rv">
+      <details><summary>What do I get when I buy a schematic?</summary><p>You receive the digital resource through the store's delivery flow, so you can use it on your Minecraft server.</p></details>
+      <details><summary>How do I install it?</summary><p>Upload the file to your WorldEdit schematics folder, then use <code>//schem load</code> and <code>//paste</code> in game. The install guide above has the full steps.</p></details>
+      <details><summary>Can I request a custom build?</summary><p>Yes. Message Mythical Studios on Discord with your idea, style and requirements. The brief builder above makes that quick.</p></details>
+      <details><summary>Do you offer server development?</summary><p>Yes. Custom development requests can be discussed directly with the Mythical Studios team.</p></details>
+      <details><summary>Is checkout secure?</summary><p>Yes. Purchases go through the connected Tebex storefront.</p></details>
+      <details><summary>Where do I get support?</summary><p>Join the Mythical Studios Discord and send your request to the team.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="box rv">
+      <h2>Your server deserves more than default.</h2>
+      <p>Start with a resource from the vault and build something your players will actually remember.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="/store/categories/schematic/">Open the schematic vault <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Join Discord</a>
+      </div>
+    </div>
   </div>
 </section>
 
 </main>
 
-<footer>© 2026 Mythical Studios • Minecraft Resources • <a href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Discord</a></footer>
+<footer>
+  <div class="wrap">
+    <span>© 2026 Mythical Studios</span>
+    <nav aria-label="Footer"><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/development/">Development</a><a href="/store/categories/ranks/">Ranks</a><a href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Discord</a></nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ============ CONFIG ============ */
+const CONFIG={discord:"https://discord.gg/tzVTqK8Yt"};
+
+/* ============ VOXEL SCENES (no external images needed) ============ */
+const THEMES={
+ grass:{top:'#62b04f',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#9aa0aa',roof:'#c8553d',wood:'#7a5a36',plank:'#c9a66b',leaf:'#3f8a3a',accent:'#f4a93b',fluid:'#3d86d1',path:'#b8a279'},
+ snow:{top:'#eef5fa',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#aab2bd',roof:'#4f7fc9',wood:'#6e4f31',plank:'#d8c19a',leaf:'#2f6b57',accent:'#f4a93b',fluid:'#6fb3e0',path:'#c9d3dc'},
+ sand:{top:'#e3ca8c',side:'#c9ad6c',deep:'#b0955a',under:'#a58f62',stone:'#dccda8',roof:'#2f9e8f',wood:'#8a6a3a',plank:'#e8d6a8',leaf:'#4f9a3e',accent:'#f4a93b',fluid:'#3d86d1',path:'#cdb27a'},
+ nether:{top:'#8c3a3a',side:'#6a2a2a',deep:'#4d1f1f',under:'#3d2a2f',stone:'#5a464d',roof:'#7a2a2a',wood:'#4a2f2f',plank:'#6a4040',leaf:'#c2552f',accent:'#ff9a3c',fluid:'#ff6a1a',path:'#5a3a3a'},
+ end:{top:'#d9d5a0',side:'#bdb884',deep:'#a09b6c',under:'#8f8a60',stone:'#3a2d55',roof:'#a68af0',wood:'#3a2d55',plank:'#4b3a6e',leaf:'#7e57c2',accent:'#d7b8ff',fluid:'#a68af0',path:'#b8b37a'}
+};
+const LIT='#ffd987',DARK='#232832';
+const GLOW=new Set([LIT,'#f4a93b','#ff9a3c','#d7b8ff','#ff6a1a','#a66cff']);
+
+function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+function rgb(h){const n=parseInt(h.slice(1),16);return[n>>16&255,n>>8&255,n&255]}
+function shade(h,f){const[r,g,b]=rgb(h);return`rgb(${Math.min(255,r*f|0)},${Math.min(255,g*f|0)},${Math.min(255,b*f|0)})`}
+
+function buildScene(theme,plan,seed,rad){
+ const T=THEMES[theme],R=rng(seed),B=new Map(),H={};
+ const set=(x,y,z,c)=>B.set(x+','+y+','+z,c);
+ const box=(x0,y0,z0,w,d,h,c)=>{for(let x=0;x<w;x++)for(let y=0;y<d;y++)for(let z=0;z<h;z++)set(x0+x,y0+y,z0+z,c)};
+ const N=17,C=8,ok=(x,y)=>H[x+','+y]===2;
+ for(let x=0;x<N;x++)for(let y=0;y<N;y++){
+  const d=Math.hypot(x-C,y-C),m=rad+.6-d+(R()-.5)*1.6;
+  if(m<=0)continue;
+  const top=m<1.4?1:2;H[x+','+y]=top;
+  for(let z=0;z<=top;z++)set(x,y,z,z===top?T.top:T.side);
+  const depth=Math.floor(m*.85);
+  for(let z=1;z<=depth;z++)set(x,y,-z,z<2?T.side:(R()<.5?T.deep:T.under));
+ }
+ const tree=(x,y,h=3)=>{if(!ok(x,y))return;for(let i=0;i<h;i++)set(x,y,3+i,T.wood);const zt=3+h-1;
+  for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){set(x+a,y+b,zt,T.leaf);set(x+a,y+b,zt+1,T.leaf)}set(x,y,zt+2,T.leaf)};
+ const tower=(x,y,h)=>{box(x-1,y-1,3,3,3,h,T.stone);const zt=3+h;
+  box(x-2,y-2,zt,5,5,1,T.roof);box(x-1,y-1,zt+1,3,3,1,T.roof);set(x,y,zt+2,T.roof);set(x,y,zt+3,T.accent);
+  set(x,y+1,zt-2,LIT);set(x+1,y,zt-2,LIT)};
+ const house=(x,y,rf)=>{if(!ok(x,y)||!ok(x+3,y+2))return;
+  box(x,y,3,4,3,2,T.plank);box(x-1,y-1,5,6,5,1,rf||T.roof);box(x,y,6,4,3,1,rf||T.roof);box(x+1,y+1,7,2,1,1,rf||T.roof);
+  set(x+1,y+2,3,DARK);set(x+1,y+2,4,DARK);set(x+3,y+1,4,LIT);set(x+2,y+2,4,LIT)};
+
+ if(plan==='castle'){
+  box(C-1,C-1,3,3,3,5,T.stone);
+  box(C-2,C-2,8,5,5,1,T.roof);box(C-1,C-1,9,3,3,1,T.roof);set(C,C,10,T.roof);set(C,C,11,T.accent);
+  set(C,C+1,6,LIT);set(C+1,C,6,LIT);set(C,C+1,4,DARK);
+  for(let i=-3;i<=3;i++){box(C+i,C-3,3,1,1,2,T.stone);box(C+i,C+3,3,1,1,2,T.stone);box(C-3,C+i,3,1,1,2,T.stone);box(C+3,C+i,3,1,1,2,T.stone)}
+  set(C,C+3,3,DARK);set(C,C+3,4,DARK);
+  [[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>tower(C+a,C+b,4));
+  for(let y=C+4;y<=C+8;y++)if(ok(C,y))set(C,y,2,T.path);
+  tree(C-6,C+1);tree(C+6,C-1,4);tree(C-5,C-5,3);
+ }
+ if(plan==='village'){
+  house(C-4,C-1);house(C+1,C-4,T.accent==='#f4a93b'&&theme!=='snow'?'#3d6fb5':T.roof);house(C-2,C+2);
+  box(C+3,C+1,3,2,2,1,T.stone);set(C+3,C+1,4,T.fluid);set(C+4,C+2,4,T.wood);set(C+4,C+2,5,T.wood);
+  for(let x=C-5;x<=C+5;x++)if(ok(x,C+1)&&!B.has(x+','+(C+1)+',3'))set(x,C+1,2,T.path);
+  tree(C+4,C+4);tree(C-5,C-3,4);tree(C+5,C-2);
+ }
+ if(plan==='hub'){
+  for(let x=0;x<N;x++)for(let y=0;y<N;y++){const d=Math.hypot(x-C,y-C);if(ok(x,y)&&d>3.2&&d<4.5)set(x,y,2,(x+y)%2?T.stone:T.accent)}
+  box(C-1,C-1,3,3,3,1,T.stone);box(C-2,C-2,2,5,5,1,T.stone);
+  for(let z=4;z<=10;z++)set(C,C,z,z<5?T.stone:T.accent);
+  [[-3,-3],[3,-3],[-3,3],[3,3]].forEach(([a,b])=>{if(ok(C+a,C+b)){for(let z=3;z<7;z++)set(C+a,C+b,z,T.stone);set(C+a,C+b,7,T.accent)}});
+  set(C,C+1,3,DARK);
+ }
+ if(plan==='ruins'){
+  for(let a=1;a<=3;a++)for(let b=1;b<=3;b++)set(C+a,C+b,2,T.fluid);
+  for(let x=C-2;x<=C+1;x++)for(let z=3;z<=7;z++){const edge=x===C-2||x===C+1||z===3||z===7;set(x,C-3,z,edge?'#2a1f3d':'#a66cff')}
+  for(let i=0;i<6;i++){const a=Math.round(R()*6-3),b=Math.round(R()*6-3),h=2+Math.floor(R()*4);
+   if(ok(C+a,C+b)&&!B.has((C+a)+','+(C+b)+',3')){for(let z=3;z<3+h;z++)set(C+a,C+b,z,T.stone);if(R()<.6)set(C+a,C+b,3+h,T.accent)}}
+ }
+ if(plan==='sky'){
+  tree(C,C-1,4);set(C+1,C+1,3,'#b5833a');set(C+2,C,3,'#e84a5f');set(C-2,C+1,3,'#f2d14b');set(C-1,C+2,3,'#e84a5f');
+  for(let y=C+1;y<=C+3;y++)if(ok(C,y)&&!B.has(C+','+y+',3'))set(C,y,2,T.path);
+ }
+ return B;
+}
+
+const STORE=new Map();
+function render(cv){
+ const B=STORE.get(cv);if(!B)return;
+ const dpr=Math.min(window.devicePixelRatio||1,2),W=cv.clientWidth,Ht=cv.clientHeight;
+ if(!W||!Ht)return;
+ cv.width=W*dpr;cv.height=Ht*dpr;
+ const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,Ht);
+ const list=[];let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+ B.forEach((c,k)=>{const[x,y,z]=k.split(',').map(Number);list.push([x,y,z,c]);
+  const px=x-y,py=(x+y)/2-(z+1);x0=Math.min(x0,px-1);x1=Math.max(x1,px+1);y0=Math.min(y0,py);y1=Math.max(y1,py+2)});
+ const pad=8,s=Math.min((W-pad*2)/(x1-x0),(Ht-pad*2)/(y1-y0));
+ const offX=(W-(x1-x0)*s)/2-x0*s,offY=(Ht-(y1-y0)*s)/2-y0*s;
+ list.sort((a,b)=>(a[0]+a[1]+a[2])-(b[0]+b[1]+b[2])||a[2]-b[2]);
+ g.lineJoin='round';g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=Math.max(.5,s*.05);
+ const poly=(p,f)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=f;g.fill();g.stroke()};
+ for(const[x,y,z,c]of list){
+  const j=.94+((((x*73856093)^(y*19349663)^(z*83492791))>>>0)%100)/100*.12,gl=GLOW.has(c);
+  const ox=offX+(x-y)*s,oy=offY+((x+y)/2-(z+1))*s;
+  if(!B.has(x+','+y+','+(z+1)))poly([ox,oy,ox+s,oy+s/2,ox,oy+s,ox-s,oy+s/2],shade(c,(gl?1.05:1.1)*j));
+  if(!B.has(x+','+(y+1)+','+z))poly([ox-s,oy+s/2,ox,oy+s,ox,oy+2*s,ox-s,oy+1.5*s],shade(c,(gl?1:.78)*j));
+  if(!B.has((x+1)+','+y+','+z))poly([ox,oy+s,ox+s,oy+s/2,ox+s,oy+1.5*s,ox,oy+2*s],shade(c,(gl?.92:.58)*j));
+ }
+}
+function initCanvas(cv){
+ const[plan,theme,seed,rad]=cv.dataset.scene.split(':');
+ STORE.set(cv,buildScene(theme,plan,+seed,+rad));
+ render(cv);
+}
+const canvases=[...document.querySelectorAll('canvas[data-scene]')];
+const ready=new Set();
+const cio='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&!ready.has(e.target)){ready.add(e.target);initCanvas(e.target);cio.unobserve(e.target)}}),{rootMargin:'300px'}):null;
+canvases.forEach(c=>cio?cio.observe(c):(ready.add(c),initCanvas(c)));
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ready.forEach(render),150)});
+
+/* ============ UI ============ */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)};
+const copyText=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}a.remove();return ok}};
+
+/* progress bar */
+const bar=$('#progress');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100||0)+'%'},{passive:true});
+
+/* mobile menu */
+const burger=$('#burger'),links=$('#links');
+burger.addEventListener('click',()=>{const o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+links.addEventListener('click',e=>{if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+
+/* scrollspy */
+const spy=$$('.links a');
+if('IntersectionObserver' in window){
+ const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)spy.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+ ['categories','builds','why','install','custom','faq'].forEach(id=>{const el=document.getElementById(id);el&&so.observe(el)});
+}
+
+/* reveal */
+const rv=$$('.rv');
+if('IntersectionObserver' in window){
+ const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.12});
+ rv.forEach(el=>ro.observe(el));
+}else rv.forEach(el=>el.classList.add('in'));
+
+/* count up */
+const cn=$('[data-count]');
+if(cn&&'IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+ const target=+cn.dataset.count;cn.textContent='0';
+ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){o.disconnect();const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200);cn.textContent=Math.round(target*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}})).observe(cn);
+}
+
+/* tabs */
+const tabs=$$('.tab');
+function selectTab(i){tabs.forEach((t,k)=>{const on=k===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
+tabs.forEach((t,i)=>{t.addEventListener('click',()=>selectTab(i));t.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();selectTab((i+1)%3);tabs[(i+1)%3].focus()}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();selectTab((i+2)%3);tabs[(i+2)%3].focus()}})});
+
+/* copy buttons */
+$$('.copy').forEach(b=>b.addEventListener('click',async()=>{
+ const ok=await copyText(b.dataset.copy),orig=b.innerHTML;
+ b.innerHTML='<svg class="i"><use href="#i-check"/></svg>'+(ok?'Copied':'Press Ctrl+C');
+ setTimeout(()=>b.innerHTML=orig,1600);
+}));
+
+/* brief builder */
+$$('.pick').forEach(p=>p.addEventListener('click',()=>p.setAttribute('aria-pressed',p.getAttribute('aria-pressed')!=='true')));
+$('#sendBrief').addEventListener('click',async()=>{
+ const needs=$$('.pick[aria-pressed=true]').map(p=>p.textContent);
+ const msg=['Hi Mythical Studios! I\'d like to start a project.','',
+  'What I need: '+(needs.length?needs.join(', '):'Not sure yet'),
+  'Server type: '+($('#stype').value.trim()||'Not specified'),
+  'Details: '+($('#sdesc').value.trim()||'Not specified')].join('\n');
+ const ok=await copyText(msg);
+ toast(ok?'Brief copied. Paste it in Discord.':'Opening Discord. Please write your brief there.');
+ setTimeout(()=>window.open(CONFIG.discord,'_blank','noopener'),700);
+});
+</script>
 </body>
 </html>
