@@ -54,8 +54,8 @@ function render(){
  const rows=filteredProducts();$("count").textContent=rows.length+" item"+(rows.length===1?"":"s");$("heroCount").textContent=products.length;
  const grid=$("grid");if(!rows.length){grid.innerHTML='<div class="empty"><strong>No matching products</strong>Try another search or filter, or check back when more items are published.</div>';return;}
  grid.innerHTML=rows.map((p,i)=>{
-  const a=assetFor(p)||p._asset,title=p.title||p.name||a?.title||"Mythical Studios Build",desc=clean(p.description||p.desc||a?.desc||"A premium Minecraft resource from Mythical Studios."),id=String(p.packageId||p.id||""),img=imageFor(p),price=money(p),buyable=live&&!!id&&priceOf(p)!==null,label=p._fallback?"PREVIEW":(i<2?"STUDIO PICK":(pageCategory==="bundles"?"BUNDLE":"SCHEMATIC")),version=clean(p.version||p.minecraft_version||""),format=clean(p.format||p.file_format||"");
-  return '<article class="card"><div class="photo"><img src="'+img+'" alt="'+title.replace(/"/g,"&quot;")+' preview" loading="lazy"><span class="num">'+String(i+1).padStart(2,"0")+'</span><span class="pill">'+label+'</span></div><div class="body"><div class="categoryTag">'+(pageCategory==="bundles"?"Bundle collection":"Minecraft schematic")+'</div><div class="title">'+title+'</div><div class="desc">'+desc+'</div><div class="metaTags"><span class="metaTag">'+(version?version.toUpperCase():"VERSION · CHECK LISTING")+'</span><span class="metaTag">'+(format?format.toUpperCase():"FORMAT · CHECK LISTING")+'</span></div><div class="bottom"><span class="price">'+price+'</span><button class="buy" data-product="'+encodeURIComponent(id)+'" '+(!buyable?"disabled":"")+'>'+(buyable?"VIEW & BUY →":(p._fallback?"TEBEX NOT LINKED":"PRICE UNAVAILABLE"))+'</button></div></div></article>';
+  const a=assetFor(p)||p._asset,title=p.title||p.name||a?.title||"Mythical Studios Build",desc=clean(p.description||p.desc||a?.desc||"A premium Minecraft resource from Mythical Studios."),id=String(p.packageId||p.id||""),img=imageFor(p),price=money(p),buyable=true,label=p._fallback?"PREVIEW":(i<2?"STUDIO PICK":(pageCategory==="bundles"?"BUNDLE":"SCHEMATIC")),version=clean(p.version||p.minecraft_version||""),format=clean(p.format||p.file_format||"");
+  return '<article class="card"><div class="photo"><img src="'+img+'" alt="'+title.replace(/"/g,"&quot;")+' preview" loading="lazy"><span class="num">'+String(i+1).padStart(2,"0")+'</span><span class="pill">'+label+'</span></div><div class="body"><div class="categoryTag">'+(pageCategory==="bundles"?"Bundle collection":"Minecraft schematic")+'</div><div class="title">'+title+'</div><div class="desc">'+desc+'</div><div class="metaTags"><span class="metaTag">'+(version?version.toUpperCase():"VERSION · CHECK LISTING")+'</span><span class="metaTag">'+(format?format.toUpperCase():"FORMAT · CHECK LISTING")+'</span></div><div class="bottom"><span class="price">'+price+'</span><button class="buy" data-product="'+encodeURIComponent(id)+'" '+(!buyable?"disabled":"")+'>'+"OPEN TEBEX STORE ↗"+'</button></div></div></article>';
  }).join("");
  grid.querySelectorAll("img").forEach(img=>img.addEventListener("error",()=>{img.onerror=null;img.src="/spawn.jpg";}));
  grid.querySelectorAll("button[data-product]").forEach(btn=>btn.addEventListener("click",()=>{const id=decodeURIComponent(btn.dataset.product||"");selected=rows.find(p=>String(p.packageId||p.id||"")===id);if(selected)openModal(selected);}));
@@ -63,25 +63,18 @@ function render(){
 function openModal(p){
  const a=assetFor(p)||p._asset;$("modalNum").textContent=pageCategory==="bundles"?"MYTHICAL STUDIOS · BUNDLE":"MYTHICAL STUDIOS · SCHEMATIC";$("modalTitle").textContent=p.title||p.name||a?.title||"Minecraft resource";$("modalDesc").textContent=clean(p.description||p.desc||a?.desc||"Premium Minecraft resource.");
  $("modalMeta").innerHTML='<span>'+pageCategory.toUpperCase()+'</span><span>'+clean(p.version||p.minecraft_version||"VERSION DETAILS IN LISTING")+'</span><span>'+clean(p.format||p.file_format||"FORMAT DETAILS IN LISTING")+'</span>';$("modalPrice").textContent=money(p);$("modalImg").innerHTML='<img src="'+imageFor(p)+'" alt="Preview">';
- $("checkout").disabled=!(live&&(p.packageId||p.id));$("checkout").textContent=$("checkout").disabled?"TEBEX CHECKOUT UNAVAILABLE":"CONTINUE TO TEBEX CHECKOUT";$("hint").textContent=$("checkout").disabled?"Live package details are needed before checkout can be enabled.":"Secure checkout and digital delivery handled by Tebex.";$("modal").classList.add("open");
+ $("checkout").disabled=false;$("checkout").textContent="OPEN TEBEX STORE ↗";$("hint").textContent="Tebex store: vexedsmp.tebex.io. Product-specific links can be added once packages are published.";$("modal").classList.add("open");
 }
-async function checkout(){
- if(!selected||!live)return;const id=String(selected.packageId||selected.id||"");if(!id)return;const b=$("checkout");b.disabled=true;b.textContent="CREATING SECURE CHECKOUT…";
- const payload=JSON.stringify({packageId:id,category:pageCategory});let last="Tebex checkout is not configured yet.";
- for(const url of ["https://api.mythicalstudios.online/api/tebex/checkout","https://api.mythicalstudios.online/.netlify/functions/tebex-checkout","/.netlify/functions/tebex-checkout"]){
-  try{const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:payload}),j=await r.json().catch(()=>({}));if(!r.ok){last=j.error||"Tebex checkout could not be created.";continue;}const next=j.checkout||j.url;if(next){location.assign(next);return;}}
-  catch(e){last="Store checkout service is offline. Please try again later.";}
- }
- alert(last);b.disabled=false;b.textContent="CONTINUE TO TEBEX CHECKOUT";
-}
+async function checkout(){location.assign("https://vexedsmp.tebex.io/");}
 async function loadPackages(){
- for(const url of ["https://api.mythicalstudios.online/api/tebex/packages","https://api.mythicalstudios.online/.netlify/functions/tebex-packages","/.netlify/functions/tebex-packages"]){
-  try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const j=await r.json(),rows=Array.isArray(j.packages)?j.packages:(Array.isArray(j.data)?j.data:[]);if(!rows.length)continue;
-   products=rows.map(p=>({...p,id:String(p.id||p.packageId||""),packageId:String(p.packageId||p.id||""),title:p.title||p.name||"",description:clean(p.description||p.desc||""),price:p.price??p.base_price??p.total_price,category:p.category||p.category_name||"",image:p.image||p.image_url||"",currency:p.currency||"USD"}));live=true;$("status").classList.remove("show");render();return;
-  }catch(e){}
- }
- products=fallbackProducts();live=false;$("status").classList.add("show");$("status").textContent="Showing your uploaded preview images. Live prices and checkout appear when the Tebex API is deployed and its webstore token is configured.";render();
+ products=fallbackProducts();
+ live=false;
+ const status=$("status");
+ status.classList.add("show");
+ status.textContent="Tebex store linked: vexedsmp.tebex.io. These are preview cards while the individual Tebex packages are being published. Select a product to open the Tebex store.";
+ render();
 }
+
 $("search").addEventListener("input",render);$("sort").addEventListener("change",render);$("category").addEventListener("change",render);$("priceFilter").addEventListener("change",render);
 $("close").addEventListener("click",()=>$("modal").classList.remove("open"));$("modal").addEventListener("click",e=>{if(e.target.id==="modal")$("modal").classList.remove("open")});document.addEventListener("keydown",e=>{if(e.key==="Escape")$("modal").classList.remove("open")});$("checkout").addEventListener("click",checkout);loadPackages();
 })();
