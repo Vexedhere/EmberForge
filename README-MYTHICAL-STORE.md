@@ -49,8 +49,8 @@ Do NOT commit the Discord bot token or GitHub token.
 
 Use server environment variables:
 
-ADMIN_CHETHAN_PASSWORD=051212
-ADMIN_VIJAY_PASSWORD=MalluruVijay
+ADMIN_CHETHAN_PASSWORD=<set-a-new-secret>
+ADMIN_VIJAY_PASSWORD=<set-a-new-secret>
 GITHUB_TOKEN=<GitHub fine-grained token with repository Contents read/write>
 DISCORD_BOT_TOKEN=<your rotated Discord bot token>
 DISCORD_GUILD_ID=<server ID>
