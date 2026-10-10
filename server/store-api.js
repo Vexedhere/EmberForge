@@ -108,7 +108,7 @@ app.get("/api/products",async(req,res)=>{
 app.post("/api/admin/products",auth,upload.fields([{name:"image",maxCount:1},{name:"file",maxCount:1}]),async(req,res)=>{
   try{
     const {category,title,price,description,features}=req.body||{};
-    if(!["ranks","schematic","development"].includes(category))return res.status(400).json({error:"Invalid category"});
+    if(!["ranks","schematic","bundles","development"].includes(category))return res.status(400).json({error:"Invalid category"});
     if(!title||!String(title).trim())return res.status(400).json({error:"Title is required"});
     const numericPrice=Number(price);
     if(!Number.isFinite(numericPrice)||numericPrice<0)return res.status(400).json({error:"Valid price is required"});
@@ -161,6 +161,43 @@ app.get("/api/admin/products",auth,async(req,res)=>{
     console.error(e);
     res.status(500).json({error:e.message});
   }
+});
+
+
+app.get("/api/tebex/packages",async(req,res)=>{
+  const token=process.env.TEBEX_WEBSTORE_TOKEN;
+  if(!token)return res.status(503).json({error:"Tebex is not configured. Set TEBEX_WEBSTORE_TOKEN in the backend environment."});
+  try{
+    const r=await fetch("https://headless.tebex.io/api/accounts/"+encodeURIComponent(token)+"/packages",{headers:{Accept:"application/json"}});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)return res.status(502).json({error:j?.message||j?.error||"Tebex catalogue request failed.",status:r.status});
+    const packages=(Array.isArray(j?.data)?j.data:[]).map(p=>({id:String(p.id),title:p.name||"",description:String(p.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim(),image:p.image||p.media?.[0]?.url||"",price:Number(p.base_price??p.total_price??0),currency:p.currency||"USD",category:p.category||"",type:p.type||""}));
+    res.set("Cache-Control","no-store");res.json({packages});
+  }catch(e){console.error(e);res.status(500).json({error:e.message||"Could not load Tebex packages."});}
+});
+app.post("/api/tebex/checkout",async(req,res)=>{
+  const token=process.env.TEBEX_WEBSTORE_TOKEN;
+  if(!token)return res.status(503).json({error:"Tebex checkout is not configured. Set TEBEX_WEBSTORE_TOKEN in the backend environment."});
+  try{
+    const packageId=String(req.body?.packageId||"");
+    if(!/^\\d+$/.test(packageId))return res.status(400).json({error:"A valid Tebex package ID is required."});
+    const verifyRes=await fetch("https://headless.tebex.io/api/accounts/"+encodeURIComponent(token)+"/packages/"+encodeURIComponent(packageId),{headers:{Accept:"application/json"}});
+    const verify=await verifyRes.json().catch(()=>({}));
+    const verified=verify?.data?.[0]||verify?.data||verify;
+    if(!verifyRes.ok||!verified?.id)return res.status(404).json({error:"That package is not available in the connected Tebex store."});
+    const category=req.body?.category==="bundles"?"bundles":"schematic";
+    const base="https://store.mythicalstudios.online/store/categories/"+category+"/";
+    const basketRes=await fetch("https://headless.tebex.io/api/accounts/"+encodeURIComponent(token)+"/baskets",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({complete_url:base+"?purchase=complete",cancel_url:base+"?purchase=cancelled",complete_auto_redirect:false})});
+    const basket=await basketRes.json().catch(()=>({}));
+    if(!basketRes.ok)return res.status(502).json({error:basket?.message||basket?.error||"Tebex could not create the checkout basket.",status:basketRes.status});
+    const ident=basket?.data?.ident||basket?.ident;if(!ident)throw new Error("Tebex created a basket but returned no basket identifier.");
+    const addRes=await fetch("https://headless.tebex.io/api/baskets/"+encodeURIComponent(ident)+"/packages",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({package_id:packageId,quantity:1})});
+    const added=await addRes.json().catch(()=>({}));
+    if(!addRes.ok)return res.status(502).json({error:added?.message||added?.error||"Tebex could not add this package to the basket.",status:addRes.status});
+    const checkout=added?.links?.checkout||added?.data?.links?.checkout;
+    if(!checkout)throw new Error("Tebex accepted the package but did not return a checkout URL.");
+    res.json({checkout});
+  }catch(e){console.error(e);res.status(500).json({error:e.message||"Checkout failed."});}
 });
 
 function startStoreApi(){
