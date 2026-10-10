@@ -101,7 +101,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 
 <nav class="nav"><div class="wrap">
 <a class="brand" href="#top"><span class="mark">M</span>Mythical Studios</a>
-<div class="links" id="links"><a href="#categories">Categories</a><a href="#schematics">Schematics</a><a href="#bundles">Bundles</a><a href="#custom">Custom Dev</a><a href="#about">About</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
+<div class="links" id="links"><a href="#categories">Categories</a><a href="/store/categories/schematic/">Schematics</a><a href="#bundles">Bundles</a><a href="#custom">Custom Dev</a><a href="#about">About</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
 <div style="display:flex;gap:10px"><a class="btn sm p" href="/store/categories/schematic/">Open the store</a><button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><svg class="i"><use href="#mn"/></svg></button></div>
 </div></nav>
 
@@ -128,14 +128,6 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 <a class="cat rv" href="/store/categories/ranks/"><div class="ic"><svg class="i"><use href="#st"/></svg></div><h3>Ranks</h3><p>Store-ready ranks and progression for your community.</p></a>
 <a class="cat rv" href="/store/categories/development/"><div class="ic"><svg class="i"><use href="#co"/></svg></div><h3>Custom Dev</h3><p>Plugins, setups and full servers made for you.</p></a>
 </div></div></section>
-
-<section id="schematics" style="padding-top:10px"><div class="wrap">
-<div class="head rv"><h2>The schematic vault.</h2><p>Every preview below is drawn from the build type it represents. Search, filter and save favourites.</p></div>
-<div class="tools"><input class="search" id="q" type="search" placeholder="Search schematics..." aria-label="Search schematics"><select class="search" id="sort" style="flex:0 0 auto;min-width:0" aria-label="Sort"><option value="f">Featured</option><option value="l">Price: low to high</option><option value="h">Price: high to low</option></select><div id="filters" style="display:flex;gap:8px;flex-wrap:wrap;width:100%"></div></div>
-<div class="grid3" id="vault"></div>
-<div class="empty" id="empty">Nothing matches that search. Try another word, or request a custom build below.</div>
-<div class="row" style="justify-content:center"><a class="btn p" href="/store/categories/schematic/">See every schematic <svg class="i"><use href="#a"/></svg></a></div>
-</div></section>
 
 <section id="bundles" style="padding-top:10px"><div class="wrap">
 <div class="head rv"><h2>Bundles: more build for less.</h2><p>Themed packs that fit together, so your whole server looks like one world.</p></div>
@@ -218,51 +210,6 @@ const TEAM=[
 {n:"Vijay",r:"Co-Owner",a:"V",s:["Co-ownership","Operations","Community"],b:"Vijay is co-owner of Mythical Network and helps run the studio day to day. He looks after operations, store quality and keeping the community supported.",b2:"He works closely with Chethan on partnerships, planning and making sure every customer gets a smooth experience."},
 {n:"Join us",r:"We are growing",a:"+",s:["Builders","Developers","Support"],b:"Mythical Network is looking for talented builders, developers and community helpers.",b2:"Join our Discord and tell us what you can do."}
 ];
-/* YOUR PRODUCTS: [name, category, tag, description, scene, price, tebexPackageId]
-   To use real screenshots, paste an image URL for that package id in IMG below. */
-const PKG=id=>"https://store.mythicalstudios.online/package/"+id;
-const IMG={/* 7721430:"https://your-image-url.png", */};
-const P=[
-["Starter Base Village","Towns & Villages","Village","A compact village to start any survival server",
-"village:grass:4:8",2.99,7721430],
-["Nether Fortress Base","Bases","Base","A dark fortress base built for the Nether look",
-"castle:nether:5:8",6.49,7721460],
-["Ocean Monument Base","Bases","Base","An underwater-style monument base with columns",
-"temple:ocean:3:8",5.99,7721459],
-["Giant Treehouse Base","Bases","Base","A huge treehouse base high above the ground",
-"treehouse:grass:6:8",4.49,7721442],
-["Underground Bunker","Bases","Base","A hidden bunker base with a surface hatch",
-"bunker:cave:5:8",4.49,7721441],
-["Japanese Survival Village","Towns & Villages","Village","A sakura-style village for survival and roleplay",
-"village:sakura:8:8",5.49,7721438],
-["Mountain Kingdom","Spawns & Lobbies","Spawn","A kingdom on a snowy mountain, ideal as a spawn",
-"castle:snow:3:8",5.99,7721437],
-["Automatic Farm District","Towns & Villages","Farms","A farm district laid out for automatic farming",
-"farm:grass:7:8",4.49,7721436],
-["Survival Trading Hall","Towns & Villages","Trading","A trading hall with stalls for survival servers",
-"market:grass:5:8",3.99,7721434],
-["Medieval Town","Towns & Villages","Town","A full medieval town with streets and houses",
-"village:grass:12:8",5.49,7721431],
-["Fantasy Kingdom Spawn","Spawns & Lobbies","Spawn","A magical fantasy kingdom spawn",
-"castle:end:11:8",5.99,7721409],
-["Desert Pharaoh","Themed","Desert","An ancient desert pyramid for adventure servers",
-"pyramid:sand:2:8",5.49,7721428],
-["Sakura Islands","Themed","Islands","Floating cherry blossom islands",
-"sky:sakura:9:5.6",4.99,7721427],
-["Dwarven Mines BedWars","Bedwars","BedWars","A mine-themed BedWars map",
-"bw:cave:4:8",5.99,7721426],
-["Void Abyss","Themed","Void","A dark void-themed build for events and maps",
-"sky:void:3:5.6",6.49,7721425],
-["CandyLand BedWars","Bedwars","BedWars","A sweet, colourful BedWars map",
-"bw:candy:6:8",5.99,7721423],
-["Olympus Temple Spawn","Spawns & Lobbies","Spawn","A marble temple spawn in the clouds",
-"temple:marble:2:8",6.99,7721419],
-["Sky Islands Lobby","Spawns & Lobbies","Lobby","A sky island lobby for game modes",
-"hub:grass:2:7",5.49,7721418],
-["Merchant Marketplace","Towns & Villages","Market","A busy marketplace with trading stalls",
-"market:sand:9:8",3.99,7721411],
-["Roman Colosseum","Themed","Arena","A Roman colosseum arena for PvP and events",
-"ring:sand:3:8",4.99,7721410]];
 const T={
 ocean:{top:'#3aa6b5',side:'#2b7f8f',deep:'#1f5f73',under:'#2a4d62',stone:'#4fb8a8',roof:'#2c9a95',wood:'#2f5f6e',plank:'#6fd0c4',leaf:'#2fa98c',accent:'#ffd987',fluid:'#2b6fd1',path:'#7fd0c8'},
 sakura:{top:'#6fb85a',side:'#8a6a45',deep:'#6b4f33',under:'#737883',stone:'#c9c4cc',roof:'#b3363f',wood:'#6a3f2a',plank:'#e3cfa6',leaf:'#f2a4c6',accent:'#f4a93b',fluid:'#3d86d1',path:'#d9c9b0'},
@@ -334,18 +281,6 @@ let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>ready.f
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2600)};
 const copyText=async t=>{try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();let k=false;try{k=document.execCommand('copy')}catch(_){}a.remove();return k}};
-
-/* vault */
-const types=['All',...new Set(P.map(p=>p[1]))];let ft='All';const favs=new Set();
-$('#filters').innerHTML=types.map(t=>`<button class="pill" aria-pressed="${t==='All'}" data-t="${t}">${t}</button>`).join('');
-function drawVault(){const q=$('#q').value.toLowerCase().trim(),so=$('#sort').value;let list=P.filter(p=>(ft==='All'||p[1]===ft)&&(p[0]+p[2]+p[3]).toLowerCase().includes(q));
-if(so==='l')list=[...list].sort((a,b)=>a[5]-b[5]);if(so==='h')list=[...list].sort((a,b)=>b[5]-a[5]);
-$('#vault').innerHTML=list.map(p=>`<article class="card"><div class="art"><canvas data-scene="${p[4]}" role="img" aria-label="${p[0]} preview"></canvas>${IMG[p[6]]?`<img src="${IMG[p[6]]}" alt="${p[0]}" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">`:''}<span class="tagc">${p[2]}</span><button class="heart" aria-pressed="${favs.has(p[0])}" aria-label="Save ${p[0]}" data-n="${p[0]}"><svg class="i"><use href="#hr"/></svg></button></div><div class="meta"><h3>${p[0]}</h3><p>${p[3]}</p><div class="foot"><b style="font:800 20px var(--d);color:var(--text)">$${p[5].toFixed(2)}</b><a class="btn g sm" href="${PKG(p[6])}">Buy now</a></div></div></article>`).join('');
-$('#empty').style.display=list.length?'none':'block';watch()}
-$('#filters').addEventListener('click',e=>{const b=e.target.closest('.pill');if(!b)return;ft=b.dataset.t;$$('#filters .pill').forEach(x=>x.setAttribute('aria-pressed',x===b));drawVault()});
-$('#q').addEventListener('input',drawVault);$('#sort').addEventListener('change',drawVault);
-$('#vault').addEventListener('click',e=>{const h=e.target.closest('.heart');if(!h)return;const n=h.dataset.n;favs.has(n)?favs.delete(n):favs.add(n);h.setAttribute('aria-pressed',favs.has(n));toast(favs.has(n)?'Saved: '+n:'Removed: '+n)});
-drawVault();
 
 /* team */
 $('#teamGrid').innerHTML=TEAM.map((m,i)=>`<button class="tm rv" data-i="${i}" aria-label="Read about ${m.n}"><div class="av">${m.a}</div><div class="t"><h3>${m.n}</h3><small>${m.r}</small><span>Select to read more</span></div></button>`).join('');
