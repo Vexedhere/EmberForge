@@ -171,7 +171,7 @@ app.get("/api/tebex/packages",async(req,res)=>{
     const r=await fetch("https://headless.tebex.io/api/accounts/"+encodeURIComponent(token)+"/packages",{headers:{Accept:"application/json"}});
     const j=await r.json().catch(()=>({}));
     if(!r.ok)return res.status(502).json({error:j?.message||j?.error||"Tebex catalogue request failed.",status:r.status});
-    const packages=(Array.isArray(j?.data)?j.data:[]).map(p=>({id:String(p.id),title:p.name||"",description:String(p.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim(),image:p.image||p.media?.[0]?.url||"",price:Number(p.base_price??p.total_price??0),currency:p.currency||"USD",category:p.category||"",type:p.type||""}));
+    const packages=(Array.isArray(j?.data)?j.data:[]).map(p=>({id:String(p.id),title:p.name||"",description:String(p.description||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim(),image:p.image||p.media?.[0]?.url||"",price:Number(p.base_price??p.total_price??0),currency:p.currency||"USD",category:p.category||"",type:p.type||""}));
     res.set("Cache-Control","no-store");res.json({packages});
   }catch(e){console.error(e);res.status(500).json({error:e.message||"Could not load Tebex packages."});}
 });
@@ -180,7 +180,7 @@ app.post("/api/tebex/checkout",async(req,res)=>{
   if(!token)return res.status(503).json({error:"Tebex checkout is not configured. Set TEBEX_WEBSTORE_TOKEN in the backend environment."});
   try{
     const packageId=String(req.body?.packageId||"");
-    if(!/^\\d+$/.test(packageId))return res.status(400).json({error:"A valid Tebex package ID is required."});
+    if(!/^\d+$/.test(packageId))return res.status(400).json({error:"A valid Tebex package ID is required."});
     const verifyRes=await fetch("https://headless.tebex.io/api/accounts/"+encodeURIComponent(token)+"/packages/"+encodeURIComponent(packageId),{headers:{Accept:"application/json"}});
     const verify=await verifyRes.json().catch(()=>({}));
     const verified=verify?.data?.[0]||verify?.data||verify;
