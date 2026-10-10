@@ -68,14 +68,14 @@ function openModal(p){
 async function checkout(){
  if(!selected||!live)return;const id=String(selected.packageId||selected.id||"");if(!id)return;const b=$("checkout");b.disabled=true;b.textContent="CREATING SECURE CHECKOUT…";
  const payload=JSON.stringify({packageId:id,category:pageCategory});let last="Tebex checkout is not configured yet.";
- for(const url of ["https://api.mythicalstudios.online/api/tebex/checkout","/.netlify/functions/tebex-checkout"]){
+ for(const url of ["https://api.mythicalstudios.online/api/tebex/checkout","https://api.mythicalstudios.online/.netlify/functions/tebex-checkout","/.netlify/functions/tebex-checkout"]){
   try{const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:payload}),j=await r.json().catch(()=>({}));if(!r.ok){last=j.error||"Tebex checkout could not be created.";continue;}const next=j.checkout||j.url;if(next){location.assign(next);return;}}
   catch(e){last="Store checkout service is offline. Please try again later.";}
  }
  alert(last);b.disabled=false;b.textContent="CONTINUE TO TEBEX CHECKOUT";
 }
 async function loadPackages(){
- for(const url of ["https://api.mythicalstudios.online/api/tebex/packages","/.netlify/functions/tebex-packages"]){
+ for(const url of ["https://api.mythicalstudios.online/api/tebex/packages","https://api.mythicalstudios.online/.netlify/functions/tebex-packages","/.netlify/functions/tebex-packages"]){
   try{const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;const j=await r.json(),rows=Array.isArray(j.packages)?j.packages:(Array.isArray(j.data)?j.data:[]);if(!rows.length)continue;
    products=rows.map(p=>({...p,id:String(p.id||p.packageId||""),packageId:String(p.packageId||p.id||""),title:p.title||p.name||"",description:clean(p.description||p.desc||""),price:p.price??p.base_price??p.total_price,category:p.category||p.category_name||"",image:p.image||p.image_url||"",currency:p.currency||"USD"}));live=true;$("status").classList.remove("show");render();return;
   }catch(e){}
