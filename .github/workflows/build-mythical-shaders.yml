@@ -1,0 +1,36 @@
+name: Build Mythical Shaders ZIP
+
+on:
+  push:
+    branches: [Master]
+    paths:
+      - "mythical-shaders/**"
+      - ".github/workflows/build-mythical-shaders.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Package installable shaderpack
+        run: |
+          cd mythical-shaders
+          zip -r ../Mythical-Shaders.zip shaders README.md
+
+      - name: Create or update latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view mythical-shaders-latest >/dev/null 2>&1; then
+            gh release create mythical-shaders-latest Mythical-Shaders.zip \
+              --title "Mythical Shaders — Latest" \
+              --notes "Free Mythical Studios shaderpack preview. Download Mythical-Shaders.zip and place it in your Minecraft Java shaderpacks folder. This is an early prototype; compatibility is not guaranteed."
+          else
+            gh release upload mythical-shaders-latest Mythical-Shaders.zip --clobber
+          fi
