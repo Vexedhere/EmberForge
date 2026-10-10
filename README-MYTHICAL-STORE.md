@@ -9,6 +9,7 @@ The storefront is now branded **Mythical Studios**.
 - Category URLs:
   - /store/categories/ranks/
   - /store/categories/schematic/
+  - /store/categories/bundles/
   - /store/categories/development/
 - Admin panel at /admin/.
 - Admin can add:
@@ -28,6 +29,8 @@ The storefront is now branded **Mythical Studios**.
 GitHub Pages is static hosting. The Node API therefore needs to be deployed separately (for example on your preferred Node hosting provider) and exposed as:
 
 https://api.mythicalstudios.online
+
+The API now exposes `/api/tebex/packages` and `/api/tebex/checkout`. Set `TEBEX_WEBSTORE_TOKEN` only in the backend host's environment. GitHub Pages cannot run Node routes or Netlify Functions by itself; deploy the Node API, or deploy this repository on Netlify and set the same token there.
 
 Set the admin page's API URL to that address if it differs.
 
@@ -55,6 +58,7 @@ GITHUB_TOKEN=<GitHub fine-grained token with repository Contents read/write>
 DISCORD_BOT_TOKEN=<your rotated Discord bot token>
 DISCORD_GUILD_ID=<server ID>
 STORE_URL=https://store.mythicalstudios.online/
+TEBEX_WEBSTORE_TOKEN=<your Tebex webstore token>
 
 The Discord bot needs permission to send messages and mention @everyone in the announcement channel.
 
