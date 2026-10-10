@@ -76,11 +76,12 @@ dialog{border:1px solid var(--line2);border-radius:22px;background:var(--panel);
 dialog .av{height:130px;font-size:48px}dialog .in{padding:26px 28px 28px}dialog h3{font-size:26px}dialog .role{color:var(--gold);font-weight:700;margin-top:4px}dialog p{margin-top:14px;color:var(--muted)}dialog .sk{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(12,11,18,.7);cursor:pointer;font-size:20px}
 details{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:0 24px}details[open]{border-color:var(--line2)}summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:19px 0;font-weight:700}summary::-webkit-details-marker{display:none}summary:after{content:"+";font-size:24px;color:var(--gold);line-height:1}details[open] summary:after{content:"\2212"}details p{margin:0 0 20px;color:var(--muted)}.faq{display:grid;gap:10px;max-width:860px}
+.capGroups{display:grid;gap:10px;margin:24px 0 10px}.capGroup{padding:0 22px;border-color:var(--line)}.capGroup summary{align-items:center}.capCount{margin-left:auto;color:var(--gold);font-size:12px;white-space:nowrap}.capGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 20px;padding:0 0 22px}.capGrid div{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);color:var(--muted);font-size:14px}
 .final .box{padding:70px 36px;text-align:center;border-radius:26px;border:1px solid var(--line2);background:radial-gradient(60% 100% at 50% 0,rgba(139,92,246,.25),var(--panel) 75%)}.final h2{font-size:clamp(30px,5vw,54px);font-weight:800}.final p{margin:14px auto 0;max-width:32em;color:var(--muted);font-size:18px}.final .row{justify-content:center}
 footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px 30px}footer nav{display:flex;gap:20px;flex-wrap:wrap}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;pointer-events:none;background:var(--text);color:var(--ink);padding:12px 20px;border-radius:12px;font-weight:700;z-index:200;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:1000px){.hero .wrap,.install,.about,.dev{grid-template-columns:1fr}.stage{max-width:600px;margin:auto;width:100%}.cats{grid-template-columns:1fr 1fr}.team{grid-template-columns:1fr 1fr}.grid3,.feat{grid-template-columns:1fr 1fr}.bund{grid-template-columns:1fr}.dev .r{border-left:0;border-top:1px solid var(--line)}.stats .grid{grid-template-columns:1fr 1fr}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-@media(max-width:720px){.burger{display:grid}.links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px 16px;display:none}.links.open{display:flex}.nav .btn{display:none}section{padding:60px 0}.cats,.team,.grid3,.feat,.vals{grid-template-columns:1fr}.bd{grid-template-columns:1fr}.dev .l,.dev .r,.panel{padding:26px}}
+@media(max-width:720px){.capGrid{grid-template-columns:1fr}.burger{display:grid}.links{position:absolute;left:0;right:0;top:68px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 20px 16px;display:none}.links.open{display:flex}.nav .btn{display:none}section{padding:60px 0}.cats,.team,.grid3,.feat,.vals{grid-template-columns:1fr}.bd{grid-template-columns:1fr}.dev .l,.dev .r,.panel{padding:26px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 </style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -149,6 +150,28 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 <label class="lab" for="sd">Project details</label><textarea class="field" id="sd" placeholder="Style, size, Minecraft version, deadline..."></textarea>
 <button class="btn p" id="send"><svg class="i"><use href="#cp"/></svg>Copy brief and open Discord</button></div>
 </div></div></section>
+
+<section id="capabilities" style="padding-top:10px"><div class="wrap">
+<div class="head rv"><h2>50 ways to level up your server.</h2><p>Explore project ideas we can scope together. Availability, compatibility, timeline and pricing are confirmed before work begins.</p></div>
+<div class="capGroups">
+<details class="capGroup rv" open><summary>Worlds & builds <span class="capCount">01–10</span></summary><div class="capGrid">
+<div>01 · Survival spawn</div><div>02 · Minigame lobby</div><div>03 · Medieval town</div><div>04 · Fantasy castle</div><div>05 · Floating islands</div><div>06 · PvP arena</div><div>07 · BedWars map</div><div>08 · SkyBlock hub</div><div>09 · Trading district</div><div>10 · Themed event map</div>
+</div></details>
+<details class="capGroup rv"><summary>Plugins & gameplay <span class="capCount">11–20</span></summary><div class="capGrid">
+<div>11 · Custom command plugin</div><div>12 · Player progression</div><div>13 · Quest system</div><div>14 · Daily rewards</div><div>15 · Crate configuration</div><div>16 · Economy tuning</div><div>17 · Party system</div><div>18 · Queue workflow</div><div>19 · Minigame mechanics</div><div>20 · Quality-of-life tools</div>
+</div></details>
+<details class="capGroup rv"><summary>Ranks & community <span class="capCount">21–30</span></summary><div class="capGrid">
+<div>21 · Rank ladder planning</div><div>22 · Permission setup</div><div>23 · Donor perks planning</div><div>24 · Starter kits</div><div>25 · Chat formatting</div><div>26 · Discord role mapping</div><div>27 · Welcome messages</div><div>28 · Staff role structure</div><div>29 · Moderation workflow</div><div>30 · Community event setup</div>
+</div></details>
+<details class="capGroup rv"><summary>Server setup & reliability <span class="capCount">31–40</span></summary><div class="capGrid">
+<div>31 · Paper server setup</div><div>32 · Plugin configuration</div><div>33 · Version compatibility review</div><div>34 · Permissions audit</div><div>35 · Spawn protection setup</div><div>36 · World management plan</div><div>37 · Backup routine planning</div><div>38 · Performance review</div><div>39 · Staging-server testing</div><div>40 · Launch checklist</div>
+</div></details>
+<details class="capGroup rv"><summary>Store & launch experience <span class="capCount">41–50</span></summary><div class="capGrid">
+<div>41 · Store category planning</div><div>42 · Product page layout</div><div>43 · Tebex package linking</div><div>44 · Bundle planning</div><div>45 · Product preview design</div><div>46 · Installation guide</div><div>47 · FAQ setup</div><div>48 · Launch announcement</div><div>49 · Release roadmap</div><div>50 · Post-launch improvements</div>
+</div></details>
+</div>
+<div class="row"><a class="btn g" href="#custom">Build a project brief <svg class="i"><use href="#a"/></svg></a><a class="btn" href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener">Discuss an idea on Discord</a></div>
+</div></section>
 
 <section id="why" style="padding-top:10px"><div class="wrap">
 <div class="head rv"><h2>Built for server owners.</h2></div>
