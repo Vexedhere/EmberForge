@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Mythical Studios by Mythical Network: Minecraft schematics, bundles, ranks and custom server development.">
+<meta name="description" content="Mythical Studios by Mythical Network: Minecraft schematics, bundles, free shaderpacks and custom server development.">
 <title>Mythical Studios | Minecraft Schematics, Bundles & Custom Dev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -36,10 +36,10 @@ canvas{display:block;width:100%;height:100%}
 section{padding:84px 0}
 .head{max-width:660px;margin-bottom:38px}.head h2{font-size:clamp(30px,4vw,46px);font-weight:800}.head p{margin-top:12px;color:var(--muted);font-size:17px}
 .js .rv{opacity:0;transform:translateY(14px);transition:opacity .55s,transform .55s}.js .rv.in{opacity:1;transform:none}
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
 .cat{position:relative;border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:24px;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:border-color .25s,transform .25s}
 .cat:hover{border-color:var(--vio);transform:translateY(-4px)}.cat .art{position:absolute;inset:0 0 40% 0}.cat h3{font-size:24px;position:relative}.cat p{color:var(--muted);font-size:14.5px;margin-top:6px;position:relative}
-.cat .ic{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:12px;background:var(--panel2);border:1px solid var(--line2);display:grid;place-items:center;color:var(--vio2)}
+.cat .ic{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:12px;background:var(--panel2);border:1px solid var(--line2);display:grid;place-items:center;color:var(--vio2)}.free-tag{position:absolute;top:20px;right:16px;border:1px solid #a7e477;background:#172719e8;color:#b8f58e;border-radius:99px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.08em}
 .tools{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;align-items:center}
 .search{flex:1;min-width:220px;padding:13px 16px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);font:inherit}
 .pill{padding:9px 16px;border-radius:99px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);font-weight:600;font-size:14px;cursor:pointer}.pill[aria-pressed=true]{background:var(--mint);border-color:var(--mint);color:#0b100c}
@@ -117,7 +117,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 
 <nav class="nav"><div class="wrap">
 <a class="brand" href="#top"><span class="mark">M</span>Mythical Studios</a>
-<div class="links" id="links"><a href="#categories">Categories</a><a href="/store/categories/schematic/">Schematics</a><a href="#bundles">Bundles</a><a href="#custom">Custom Dev</a><a href="#capabilities">50 ideas</a><a href="#about">About</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
+<div class="links" id="links"><a href="#categories">Categories</a><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/bundles/">Bundles</a><a href="/shaderpacks/">Free Shaderpacks</a><a href="#custom">Custom Dev</a><a href="#capabilities">50 ideas</a><a href="#about">About</a><a href="#team">Team</a><a href="#faq">FAQ</a></div>
 <div style="display:flex;gap:10px"><a class="btn sm p" href="/store/categories/schematic/">Open the store</a><button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><svg class="i"><use href="#mn"/></svg></button></div>
 </div></nav>
 
@@ -126,7 +126,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 <div>
 <span class="badge"><i>C</i><span>Founded by <b>Chethan</b></span></span>
 <h1>Build a server players remember.</h1>
-<p class="lead">Premium Minecraft schematics, bundles, ranks and custom server development from Mythical Network. Made for owners who care how their world looks, feels and performs.</p>
+<p class="lead">Premium Minecraft schematics, themed bundles, free shaderpacks and custom server development from Mythical Network. Made for owners who care how their world looks, feels and performs.</p>
 <div class="row"><a class="btn g" href="/store/categories/schematic/">Browse schematics <svg class="i"><use href="#a"/></svg></a><a class="btn" href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener"><svg class="i"><use href="#ch"/></svg> Join Discord</a></div>
 </div>
 <div class="stage heroShot"><img src="/spawn.jpg" alt="Minecraft server spawn build by Mythical Studios" fetchpriority="high"><div class="shotBadge"><span class="liveDot"></span> BUILDS THAT MAKE A FIRST IMPRESSION</div><div class="shotCaption"><span>MYTHICAL STUDIOS / BUILD SPOTLIGHT</span><strong>Make your world unforgettable.</strong><a href="/store/categories/schematic/">Explore builds <svg class="i"><use href="#a"/></svg></a></div></div>
@@ -141,7 +141,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 <div class="cats">
 <a class="cat rv" href="/store/categories/schematic/"><div class="art"><img class="real-shot" src="/schematics.jpg" alt="Minecraft schematic builds preview" loading="lazy"></div><h3>Schematics</h3><p>Spawns, hubs, towns and castles ready to paste.</p></a>
 <a class="cat rv" href="/store/categories/bundles/"><div class="art"><img class="real-shot" src="/bundles.jpg" alt="Minecraft schematic bundle builds preview" loading="lazy"></div><h3>Bundles</h3><p>Matching builds grouped together at a better price.</p></a>
-<a class="cat rv" href="/store/categories/ranks/"><div class="ic"><svg class="i"><use href="#st"/></svg></div><h3>Ranks</h3><p>Store-ready ranks and progression for your community.</p></a>
+<a class="cat rv" href="/shaderpacks/"><div class="art"><img class="real-shot" src="https://cdn.modrinth.com/data/HVnmMxH1/images/111e76bfa966c68b3581a93f7322588e642ce4db_350.webp" alt="Complementary Minecraft shader preview" loading="lazy"></div><h3>Free Shaderpacks</h3><p>Real shader previews, official downloads and setup guides — always free.</p><span class="free-tag">100% FREE</span></a>
 <a class="cat rv" href="/store/categories/development/"><div class="ic"><svg class="i"><use href="#co"/></svg></div><h3>Custom Dev</h3><p>Plugins, setups and full servers made for you.</p></a>
 </div></div></section>
 
@@ -238,7 +238,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-s
 </div></div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 Mythical Studios · Mythical Network · Founded by Chethan</span><nav><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/bundles/">Bundles</a><a href="/store/categories/ranks/">Ranks</a><a href="/store/categories/development/">Custom Dev</a><a href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener">Discord</a></nav></div></footer>
+<footer><div class="wrap"><span>© 2026 Mythical Studios · Mythical Network · Founded by Chethan</span><nav><a href="/store/categories/schematic/">Schematics</a><a href="/store/categories/bundles/">Bundles</a><a href="/shaderpacks/">Free Shaderpacks</a><a href="/store/categories/development/">Custom Dev</a><a href="https://discord.gg/T4zyGz5EV" target="_blank" rel="noopener">Discord</a></nav></div></footer>
 
 <dialog id="dlg" aria-labelledby="dn"><button class="x" id="dx" aria-label="Close">×</button><div class="av" id="da"></div><div class="in"><h3 id="dn"></h3><div class="role" id="dr"></div><p id="db"></p><p id="db2"></p><div class="sk" id="ds"></div></div></dialog>
 <div class="toast" id="toast" role="status"></div>
