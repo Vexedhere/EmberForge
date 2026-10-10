@@ -1,136 +1,16 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Browse Mythical Studios Minecraft schematics with build previews, category filters and secure Tebex checkout.">
-<title>Schematic Store | Mythical Studios</title>
-<style>
-:root{--bg:#0c0b12;--panel:#17141f;--panel2:#1f1b2b;--line:#2a2538;--text:#f1eefb;--muted:#a49fb8;--violet:#8b5cf6;--cyan:#2dd4a0;--pink:#fbbf24;--lime:#b79cff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(900px 500px at 0 -10%,#8b5cf622,transparent 62%),radial-gradient(800px 500px at 100% 20%,#2dd4a012,transparent 58%),var(--bg);color:var(--text);font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(to bottom,#000,transparent 75%)}a{color:inherit;text-decoration:none}button,input,select{font:inherit}
-.nav{position:sticky;top:0;z-index:50;background:#0c0b12c9;backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}.navin{max-width:1320px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;font-size:11px}.logo{width:38px;height:38px;border:1px solid #2a2538;border-radius:12px;background:linear-gradient(135deg,#8b5cf6,#2dd4a0);color:#0c0b12;display:grid;place-items:center;box-shadow:0 0 35px #8b5cf644}.links{display:flex;gap:24px;color:#a49fb8;font-size:10px;font-weight:850}.links a:hover{color:#fff}.navbtn{padding:10px 13px;border:1px solid #8b5cf655;border-radius:10px;background:#8b5cf610;font-size:10px;font-weight:900}
-.wrap{max-width:1320px;margin:auto;padding:40px 22px 90px}.crumb{color:#817a95;font-size:9px;font-weight:900;letter-spacing:.15em;margin-bottom:30px}.crumb a:hover{color:#fff}
-.hero{position:relative;min-height:370px;border:1px solid var(--line);border-radius:28px;overflow:hidden;padding:42px;display:flex;align-items:end;background:linear-gradient(90deg,#0c0b12ee 0%,#0c0b12b8 42%,#0c0b1238 100%),url('/spawn.jpg') center/cover}.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#8b5cf625,transparent 45%,#2dd4a014);pointer-events:none}.hero>*{position:relative;z-index:2}.eyebrow{font-size:9px;font-weight:950;letter-spacing:.2em;color:#b79cff;text-transform:uppercase}.hero h1{font-size:clamp(48px,7vw,86px);line-height:.88;letter-spacing:-.065em;margin:14px 0 17px;max-width:850px}.grad{background:linear-gradient(90deg,#fff,#b79cff,#b79cff);background-clip:text;-webkit-background-clip:text;color:transparent}.hero p{max-width:620px;color:#c9c3d7;font-size:13px;line-height:1.8;margin:0}.heroStats{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}.stat{border:1px solid #2a2538;background:#0c0b129c;backdrop-filter:blur(12px);padding:9px 12px;border-radius:10px;font-size:9px;color:#aaa6b2;font-weight:850}.stat b{color:#fff;margin-right:4px}
-.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:22px 0 14px}.tools{display:flex;gap:8px;flex-wrap:wrap}.control{background:#0a0a0f;color:#fff;border:1px solid #2a2538;border-radius:10px;padding:10px 12px;font-size:10px;outline:0}.control:focus{border-color:#8b5cf655}.search{width:260px}.count{color:#817a95;font-size:10px;font-weight:850}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.card{background:linear-gradient(145deg,#ffffff08,#ffffff02);border:1px solid var(--line);border-radius:19px;overflow:hidden;display:flex;flex-direction:column;transition:.22s;cursor:pointer}.card:hover{transform:translateY(-6px);border-color:#8b5cf655;box-shadow:0 25px 80px #00090099}.photo{height:190px;position:relative;overflow:hidden;background:#0c0c12}.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s}.card:hover .photo img{transform:scale(1.06)}.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,#0c0b12dd)}.num{position:absolute;z-index:2;left:12px;top:12px;border:1px solid #3a3350;background:#0c0b12aa;backdrop-filter:blur(8px);padding:6px 8px;border-radius:8px;font-size:8px;font-weight:950;letter-spacing:.15em}.pill{position:absolute;z-index:2;right:12px;top:12px;background:#8b5cf6dd;padding:6px 8px;border-radius:999px;font-size:8px;font-weight:950}.body{padding:16px;display:flex;flex-direction:column;min-height:175px;flex:1}.title{font-size:14px;font-weight:950;line-height:1.25}.desc{font-size:10px;color:#a49fb8;line-height:1.65;margin:8px 0 13px}.bottom{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-top:auto}.price{font-size:17px;font-weight:950}.currency{font-size:9px;color:#817a95;font-weight:800}.buy{border:1px solid #8b5cf655;background:#8b5cf616;color:#fff;padding:9px 11px;border-radius:9px;font-size:9px;font-weight:950}.card:hover .buy{background:#8b5cf6}
-.empty{text-align:center;border:1px dashed #ffffff1c;border-radius:18px;padding:70px;color:#8f8b99}.empty strong{display:block;color:#fff;font-size:18px;margin-bottom:7px}
-.modal{position:fixed;inset:0;z-index:100;background:#050805dd;backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.box{width:min(760px,100%);max-height:90vh;overflow:auto;background:#17141f;border:1px solid #2a2538;border-radius:23px;box-shadow:0 40px 120px #000;position:relative}.close{position:absolute;z-index:5;right:14px;top:14px;width:38px;height:38px;border-radius:50%;border:1px solid #3a3350;background:#0c0b12cc;color:#fff;font-size:20px;cursor:pointer}.modalImg{height:330px;overflow:hidden;background:#1f1b2b}.modalImg img{width:100%;height:100%;object-fit:cover}.modalBody{padding:25px}.modalTitle{font-size:29px;font-weight:950;letter-spacing:-.04em;margin:5px 0 8px}.modalDesc{color:#a49fb8;font-size:12px;line-height:1.8}.modalPrice{font-size:25px;font-weight:950;margin:15px 0}.checkout{width:100%;padding:14px;border:0;border-radius:11px;background:linear-gradient(90deg,#8b5cf6,#2dd4a0,#2dd4a0);color:#fff;font-size:10px;font-weight:950;cursor:pointer}.checkout:disabled{opacity:.55}.hint{text-align:center;color:#817a95;font-size:9px;margin-top:9px}
-.footer{border-top:1px solid var(--line);padding:30px 22px;text-align:center;color:#686572;font-size:9px}
-.sectionIntro{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:34px 0 18px}.sectionIntro h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.045em;margin:8px 0}.sectionIntro p{color:var(--muted);font-size:13px}.metaTags{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 13px}.metaTag{border:1px solid #3a3350;background:#1f1b2b;color:#b79cff;border-radius:6px;padding:5px 7px;font-size:8px;font-weight:900;letter-spacing:.04em}.categoryTag{font-size:9px;color:#b79cff;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.storeNote{margin-top:22px;padding:15px 17px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.7;background:#17141f}.storeNote strong{color:var(--text)}.modalMeta{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.modalMeta span{padding:7px 9px;border:1px solid #3a3350;background:#1f1b2b;color:#b79cff;border-radius:7px;font-size:9px;font-weight:900}.hero{box-shadow:0 25px 80px #0005}.pill{background:#527d3ddd}.checkout{background:linear-gradient(90deg,#8b5cf6,#2dd4a0);color:#0c0b12}.checkout:hover{filter:brightness(1.07)}@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:780px){.links{display:none}.hero{padding:28px;min-height:440px}.toolbar{align-items:stretch;flex-direction:column}.search{width:100%}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:540px){.wrap{padding-left:14px;padding-right:14px}.hero{border-radius:20px;padding:22px}.hero h1{font-size:50px}.grid{grid-template-columns:1fr}.photo{height:210px}}
-</style>
-</head>
-<body>
-<nav class="nav"><div class="navin"><a class="brand" href="/"><span class="logo">M</span><span>Mythical Studios</span></a><div class="links"><a href="/">Home</a><a href="/store/categories/schematic/">Schematic Vault</a><a href="/store/categories/development/">Development</a></div><a class="navbtn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">JOIN DISCORD ↗</a></div></nav>
-<main class="wrap">
-<div class="crumb"><a href="/">MYTHICAL STUDIOS</a> / RESOURCE VAULT / SCHEMATICS</div>
-<section class="hero"><div><div class="eyebrow">MYTHICAL STUDIOS / MINECRAFT SCHEMATICS</div><h1>Build your next<br><span class="grad">great world.</span></h1><p>Explore server spawns, survival bases, fantasy builds and minigame maps. Find your next centrepiece with quick search, useful categories and secure Tebex checkout.</p><div class="heroStats"><span class="stat"><b id="heroCount">20</b> resources</span><span class="stat"><b>Featured</b> studio picks</span><span class="stat"><b>Secure</b> Tebex checkout</span></div></div></section>
-<div class="sectionIntro"><div><div class="eyebrow">THE COLLECTION</div><h2>Find your next build.</h2><p>Filter by build type, search by name, or sort by price.</p></div></div><div class="toolbar"><div class="tools"><select id="sort" class="control" aria-label="Sort schematics"><option value="featured">Sort: Featured</option><option value="low">Price: low → high</option><option value="high">Price: high → low</option><option value="name">Name: A–Z</option></select><select id="category" class="control" aria-label="Filter by category"><option value="all">All categories</option><option value="Spawns & Lobbies">Spawns & Lobbies</option><option value="Bases & Survival">Bases & Survival</option><option value="Towns & Villages">Towns & Villages</option><option value="Fantasy & Themed">Fantasy & Themed</option><option value="Arenas & Minigames">Arenas & Minigames</option></select><select id="filter" class="control" aria-label="Filter by price"><option value="all">All prices</option><option value="under5">Under $5</option><option value="5plus">$5+</option></select></div><div style="display:flex;gap:10px;align-items:center;flex:1"><input id="search" class="control search" placeholder="Search builds, styles, tags…" aria-label="Search schematics"><span class="count" id="count">Loading...</span></div></div>
-<section id="grid" class="grid" aria-live="polite"></section><div class="storeNote"><strong>Version & file format:</strong> check each product listing for the confirmed Minecraft version and exact download format before purchase. We only show compatibility details when they are verified.</div>
-</main>
-<footer class="footer">© 2026 Mythical Studios • Premium Minecraft Resources • <a href="https://discord.gg/tzVTqK8Yt" target="_blank">Discord</a></footer>
-<div id="modal" class="modal" aria-hidden="true"><div class="box"><button id="close" class="close">×</button><div id="modalImg" class="modalImg"></div><div class="modalBody"><div id="modalNum" class="eyebrow"></div><div id="modalTitle" class="modalTitle"></div><div id="modalDesc" class="modalDesc"></div><div id="modalMeta" class="modalMeta"></div><div id="modalPrice" class="modalPrice"></div><button id="checkout" class="checkout">BUY NOW — TEBEX</button><div class="hint">Secure checkout • digital delivery handled by Tebex</div></div></div></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL="https://nzaelikbjumaidaombmp.supabase.co";
-const SUPABASE_KEY="sb_publishable_xI4i15jxoh44D8USeKLLKQ_daeg0gtt";
-const LOCAL_IMAGES=["/spawn.jpg","/spawn2.jpg","/spawn3.jpg","/spawn4.jpg"];
-const FALLBACK_IMAGES=[
-"/spawn.jpg",
-"/spawn2.jpg",
-"/spawn3.jpg",
-"/spawn4.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2025/870/19434977_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2020/997/13700536_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2024/725/17584578_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2025/281/19018916_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2025/343/18549682_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2022/374/16351881-screenshot-at-min_l.jpg",
-"https://static.planetminecraft.com/files/resource_media/screenshot/1840/2018-10-03-12-26-36-1538591383_thumb.jpg",
-"https://static.planetminecraft.com/files/resource_media/screenshot/1415/castle1_fotor_thumb.jpg",
-"https://static.planetminecraft.com/files/resource_media/screenshot/1716/2017-04-22_21122610979741_thumb.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2022/374/16351881-screenshot-at-min_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2020/997/13700536_l.jpg",
-"https://static.planetminecraft.com/files/image/minecraft/project/2025/870/19434977_l.jpg"
-];
-const FALLBACK=[
-["001","Fantasy Kingdom Spawn","A premium fantasy kingdom spawn build.",5.99,"7721409"],
-["002","Roman Colosseum","A grand arena-style Minecraft build.",4.99,"7721410"],
-["003","Merchant Marketplace","A polished marketplace for server hubs.",3.99,"7721411"],
-["004","Sky Islands Lobby","A floating-islands lobby for networks.",5.49,"7721418"],
-["005","Olympus Temple Spawn","A Greek-inspired temple spawn.",6.99,"7721419"],
-["006","Candyland BedWars","A colorful BedWars environment.",5.99,"7721423"],
-["007","Void Abyss","A dark floating-island environment.",6.49,"7721425"],
-["008","Dwarven Mines BedWars","A dwarven underground BedWars map.",5.99,"7721426"],
-["009","Sakura Islands","A Japanese sakura-themed island build.",4.99,"7721427"],
-["010","Desert Pharaoh","An Egyptian-inspired desert build.",5.49,"7721428"],
-["011","Starter Base Village","A ready-to-use survival village.",2.99,"7721430"],
-["012","Medieval Town","A complete medieval town build.",5.49,"7721431"],
-["013","Survival Trading Hall","A compact survival trading hall.",3.99,"7721434"],
-["014","Automatic Farm District","A district designed for farm builds.",4.49,"7721436"],
-["015","Mountain Kingdom","A mountain kingdom survival build.",5.99,"7721437"],
-["016","Japanese Survival Village","A Japanese-style survival village.",5.49,"7721438"],
-["017","Underground Bunker","A secure underground survival bunker.",4.49,"7721441"],
-["018","Giant Treehouse Base","A giant treehouse survival base.",4.49,"7721442"],
-["019","Ocean Monument Base","An ocean monument-inspired base.",5.99,"7721459"],
-["020","Nether Fortress Base","A Nether fortress survival base.",6.49,"7721460"]
-].map((x,i)=>({n:x[0],title:x[1],desc:x[2],price:x[3],packageId:x[4],image:FALLBACK_IMAGES[i%FALLBACK_IMAGES.length],currency:"USD"}));
-
-let products=[...FALLBACK],selected=null;
-const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
-const FEATURED_IDS=new Set(["7721409","7721418","7721431","7721426"]);
-function categoryFor(p){
- const s=(p.title+" "+(p.desc||"")).toLowerCase();
- if(/spawn|lobby|hub|kingdom spawn|temple spawn/.test(s))return "Spawns & Lobbies";
- if(/village|town|market|trading|farm|district/.test(s))return "Towns & Villages";
- if(/bedwars|colosseum|arena|minigame|pvp/.test(s))return "Arenas & Minigames";
- if(/fantasy|sakura|island|pharaoh|temple|void|nether|ocean|mountain/.test(s))return "Fantasy & Themed";
- return "Bases & Survival";
-}
-function filtered(){
- let a=[...products],q=document.getElementById("search").value.toLowerCase().trim(),f=document.getElementById("filter").value,s=document.getElementById("sort").value,cat=document.getElementById("category").value;
- if(q)a=a.filter(x=>(x.title+" "+x.desc+" "+categoryFor(x)).toLowerCase().includes(q));
- if(cat!=="all")a=a.filter(x=>categoryFor(x)===cat);
- if(f==="under5")a=a.filter(x=>Number(x.price)<5); if(f==="5plus")a=a.filter(x=>Number(x.price)>=5);
- if(s==="low")a.sort((a,b)=>Number(a.price)-Number(b.price)); if(s==="high")a.sort((a,b)=>Number(b.price)-Number(a.price));
- if(s==="name")a.sort((a,b)=>a.title.localeCompare(b.title));
- if(s==="featured")a.sort((a,b)=>(Number(FEATURED_IDS.has(String(b.packageId)))-Number(FEATURED_IDS.has(String(a.packageId))))||String(a.n).localeCompare(String(b.n)));
- return a;
-}
-function money(p){return p.currency==="INR"?"₹"+Number(p.price).toLocaleString("en-IN"):"$"+Number(p.price).toFixed(2)}
-function render(){
- const a=filtered(),g=document.getElementById("grid");document.getElementById("count").textContent=a.length+" resource"+(a.length===1?"":"s");document.getElementById("heroCount").textContent=products.length;
- if(!a.length){g.className="empty";g.innerHTML="<strong>No schematics found.</strong>Try another search or filter.";return}
- g.className="grid";g.innerHTML=a.map(p=>{const cat=categoryFor(p),featured=FEATURED_IDS.has(String(p.packageId));return '<article class="card" data-id="'+esc(p.packageId)+'"><div class="photo"><img src="'+esc(p.image||FALLBACK_IMAGES[Number(p.n)%FALLBACK_IMAGES.length])+'" alt="'+esc(p.title)+' preview" loading="lazy"><span class="num">'+esc(p.n)+'</span><span class="pill">'+(featured?'FEATURED PICK':'SCHEMATIC')+'</span></div><div class="body"><div class="categoryTag">'+esc(cat)+'</div><div class="title">'+esc(p.title)+'</div><div class="desc">'+esc(p.desc||"Premium Minecraft resource.")+'</div><div class="metaTags"><span class="metaTag">VERSION · CHECK LISTING</span><span class="metaTag">FORMAT · CHECK LISTING</span></div><div class="bottom"><span class="price">'+money(p)+' <small class="currency">'+esc(p.currency||"USD")+'</small></span><span class="buy">VIEW & BUY →</span></div></div></article>'}).join("");
- g.querySelectorAll(".card").forEach(c=>c.onclick=()=>open(products.find(p=>String(p.packageId)===c.dataset.id)));
- g.querySelectorAll(".photo img").forEach((img,i)=>{img.onerror=()=>{img.onerror=null;img.src=LOCAL_IMAGES[i%LOCAL_IMAGES.length]}});
-}
-function open(p){
- selected=p;document.getElementById("modalNum").textContent=categoryFor(p).toUpperCase()+" · SCHEMATIC "+p.n;document.getElementById("modalTitle").textContent=p.title;document.getElementById("modalDesc").textContent=p.desc||"Premium Minecraft resource from Mythical Studios.";document.getElementById("modalMeta").innerHTML='<span>MINECRAFT VERSION · CHECK PRODUCT DETAILS</span><span>FILE FORMAT · CHECK PRODUCT DETAILS</span><span>'+esc(categoryFor(p))+'</span>';document.getElementById("modalPrice").textContent=money(p);document.getElementById("modalImg").innerHTML='<img src="'+esc(p.image||LOCAL_IMAGES[Number(p.n)%LOCAL_IMAGES.length])+'" alt="'+esc(p.title)+'">';document.querySelector("#modalImg img").onerror=()=>{document.querySelector("#modalImg img").onerror=null;document.querySelector("#modalImg img").src=LOCAL_IMAGES[Number(p.n)%LOCAL_IMAGES.length]};
- const b=document.getElementById("checkout");b.disabled=false;b.textContent="BUY NOW — TEBEX";document.getElementById("modal").classList.add("open");
-}
-async function buy(){
- if(!selected)return;const b=document.getElementById("checkout");b.disabled=true;b.textContent="CREATING SECURE CHECKOUT…";
- try{const r=await fetch("/.netlify/functions/tebex-checkout",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({packageId:selected.packageId})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.checkout)throw new Error(j.error||"Tebex checkout failed. Please try again.");location.assign(j.checkout)}
- catch(e){alert(e.message);b.disabled=false;b.textContent="BUY NOW — TEBEX"}
-}
-async function loadSupabaseImages(){
- try{
-  const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-  const {data,error}=await sb.from("products").select("id,title,image_path").eq("published",true).in("category",["schematic","schematics"]);
-  if(error)throw error;
-  const rows=(data||[]).map(p=>({p,n:(String(p.id||"").match(/(?:^|\D)(\d{3})(?:\D|$)/)||String(p.title||"").match(/(?:^|\D)(\d{3})(?:\D|$)/)||[])[1],image:p.image_path?sb.storage.from("store-resources").getPublicUrl(p.image_path).data.publicUrl:""})).filter(x=>x.n&&x.image);
-  const byNo=new Map(rows.map(x=>[x.n,x.image]));
-  products=products.map(p=>({...p,image:byNo.get(p.n)||p.image}));
- }catch(e){console.warn("Supabase image catalog unavailable",e)}
- render();
-}
-async function loadTebex(){
- try{
-  const r=await fetch("/.netlify/functions/tebex-packages",{cache:"no-store"});if(!r.ok)throw new Error();
-  const j=await r.json();const byId=new Map((j.packages||[]).map(x=>[String(x.id),x]));
-  products=products.map(p=>{const t=byId.get(p.packageId);return t?{...p,...t,title:t.title||p.title,desc:t.description||p.desc,image:t.image||p.image,price:Number.isFinite(t.price)&&t.price>0?t.price:p.price,currency:t.currency||p.currency}:p});
- }catch(e){console.warn("Using storefront fallback catalog",e)}
- render();
-}
-document.getElementById("checkout").onclick=buy;document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("open");document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")document.getElementById("modal").classList.remove("open")};document.addEventListener("keydown",e=>{if(e.key==="Escape")document.getElementById("modal").classList.remove("open")});document.getElementById("sort").onchange=render;document.getElementById("filter").onchange=render;document.getElementById("category").onchange=render;document.getElementById("search").oninput=render;render();loadSupabaseImages();loadTebex();
-</script>
-</body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Shop Minecraft schematics from Mythical Studios. Browse build previews, search by style and check out securely with Tebex.">
+<title>Minecraft Schematics | Mythical Studios Store</title><link rel="stylesheet" href="/store/store.css"></head>
+<body data-category="schematic">
+<nav class="nav"><div class="navin"><a class="brand" href="/"><span class="logo">M</span><span>MYTHICAL STUDIOS</span></a><div class="links"><a href="/">Home</a><a class="active" href="/store/categories/schematic/">Schematics</a><a href="/store/categories/bundles/">Bundles</a><a href="/store/categories/development/">Development</a><a href="/store/categories/ranks/">Ranks</a></div><a class="navbtn" href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">JOIN DISCORD ↗</a></div></nav>
+<main class="wrap"><div class="crumb"><a href="/">MYTHICAL STUDIOS</a> / STORE / SCHEMATICS</div>
+<section class="hero"><div class="heroContent"><div class="eyebrow">MYTHICAL STUDIOS · BUILD SOMETHING LEGENDARY</div><h1>Make your server<br><span class="grad">unforgettable.</span></h1><p>Discover hand-picked Minecraft spawns, survival builds, fantasy environments and server-ready maps. Preview the builds, find your style, then get the live price and checkout through Tebex.</p><div class="heroStats"><span class="stat"><b id="heroCount">14</b> build previews</span><span class="stat"><b>Studio</b> curated designs</span><span class="stat"><b>Details</b> confirmed on listing</span></div></div></section>
+<nav class="categoryNav" aria-label="Store categories"><a class="categoryLink active" href="/store/categories/schematic/"><span class="dot"></span>Schematics</a><a class="categoryLink" href="/store/categories/bundles/"><span class="dot"></span>Bundles & collections</a><a class="categoryLink" href="/store/categories/development/"><span class="dot"></span>Server development</a><a class="categoryLink" href="/store/categories/ranks/"><span class="dot"></span>Ranks</a></nav>
+<div class="sectionIntro"><div><div class="eyebrow">THE SCHEMATIC VAULT</div><h2>Find your next build.</h2><p>Search by name, sort the catalogue or filter by build style.</p></div></div>
+<div class="toolbar"><div class="tools"><select id="sort" class="control" aria-label="Sort products"><option value="featured">Sort: Featured</option><option value="low">Price: low → high</option><option value="high">Price: high → low</option><option value="name">Name: A–Z</option></select><select id="category" class="control" aria-label="Filter category"><option value="all">All schematics</option><option value="Fantasy Kingdom Spawn">Fantasy Kingdom</option><option value="Sakura Islands">Sakura / Japanese</option><option value="Medieval Town">Medieval builds</option><option value="Void Abyss">Void / fantasy</option><option value="Starter Base Village">Survival builds</option></select><select id="priceFilter" class="control" aria-label="Filter by price"><option value="all">All prices</option><option value="under5">Under $5</option><option value="5plus">$5 and above</option></select></div><div style="display:flex;gap:10px;align-items:center;flex:1"><input id="search" class="control search" placeholder="Search schematics, themes and builds…" aria-label="Search schematics"><span id="count" class="count">Loading catalogue…</span></div></div>
+<div id="status" class="status" role="status"></div><section id="grid" class="grid" aria-live="polite"></section>
+<div class="storeNote"><strong>Product details:</strong> Minecraft version, exact file format, included files and compatibility should be confirmed on each live listing before purchase. We don't invent version labels where the listing hasn't confirmed them.</div></main>
+<footer class="footer">© 2026 Mythical Studios · Premium Minecraft resources · <a href="https://discord.gg/tzVTqK8Yt" target="_blank" rel="noopener">Join the community</a></footer>
+<div id="modal" class="modal" aria-hidden="true"><div class="modalBox"><button id="close" class="close" aria-label="Close">×</button><div id="modalImg" class="modalImg"></div><div class="modalBody"><div id="modalNum" class="eyebrow"></div><div id="modalTitle" class="modalTitle"></div><div id="modalDesc" class="modalDesc"></div><div id="modalMeta" class="modalMeta"></div><div id="modalPrice" class="modalPrice"></div><button id="checkout" class="checkout">CONTINUE TO TEBEX CHECKOUT</button><div id="hint" class="hint">Secure checkout handled by Tebex.</div></div></div></div>
+<script src="/store/store.js"></script></body></html>
