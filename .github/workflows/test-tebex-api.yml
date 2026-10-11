@@ -1,0 +1,75 @@
+name: Test Tebex API connection
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-tebex:
+    name: Verify Tebex Checkout API access
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Validate required secrets
+        env:
+          TEBEX_PROJECT_ID: ${{ secrets.TEBEX_PROJECT_ID }}
+          TEBEX_PRIVATE_KEY: ${{ secrets.TEBEX_PRIVATE_KEY }}
+        run: |
+          if [ -z "$TEBEX_PROJECT_ID" ] || [ -z "$TEBEX_PRIVATE_KEY" ]; then
+            echo "::error::Missing TEBEX_PROJECT_ID or TEBEX_PRIVATE_KEY repository secret."
+            exit 1
+          fi
+
+      - name: Test Checkout API by creating an empty basket
+        env:
+          TEBEX_PROJECT_ID: ${{ secrets.TEBEX_PROJECT_ID }}
+          TEBEX_PRIVATE_KEY: ${{ secrets.TEBEX_PRIVATE_KEY }}
+        run: |
+          python - <<'PY'
+          import base64
+          import json
+          import os
+          import sys
+          import urllib.error
+          import urllib.request
+
+          project_id = os.environ["TEBEX_PROJECT_ID"]
+          private_key = os.environ["TEBEX_PRIVATE_KEY"]
+          auth = base64.b64encode(f"{project_id}:{private_key}".encode()).decode()
+          payload = json.dumps({
+              "return_url": "https://store.mythicalstudios.online/",
+              "complete_url": "https://store.mythicalstudios.online/"
+          }).encode()
+          request = urllib.request.Request(
+              "https://checkout.tebex.io/api/baskets",
+              data=payload,
+              headers={
+                  "Authorization": f"Basic {auth}",
+                  "Content-Type": "application/json",
+                  "Accept": "application/json"
+              },
+              method="POST"
+          )
+          try:
+              with urllib.request.urlopen(request, timeout=20) as response:
+                  status = response.status
+                  data = json.loads(response.read().decode("utf-8"))
+          except urllib.error.HTTPError as error:
+              # Deliberately do not print the response body or any credentials.
+              print(f"Tebex API returned HTTP {error.code}.")
+              if error.code in (401, 403):
+                  print("Check the Project ID/private key, and confirm Checkout API access is enabled for this project.")
+              sys.exit(1)
+          except Exception as error:
+              print(f"Could not reach Tebex Checkout API ({type(error).__name__}).")
+              sys.exit(1)
+
+          if status not in (200, 201) or not data.get("ident"):
+              print(f"Tebex responded with HTTP {status}, but no basket identifier was returned.")
+              sys.exit(1)
+
+          print("SUCCESS: Tebex Checkout API authentication worked and an empty test basket was created.")
+          print("No package was added and no payment was taken.")
+          PY
